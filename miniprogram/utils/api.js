@@ -82,7 +82,7 @@ const userApi = {
    * @param {number} userId - 用户ID
    */
   getInfo: (userId) => {
-    return request('GET', `/api/user/info?user_id=${userId}`);
+    return request('GET', `/api/user/info?userId=${userId}`);
   },
 
   /**
@@ -92,7 +92,7 @@ const userApi = {
    */
   update: (userId, data) => {
     return request('PUT', '/api/user/update', {
-      user_id: userId,
+      userId,
       ...data
     });
   },
@@ -102,7 +102,7 @@ const userApi = {
    * @param {number} userId - 用户ID
    */
   getStats: (userId) => {
-    return request('GET', `/api/user/stats?user_id=${userId}`);
+    return request('GET', `/api/user/stats?userId=${userId}`);
   }
 };
 
@@ -118,7 +118,7 @@ const wordApi = {
    */
   query: (userId, word, useCache = true) => {
     return request('POST', '/api/word/query', {
-      user_id: userId,
+      userId,
       word,
       use_cache: useCache
     });
@@ -131,7 +131,7 @@ const wordApi = {
    * @param {number} pageSize - 每页数量
    */
   getHistory: (userId, page = 1, pageSize = 20) => {
-    return request('GET', `/api/word/history?user_id=${userId}&page=${page}&page_size=${pageSize}`);
+    return request('GET', `/api/word/history?userId=${userId}&page=${page}&page_size=${pageSize}`);
   },
 
   /**
@@ -140,7 +140,7 @@ const wordApi = {
    */
   clearHistory: (userId) => {
     return request('DELETE', '/api/word/history/clear', {
-      user_id: userId
+      userId
     });
   },
 
@@ -163,7 +163,7 @@ const vocabBookApi = {
    */
   add: (userId, wordData) => {
     return request('POST', '/api/vocab-book/add', {
-      user_id: userId,
+      userId,
       ...wordData
     });
   },
@@ -175,7 +175,7 @@ const vocabBookApi = {
    */
   getList: (userId, params = {}) => {
     const { page = 1, pageSize = 20, status, sortBy, order } = params;
-    let url = `/api/vocab-book/list?user_id=${userId}&page=${page}&page_size=${pageSize}`;
+    let url = `/api/vocab-book/list?userId=${userId}&page=${page}&page_size=${pageSize}`;
     if (status !== undefined) url += `&status=${status}`;
     if (sortBy) url += `&sort_by=${sortBy}`;
     if (order) url += `&order=${order}`;
@@ -188,7 +188,7 @@ const vocabBookApi = {
    * @param {number} vocabId - 生词ID
    */
   getDetail: (userId, vocabId) => {
-    return request('GET', `/api/vocab-book/detail?user_id=${userId}&vocab_id=${vocabId}`);
+    return request('GET', `/api/vocab-book/detail?userId=${userId}&vocab_id=${vocabId}`);
   },
 
   /**
@@ -199,7 +199,7 @@ const vocabBookApi = {
    */
   update: (userId, vocabId, data) => {
     return request('PUT', '/api/vocab-book/update', {
-      user_id: userId,
+      userId,
       vocab_id: vocabId,
       ...data
     });
@@ -212,7 +212,7 @@ const vocabBookApi = {
    */
   delete: (userId, vocabId) => {
     return request('DELETE', '/api/vocab-book/delete', {
-      user_id: userId,
+      userId,
       vocab_id: vocabId
     });
   },
@@ -224,7 +224,7 @@ const vocabBookApi = {
    */
   batchDelete: (userId, vocabIds) => {
     return request('DELETE', '/api/vocab-book/batch-delete', {
-      user_id: userId,
+      userId,
       vocab_ids: vocabIds
     });
   },
@@ -234,7 +234,7 @@ const vocabBookApi = {
    * @param {number} userId - 用户ID
    */
   getStats: (userId) => {
-    return request('GET', `/api/vocab-book/stats?user_id=${userId}`);
+    return request('GET', `/api/vocab-book/stats?userId=${userId}`);
   },
 
   /**
@@ -243,7 +243,7 @@ const vocabBookApi = {
    * @param {string} word - 单词
    */
   checkExists: (userId, word) => {
-    return request('GET', `/api/vocab-book/check-exists?user_id=${userId}&word=${word}`);
+    return request('GET', `/api/vocab-book/check-exists?userId=${userId}&word=${word}`);
   }
 };
 
