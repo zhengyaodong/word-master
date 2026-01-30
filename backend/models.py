@@ -36,11 +36,11 @@ class User(Base):
     def to_dict(self):
         """转换为字典"""
         return {
-            'user_id': self.user_id,
+            'userId': self.user_id,
             'openid': self.openid,
             'nickname': self.nickname,
-            'avatar_url': self.avatar_url,
-            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None
+            'avatarUrl': self.avatar_url,
+            'createdAt': self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None
         }
     
     def __repr__(self):
@@ -90,7 +90,7 @@ class VocabularyBook(Base):
         """转换为字典"""
         return {
             'vocab_id': self.vocab_id,
-            'user_id': self.user_id,
+            'userId': self.user_id,
             'word': self.word,
             'phonetic': self.phonetic,
             'definition': self.definition,
@@ -99,7 +99,7 @@ class VocabularyBook(Base):
             'memory_tips': self.memory_tips,
             'status': self.status,
             'status_text': self.get_status_text(),
-            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None
+            'createdAt': self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None
         }
     
     def get_status_text(self):
@@ -148,7 +148,7 @@ class QueryHistory(Base):
         """转换为字典"""
         return {
             'history_id': self.history_id,
-            'user_id': self.user_id,
+            'userId': self.user_id,
             'word': self.word,
             'result': self.get_result(),
             'query_time': self.query_time.strftime('%Y-%m-%d %H:%M:%S') if self.query_time else None

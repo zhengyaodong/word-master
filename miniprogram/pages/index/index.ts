@@ -21,11 +21,20 @@ Page({
       this.setData({ userId: userInfo.userId });
       this.loadHistory();
     } else {
-      // 未登录，跳转到登录页面或提示
-      wx.showToast({
-        title: '请先登录',
-        icon: 'none'
-      });
+      // 等待自动登录完成
+      const checkLogin = setInterval(() => {
+        const userInfo = app.globalData.userInfo;
+        if (userInfo && userInfo.userId) {
+          this.setData({ userId: userInfo.userId });
+          this.loadHistory();
+          clearInterval(checkLogin);
+        }
+      }, 100);
+      
+      // 5秒后停止检查
+      setTimeout(() => {
+        clearInterval(checkLogin);
+      }, 5000);
     }
   },
 
@@ -146,11 +155,23 @@ Page({
     }
 
     const result = this.data.queryResult;
+    const userId = this.data.userId;
+    
+    console.log('添加生词 - userId:', userId);
+    console.log('添加生词 - result:', result);
+    
+    if (!userId || userId === 0) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      });
+      return;
+    }
     
     wx.showLoading({ title: '添加中...' });
 
     try {
-      await vocabBookApi.add(this.data.userId, {
+      const addResult = await vocabBookApi.add(userId, {
         word: result.word,
         phonetic: result.phonetic,
         definition: result.definition,
@@ -158,6 +179,8 @@ Page({
         examples: result.examples,
         memory_tips: result.memory_tips
       });
+      
+      console.log('添加生词结果:', addResult);
 
       this.setData({ isInVocabBook: true });
 
