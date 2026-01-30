@@ -1,92 +1,120 @@
-<!-- 生词本页面 -->
-<view class="container">
+<!-- 生词本页面 - WeUI 风格 -->
+<view class="page" data-weui-theme="{{theme}}">
   <!-- 统计卡片 -->
   <view class="stats-section">
-    <view class="stats-card">
-      <view class="stats-item">
-        <text class="stats-number">{{stats.total_count}}</text>
-        <text class="stats-label">全部</text>
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <view class="stat-item">
+          <view class="stat-value">{{stats.total_count || 0}}</view>
+          <view class="stat-label">全部</view>
+        </view>
       </view>
-      <view class="stats-item">
-        <text class="stats-number new">{{stats.new_count}}</text>
-        <text class="stats-label">未学习</text>
+      <view class="weui-flex__item">
+        <view class="stat-item">
+          <view class="stat-value stat-new">{{stats.new_count || 0}}</view>
+          <view class="stat-label">未学习</view>
+        </view>
       </view>
-      <view class="stats-item">
-        <text class="stats-number learning">{{stats.learning_count}}</text>
-        <text class="stats-label">学习中</text>
+      <view class="weui-flex__item">
+        <view class="stat-item">
+          <view class="stat-value stat-learning">{{stats.learning_count || 0}}</view>
+          <view class="stat-label">学习中</view>
+        </view>
       </view>
-      <view class="stats-item">
-        <text class="stats-number mastered">{{stats.mastered_count}}</text>
-        <text class="stats-label">已掌握</text>
+      <view class="weui-flex__item">
+        <view class="stat-item">
+          <view class="stat-value stat-mastered">{{stats.mastered_count || 0}}</view>
+          <view class="stat-label">已掌握</view>
+        </view>
       </view>
     </view>
   </view>
 
   <!-- 筛选栏 -->
   <view class="filter-section">
-    <view 
-      class="filter-item {{currentFilter === 'all' ? 'active' : ''}}"
-      data-filter="all"
-      bindtap="onFilterChange"
-    >全部</view>
-    <view 
-      class="filter-item {{currentFilter === 'new' ? 'active' : ''}}"
-      data-filter="new"
-      bindtap="onFilterChange"
-    >未学习</view>
-    <view 
-      class="filter-item {{currentFilter === 'learning' ? 'active' : ''}}"
-      data-filter="learning"
-      bindtap="onFilterChange"
-    >学习中</view>
-    <view 
-      class="filter-item {{currentFilter === 'mastered' ? 'active' : ''}}"
-      data-filter="mastered"
-      bindtap="onFilterChange"
-    >已掌握</view>
+    <view class="weui-navbar">
+      <view 
+        class="weui-navbar__item {{currentFilter === 'all' ? 'weui-bar__item_on' : ''}}"
+        data-filter="all"
+        bindtap="onFilterChange"
+      >全部</view>
+      <view 
+        class="weui-navbar__item {{currentFilter === 'new' ? 'weui-bar__item_on' : ''}}"
+        data-filter="new"
+        bindtap="onFilterChange"
+      >未学习</view>
+      <view 
+        class="weui-navbar__item {{currentFilter === 'learning' ? 'weui-bar__item_on' : ''}}"
+        data-filter="learning"
+        bindtap="onFilterChange"
+      >学习中</view>
+      <view 
+        class="weui-navbar__item {{currentFilter === 'mastered' ? 'weui-bar__item_on' : ''}}"
+        data-filter="mastered"
+        bindtap="onFilterChange"
+      >已掌握</view>
+    </view>
   </view>
 
   <!-- 单词列表 -->
   <view class="vocab-list">
     <view 
-      class="vocab-item" 
+      class="vocab-item weui-cell" 
       wx:for="{{vocabList}}" 
       wx:key="vocab_id"
       bindtap="viewDetail"
       data-vocab-id="{{item.vocab_id}}"
     >
-      <view class="vocab-main">
-        <text class="vocab-word">{{item.word}}</text>
-        <text class="vocab-phonetic">{{item.phonetic}}</text>
-        <text class="vocab-definition">{{item.definition}}</text>
+      <view class="weui-cell__bd">
+        <view class="vocab-word">{{item.word}}</view>
+        <view class="vocab-phonetic" wx:if="{{item.phonetic}}">{{item.phonetic}}</view>
+        <view class="vocab-definition">{{item.definition}}</view>
       </view>
-      
-      <view class="vocab-status">
-        <text class="status-badge status-{{item.status}}">{{item.status_text}}</text>
+      <view class="weui-cell__ft">
+        <view class="status-badge status-{{item.status}}">{{item.status_text}}</view>
       </view>
+    </view>
+  </view>
 
-      <view class="vocab-actions">
-        <view class="action-btn" catchtap="updateStatus" data-vocab-id="{{item.vocab_id}}" data-status="1" wx:if="{{item.status === 0}}">
-          <text>开始学习</text>
-        </view>
-        <view class="action-btn" catchtap="updateStatus" data-vocab-id="{{item.vocab_id}}" data-status="2" wx:if="{{item.status === 1}}">
-          <text>已掌握</text>
-        </view>
-        <view class="action-btn delete" catchtap="deleteVocab" data-vocab-id="{{item.vocab_id}}">
-          <text>删除</text>
-        </view>
+  <!-- 操作按钮 -->
+  <view class="action-bar" wx:if="{{selectedVocabIds.length > 0}}">
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <button class="weui-btn weui-btn_mini weui-btn_primary" bindtap="batchUpdateStatus" data-status="1">开始学习</button>
+      </view>
+      <view class="weui-flex__item">
+        <button class="weui-btn weui-btn_mini weui-btn_primary" bindtap="batchUpdateStatus" data-status="2">已掌握</button>
+      </view>
+      <view class="weui-flex__item">
+        <button class="weui-btn weui-btn_mini weui-btn_warn" bindtap="batchDelete">删除</button>
       </view>
     </view>
   </view>
 
   <!-- 空状态 -->
-  <view class="empty-state" wx:if="{{!loading && vocabList.length === 0}}">
-    <text class="empty-title">生词本是空的</text>
-    <text class="empty-desc">去查词页面添加单词吧</text>
+  <view class="weui-msg" wx:if="{{!loading && vocabList.length === 0}}">
+    <view class="weui-msg__icon-area">
+      <icon type="info" size="93" color="#07c160"></icon>
+    </view>
+    <view class="weui-msg__text-area">
+      <view class="weui-msg__title">生词本是空的</view>
+      <view class="weui-msg__desc">去查词页面添加单词吧</view>
+    </view>
+    <view class="weui-msg__opr-area">
+      <view class="weui-btn-area">
+        <button class="weui-btn weui-btn_primary" bindtap="goToSearch">去查词</button>
+      </view>
+    </view>
   </view>
 
   <!-- 加载中 -->
-  <view class="loading-state" wx:if="{{loading}}">
-    <text>加载中...</text>
+  <view class="weui-loadmore" wx:if="{{loading}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="weui-loadmore weui-loadmore_line" wx:if="{{!loading && vocabList.length > 0 && !hasMore}}">
+    <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多了</view>
   </view>
 </view>

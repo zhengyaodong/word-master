@@ -1,65 +1,100 @@
-<!-- 个人中心页面 -->
-<view class="container">
+<!-- 个人中心页面 - WeUI 风格 -->
+<view class="page" data-weui-theme="{{theme}}">
   <!-- 用户信息卡片 -->
   <view class="user-card">
-    <view class="user-info">
-      <image 
-        class="avatar" 
-        src="{{userInfo.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'}}"
-        bindtap="getUserProfile"
-      />
-      <view class="user-detail">
-        <text class="nickname">{{userInfo.nickname || '点击登录'}}</text>
-        <text class="user-id" wx:if="{{userInfo.userId}}">ID: {{userInfo.userId}}</text>
+    <view class="weui-cell weui-cell_access" bindtap="{{userInfo.userId ? '' : 'mockLogin'}}">
+      <view class="weui-cell__hd">
+        <image 
+          class="avatar" 
+          src="{{userInfo.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'}}"
+        />
       </view>
-    </view>
-    <view class="login-btn" wx:if="{{!userInfo.userId}}" bindtap="mockLogin">
-      <text>立即登录</text>
+      <view class="weui-cell__bd">
+        <view class="nickname">{{userInfo.nickname || '点击登录'}}</view>
+        <view class="user-id" wx:if="{{userInfo.userId}}">ID: {{userInfo.userId}}</view>
+      </view>
+      <view class="weui-cell__ft" wx:if="{{!userInfo.userId}}">
+        <text class="login-text">立即登录</text>
+      </view>
     </view>
   </view>
 
   <!-- 统计卡片 -->
-  <view class="stats-card" wx:if="{{userInfo.userId}}">
-    <view class="stats-item">
-      <text class="stats-number">{{stats.total_queries}}</text>
-      <text class="stats-label">总查询</text>
-    </view>
-    <view class="stats-item">
-      <text class="stats-number">{{stats.vocab_count}}</text>
-      <text class="stats-label">生词本</text>
-    </view>
-    <view class="stats-item">
-      <text class="stats-number">{{stats.today_queries}}</text>
-      <text class="stats-label">今日查询</text>
+  <view class="stats-section" wx:if="{{userInfo.userId}}">
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <view class="stat-item">
+          <view class="stat-value">{{stats.vocab_count || 0}}</view>
+          <view class="stat-label">生词本</view>
+        </view>
+      </view>
+      <view class="weui-flex__item">
+        <view class="stat-item">
+          <view class="stat-value">{{stats.mastered_count || 0}}</view>
+          <view class="stat-label">已掌握</view>
+        </view>
+      </view>
+      <view class="weui-flex__item">
+        <view class="stat-item">
+          <view class="stat-value">{{stats.learning_count || 0}}</view>
+          <view class="stat-label">学习中</view>
+        </view>
+      </view>
     </view>
   </view>
 
   <!-- 功能列表 -->
-  <view class="menu-list">
-    <view class="menu-item" bindtap="goToVocabBook">
-      <text class="menu-icon">📚</text>
-      <text class="menu-text">我的生词本</text>
-      <text class="menu-arrow">></text>
-    </view>
-    
-    <view class="menu-item">
-      <text class="menu-icon">🤖</text>
-      <text class="menu-text">AI服务状态</text>
-      <text class="menu-status {{ollamaStatus ? 'online' : 'offline'}}">
-        {{ollamaStatus ? '正常运行' : '离线'}}
-      </text>
-    </view>
-    
-    <view class="menu-item" bindtap="showAbout">
-      <text class="menu-icon">ℹ️</text>
-      <text class="menu-text">关于</text>
-      <text class="menu-arrow">></text>
+  <view class="weui-cells__title">功能</view>
+  <view class="weui-cells weui-cells_after-title">
+    <navigator url="/pages/vocab-book/vocab-book" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <view class="icon-box icon-vocab">
+          <text class="icon">📚</text>
+        </view>
+      </view>
+      <view class="weui-cell__bd">我的生词本</view>
+      <view class="weui-cell__ft"></view>
+    </navigator>
+  </view>
+
+  <!-- 服务状态 -->
+  <view class="weui-cells__title">服务</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <view class="icon-box icon-service">
+          <text class="icon">🤖</text>
+        </view>
+      </view>
+      <view class="weui-cell__bd">
+        <view>AI 服务状态</view>
+        <view class="service-desc">Ollama 智能单词解释</view>
+      </view>
+      <view class="weui-cell__ft">
+        <view class="status-badge {{ollamaStatus ? 'status-online' : 'status-offline'}}">
+          {{ollamaStatus ? '正常运行' : '离线'}}
+        </view>
+      </view>
     </view>
   </view>
 
-  <!-- 服务信息 -->
-  <view class="service-info">
-    <text class="info-text">后端服务: http://localhost:5000</text>
-    <text class="info-text">Ollama模型: qwen3:0.6b</text>
+  <!-- 关于 -->
+  <view class="weui-cells__title">关于</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_access" bindtap="showAbout">
+      <view class="weui-cell__hd">
+        <view class="icon-box icon-about">
+          <text class="icon">ℹ️</text>
+        </view>
+      </view>
+      <view class="weui-cell__bd">关于单词大师</view>
+      <view class="weui-cell__ft"></view>
+    </view>
+  </view>
+
+  <!-- 底部信息 -->
+  <view class="weui-footer">
+    <view class="weui-footer__text">后端服务: http://localhost:5000</view>
+    <view class="weui-footer__text">Ollama模型: qwen3:0.6b</view>
   </view>
 </view>

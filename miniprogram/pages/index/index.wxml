@@ -1,100 +1,114 @@
-<!-- 查词页面 -->
-<view class="container">
+<!-- 查词页面 - WeUI 风格 -->
+<view class="page" data-weui-theme="{{theme}}">
   <!-- 搜索区域 -->
-  <view class="search-section">
-    <view class="search-box">
-      <input 
-        class="search-input" 
-        placeholder="输入英文单词查询" 
-        value="{{inputWord}}"
-        bindinput="onInputChange"
-        bindconfirm="onSearch"
-        confirm-type="search"
-      />
-      <button class="search-btn" bindtap="onSearch" loading="{{isLoading}}">
-        {{isLoading ? '查询中' : '查询'}}
-      </button>
-    </view>
-    
-    <!-- 最近查询 -->
-    <view class="history-section" wx:if="{{history.length > 0}}">
-      <view class="section-title">
-        <text>最近查询</text>
-        <text class="clear-btn" bindtap="clearHistory">清空</text>
-      </view>
-      <view class="history-list">
-        <view 
-          class="history-item" 
-          wx:for="{{history}}" 
-          wx:key="index"
-          bindtap="onHistoryTap"
-          data-word="{{item.word}}"
-        >
-          {{item.word}}
+  <view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+        <input 
+          type="text" 
+          class="weui-search-bar__input" 
+          placeholder="输入英文单词查询" 
+          value="{{inputWord}}"
+          bindinput="onInputChange"
+          bindconfirm="onSearch"
+          confirm-type="search"
+        />
+        <view class="weui-icon-clear" wx:if="{{inputWord.length > 0}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
         </view>
+      </view>
+    </view>
+    <view class="weui-search-bar__cancel-btn" bindtap="onSearch">
+      <text wx:if="{{!isLoading}}">搜索</text>
+      <text wx:else>查询中...</text>
+    </view>
+  </view>
+
+  <!-- 最近查询 -->
+  <view class="weui-cells__title" wx:if="{{history.length > 0}}">
+    <view class="history-header">
+      <text>最近查询</text>
+      <text class="clear-link" bindtap="clearHistory">清空</text>
+    </view>
+  </view>
+  <view class="weui-cells weui-cells_after-title" wx:if="{{history.length > 0}}">
+    <view class="weui-cell history-cell" wx:for="{{history}}" wx:key="index" bindtap="onHistoryTap" data-word="{{item.word}}">
+      <view class="weui-cell__bd">
+        <text class="history-word">{{item.word}}</text>
+      </view>
+      <view class="weui-cell__ft">
+        <text class="history-time">{{item.query_time}}</text>
       </view>
     </view>
   </view>
 
   <!-- 查询结果 -->
-  <view class="result-section" wx:if="{{queryResult}}">
-    <view class="word-card">
+  <view class="result-container" wx:if="{{queryResult}}">
+    <view class="weui-article">
       <!-- 单词标题 -->
-      <view class="word-header">
-        <text class="word-title">{{queryResult.word}}</text>
-        <text class="word-phonetic">{{queryResult.phonetic}}</text>
-        <text class="word-pos">{{queryResult.part_of_speech}}</text>
+      <view class="weui-article__h1 word-title">
+        {{queryResult.word}}
+        <text class="word-phonetic" wx:if="{{queryResult.phonetic}}">{{queryResult.phonetic}}</text>
+        <text class="word-pos" wx:if="{{queryResult.part_of_speech}}">{{queryResult.part_of_speech}}</text>
       </view>
 
       <!-- 释义 -->
-      <view class="definition-section">
-        <view class="section-title">中文释义</view>
-        <text class="definition-text">{{queryResult.definition}}</text>
+      <view class="weui-article__section">
+        <view class="weui-article__h2">中文释义</view>
+        <view class="weui-article__p definition-text">{{queryResult.definition}}</view>
         
-        <view class="section-title" wx:if="{{queryResult.english_definition}}">英文释义</view>
-        <text class="english-definition" wx:if="{{queryResult.english_definition}}">
+        <view class="weui-article__h2" wx:if="{{queryResult.english_definition}}">英文释义</view>
+        <view class="weui-article__p english-definition" wx:if="{{queryResult.english_definition}}">
           {{queryResult.english_definition}}
-        </text>
+        </view>
       </view>
 
       <!-- 例句 -->
-      <view class="examples-section" wx:if="{{queryResult.examples && queryResult.examples.length > 0}}">
-        <view class="section-title">例句</view>
-        <view class="example-item" wx:for="{{queryResult.examples}}" wx:key="index">
+      <view class="weui-article__section" wx:if="{{queryResult.examples && queryResult.examples.length > 0}}">
+        <view class="weui-article__h2">例句</view>
+        <view class="weui-article__p example-item" wx:for="{{queryResult.examples}}" wx:key="index">
           <text class="example-sentence">{{item.sentence}}</text>
           <text class="example-translation">{{item.translation}}</text>
         </view>
       </view>
 
       <!-- 记忆技巧 -->
-      <view class="memory-section" wx:if="{{queryResult.memory_tips}}">
-        <view class="section-title">记忆技巧</view>
-        <text class="memory-text">{{queryResult.memory_tips}}</text>
+      <view class="weui-article__section" wx:if="{{queryResult.memory_tips}}">
+        <view class="weui-article__h2">记忆技巧</view>
+        <view class="weui-article__p memory-text">{{queryResult.memory_tips}}</view>
       </view>
+    </view>
 
-      <!-- 操作按钮 -->
-      <view class="action-section">
-        <button 
-          class="action-btn add-btn" 
-          bindtap="addToVocabBook"
-          disabled="{{isInVocabBook}}"
-          type="{{isInVocabBook ? 'default' : 'primary'}}"
-        >
-          {{isInVocabBook ? '已在生词本' : '加入生词本'}}
-        </button>
-        <button class="action-btn share-btn" open-type="share">分享</button>
-      </view>
+    <!-- 操作按钮 -->
+    <view class="button-sp-area">
+      <button 
+        class="weui-btn" 
+        type="{{isInVocabBook ? 'default' : 'primary'}}" 
+        bindtap="addToVocabBook"
+        disabled="{{isInVocabBook}}"
+      >
+        {{isInVocabBook ? '✓ 已在生词本' : '+ 加入生词本'}}
+      </button>
+      <button class="weui-btn weui-btn_default" open-type="share">
+        <text class="icon-share"></text> 分享给朋友
+      </button>
+    </view>
 
-      <!-- 缓存提示 -->
-      <view class="cache-tip" wx:if="{{queryResult.from_cache}}">
-        <text>来自缓存</text>
-      </view>
+    <!-- 缓存提示 -->
+    <view class="weui-footer" wx:if="{{queryResult.from_cache}}">
+      <view class="weui-footer__text">来自缓存</view>
     </view>
   </view>
 
   <!-- 空状态 -->
-  <view class="empty-state" wx:if="{{!queryResult && !isLoading}}">
-    <text class="empty-title">输入单词开始查询</text>
-    <text class="empty-desc">使用AI智能解释单词</text>
+  <view class="weui-msg" wx:if="{{!queryResult && !isLoading}}">
+    <view class="weui-msg__icon-area">
+      <icon type="search" size="93" color="#07c160"></icon>
+    </view>
+    <view class="weui-msg__text-area">
+      <view class="weui-msg__title">输入单词开始查询</view>
+      <view class="weui-msg__desc">使用AI智能解释单词，帮助你更好地记忆</view>
+    </view>
   </view>
 </view>

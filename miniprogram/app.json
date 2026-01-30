@@ -7,27 +7,39 @@
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationStyle": "custom"
+    "navigationStyle": "default",
+    "navigationBarBackgroundColor": "#07c160",
+    "navigationBarTitleText": "单词大师",
+    "backgroundColor": "#f5f5f5"
   },
   "tabBar": {
     "color": "#999999",
-    "selectedColor": "#4a90d9",
+    "selectedColor": "#07c160",
     "backgroundColor": "#ffffff",
     "borderStyle": "black",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "查词"
+        "text": "查词",
+        "iconPath": "images/tabbar/search.png",
+        "selectedIconPath": "images/tabbar/search.png"
       },
       {
         "pagePath": "pages/vocab-book/vocab-book",
-        "text": "生词本"
+        "text": "生词本",
+        "iconPath": "images/tabbar/search.png",
+        "selectedIconPath": "images/tabbar/search.png"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "images/tabbar/search.png",
+        "selectedIconPath": "images/tabbar/search.png"
       }
     ]
+  },
+  "useExtendedLib": {
+    "weui": true
   },
   "style": "v2",
   "rendererOptions": {
