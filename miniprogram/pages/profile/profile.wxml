@@ -1,0 +1,65 @@
+<!-- 个人中心页面 -->
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-info">
+      <image 
+        class="avatar" 
+        src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}"
+        bindtap="getUserProfile"
+      />
+      <view class="user-detail">
+        <text class="nickname">{{userInfo.nickname || '点击登录'}}</text>
+        <text class="user-id" wx:if="{{userInfo.userId}}">ID: {{userInfo.userId}}</text>
+      </view>
+    </view>
+    <view class="login-btn" wx:if="{{!userInfo.userId}}" bindtap="mockLogin">
+      <text>立即登录</text>
+    </view>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-card" wx:if="{{userInfo.userId}}">
+    <view class="stats-item">
+      <text class="stats-number">{{stats.total_queries}}</text>
+      <text class="stats-label">总查询</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-number">{{stats.vocab_count}}</text>
+      <text class="stats-label">生词本</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-number">{{stats.today_queries}}</text>
+      <text class="stats-label">今日查询</text>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="menu-list">
+    <view class="menu-item" bindtap="goToVocabBook">
+      <text class="menu-icon">📚</text>
+      <text class="menu-text">我的生词本</text>
+      <text class="menu-arrow">></text>
+    </view>
+    
+    <view class="menu-item">
+      <text class="menu-icon">🤖</text>
+      <text class="menu-text">AI服务状态</text>
+      <text class="menu-status {{ollamaStatus ? 'online' : 'offline'}}">
+        {{ollamaStatus ? '正常运行' : '离线'}}
+      </text>
+    </view>
+    
+    <view class="menu-item" bindtap="showAbout">
+      <text class="menu-icon">ℹ️</text>
+      <text class="menu-text">关于</text>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 服务信息 -->
+  <view class="service-info">
+    <text class="info-text">后端服务: http://localhost:5000</text>
+    <text class="info-text">Ollama模型: qwen3:0.6b</text>
+  </view>
+</view>

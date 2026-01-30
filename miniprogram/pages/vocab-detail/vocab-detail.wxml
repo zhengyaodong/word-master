@@ -1,0 +1,70 @@
+<!-- 生词详情页面 -->
+<view class="container">
+  <view class="nav-bar">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">←</text>
+    </view>
+    <text class="nav-title">生词详情</text>
+  </view>
+
+  <view class="content" wx:if="{{vocabDetail && !loading}}">
+    <!-- 单词标题 -->
+    <view class="word-header">
+      <text class="word-title">{{vocabDetail.word}}</text>
+      <text class="word-phonetic">{{vocabDetail.phonetic}}</text>
+      <text class="word-status status-{{vocabDetail.status}}">{{vocabDetail.status_text}}</text>
+    </view>
+
+    <!-- 释义 -->
+    <view class="section">
+      <view class="section-title">中文释义</view>
+      <text class="section-content">{{vocabDetail.definition}}</text>
+    </view>
+
+    <view class="section" wx:if="{{vocabDetail.english_definition}}">
+      <view class="section-title">英文释义</view>
+      <text class="section-content english">{{vocabDetail.english_definition}}</text>
+    </view>
+
+    <!-- 例句 -->
+    <view class="section" wx:if="{{vocabDetail.examples && vocabDetail.examples.length > 0}}">
+      <view class="section-title">例句</view>
+      <view class="example-item" wx:for="{{vocabDetail.examples}}" wx:key="index">
+        <text class="example-sentence">{{item.sentence}}</text>
+        <text class="example-translation">{{item.translation}}</text>
+      </view>
+    </view>
+
+    <!-- 记忆技巧 -->
+    <view class="section memory-section" wx:if="{{vocabDetail.memory_tips}}">
+      <view class="section-title">记忆技巧</view>
+      <text class="section-content">{{vocabDetail.memory_tips}}</text>
+    </view>
+
+    <!-- 时间信息 -->
+    <view class="time-info">
+      <text>添加时间: {{vocabDetail.created_at}}</text>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-section">
+      <view class="action-btn" bindtap="updateStatus" data-status="1" wx:if="{{vocabDetail.status === 0}}">
+        标记为学习中
+      </view>
+      <view class="action-btn" bindtap="updateStatus" data-status="2" wx:if="{{vocabDetail.status === 1}}">
+        标记为已掌握
+      </view>
+      <view class="action-btn" bindtap="updateStatus" data-status="0" wx:if="{{vocabDetail.status === 2}}">
+        重新学习
+      </view>
+      <view class="action-btn delete" bindtap="deleteVocab">
+        删除
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

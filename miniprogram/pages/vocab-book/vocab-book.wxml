@@ -1,0 +1,92 @@
+<!-- 生词本页面 -->
+<view class="container">
+  <!-- 统计卡片 -->
+  <view class="stats-section">
+    <view class="stats-card">
+      <view class="stats-item">
+        <text class="stats-number">{{stats.total_count}}</text>
+        <text class="stats-label">全部</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-number new">{{stats.new_count}}</text>
+        <text class="stats-label">未学习</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-number learning">{{stats.learning_count}}</text>
+        <text class="stats-label">学习中</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-number mastered">{{stats.mastered_count}}</text>
+        <text class="stats-label">已掌握</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 筛选栏 -->
+  <view class="filter-section">
+    <view 
+      class="filter-item {{currentFilter === 'all' ? 'active' : ''}}"
+      data-filter="all"
+      bindtap="onFilterChange"
+    >全部</view>
+    <view 
+      class="filter-item {{currentFilter === 'new' ? 'active' : ''}}"
+      data-filter="new"
+      bindtap="onFilterChange"
+    >未学习</view>
+    <view 
+      class="filter-item {{currentFilter === 'learning' ? 'active' : ''}}"
+      data-filter="learning"
+      bindtap="onFilterChange"
+    >学习中</view>
+    <view 
+      class="filter-item {{currentFilter === 'mastered' ? 'active' : ''}}"
+      data-filter="mastered"
+      bindtap="onFilterChange"
+    >已掌握</view>
+  </view>
+
+  <!-- 单词列表 -->
+  <view class="vocab-list">
+    <view 
+      class="vocab-item" 
+      wx:for="{{vocabList}}" 
+      wx:key="vocab_id"
+      bindtap="viewDetail"
+      data-vocab-id="{{item.vocab_id}}"
+    >
+      <view class="vocab-main">
+        <text class="vocab-word">{{item.word}}</text>
+        <text class="vocab-phonetic">{{item.phonetic}}</text>
+        <text class="vocab-definition">{{item.definition}}</text>
+      </view>
+      
+      <view class="vocab-status">
+        <text class="status-badge status-{{item.status}}">{{item.status_text}}</text>
+      </view>
+
+      <view class="vocab-actions">
+        <view class="action-btn" catchtap="updateStatus" data-vocab-id="{{item.vocab_id}}" data-status="1" wx:if="{{item.status === 0}}">
+          <text>开始学习</text>
+        </view>
+        <view class="action-btn" catchtap="updateStatus" data-vocab-id="{{item.vocab_id}}" data-status="2" wx:if="{{item.status === 1}}">
+          <text>已掌握</text>
+        </view>
+        <view class="action-btn delete" catchtap="deleteVocab" data-vocab-id="{{item.vocab_id}}">
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && vocabList.length === 0}}">
+    <text class="empty-title">生词本是空的</text>
+    <text class="empty-desc">去查词页面添加单词吧</text>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>
