@@ -63,7 +63,8 @@ def query_word():
     if not word.isalpha():
         return error_response("单词只能包含英文字母")
     
-    user_id = data.get('user_id')
+    # 支持两种命名方式：userId（驼峰）和 user_id（下划线）
+    user_id = data.get('userId') or data.get('user_id')
     use_cache = data.get('use_cache', True)
     
     session = get_db_session()
@@ -116,7 +117,8 @@ def get_query_history():
         - total: 总记录数
         - list: 历史记录列表
     """
-    user_id = request.args.get('user_id', type=int)
+    # 支持两种命名方式：userId（驼峰）和 user_id（下划线）
+    user_id = request.args.get('userId', type=int) or request.args.get('user_id', type=int)
     page = request.args.get('page', 1, type=int)
     page_size = request.args.get('page_size', 20, type=int)
     
@@ -172,7 +174,8 @@ def clear_query_history():
     if not data:
         return error_response("请求参数不能为空")
     
-    user_id = data.get('user_id')
+    # 支持两种命名方式：userId（驼峰）和 user_id（下划线）
+    user_id = data.get('userId') or data.get('user_id')
     if not user_id:
         return error_response("user_id不能为空")
     

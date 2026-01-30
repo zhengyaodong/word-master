@@ -34,7 +34,7 @@ Page({
   // 加载用户信息
   loadUserInfo() {
     const userInfo = app.globalData.userInfo;
-    if (userInfo) {
+    if (userInfo && userInfo.userId) {
       this.setData({ userInfo });
       this.loadStats();
       this.checkService();
@@ -47,15 +47,29 @@ Page({
   // 模拟登录（开发测试用）
   async mockLogin() {
     try {
+      console.log('[DEBUG] 开始登录...');
       // 使用测试openid
       const result = await userApi.login('test_openid_123', '测试用户', '');
-      const userInfo = result.data;
+      console.log('[DEBUG] 登录返回结果:', result);
+      
+      const data = result.data;
+      // 将后端字段映射到前端字段（后端返回驼峰命名）
+      const userInfo = {
+        userId: data.userId,
+        nickname: data.nickname,
+        avatarUrl: data.avatarUrl,
+        createdAt: data.createdAt
+      };
+      console.log('[DEBUG] 转换后的 userInfo:', userInfo);
       
       app.globalData.userInfo = userInfo;
-      this.setData({ userInfo });
       
-      this.loadStats();
-      this.checkService();
+      // 使用回调确保setData完成
+      this.setData({ userInfo }, () => {
+        console.log('[DEBUG] setData 完成, 当前 userInfo:', this.data.userInfo);
+        this.loadStats();
+        this.checkService();
+      });
       
       wx.showToast({
         title: '登录成功',
@@ -68,11 +82,20 @@ Page({
 
   // 加载统计
   async loadStats() {
+    console.log('[DEBUG] loadStats 被调用, userInfo:', this.data.userInfo);
     try {
-      const result = await userApi.getStats(this.data.userInfo.userId);
+      const userId = this.data.userInfo.userId;
+      console.log('[DEBUG] 准备获取统计, userId:', userId);
+      if (!userId) {
+        console.error('[DEBUG] userId 为空，跳过获取统计');
+        return;
+      }
+      console.log('[DEBUG] 即将调用 userApi.getStats...');
+      const result = await userApi.getStats(userId);
+      console.log('[DEBUG] 获取统计成功, 结果:', result);
       this.setData({ stats: result.data });
     } catch (error) {
-      console.error('加载统计失败:', error);
+      console.error('[DEBUG] 加载统计失败:', error);
     }
   },
 

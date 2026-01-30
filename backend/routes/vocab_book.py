@@ -52,7 +52,8 @@ def add_to_vocab_book():
     if not data:
         return error_response("请求参数不能为空")
     
-    user_id = data.get('user_id')
+    # 支持两种命名方式：userId（驼峰）和 user_id（下划线）
+    user_id = data.get('userId') or data.get('user_id')
     word = data.get('word', '').strip()
     
     if not user_id:
@@ -123,7 +124,8 @@ def get_vocab_list():
         - total: 总记录数
         - list: 生词列表
     """
-    user_id = request.args.get('user_id', type=int)
+    # 支持两种命名方式：userId（驼峰）和 user_id（下划线）
+    user_id = request.args.get('userId', type=int) or request.args.get('user_id', type=int)
     page = request.args.get('page', 1, type=int)
     page_size = request.args.get('page_size', 20, type=int)
     status = request.args.get('status', type=int)
@@ -193,7 +195,8 @@ def get_vocab_detail():
     返回:
         - 生词详细信息
     """
-    user_id = request.args.get('user_id', type=int)
+    # 支持两种命名方式：userId（驼峰）和 user_id（下划线）
+    user_id = request.args.get('userId', type=int) or request.args.get('user_id', type=int)
     vocab_id = request.args.get('vocab_id', type=int)
     
     if not user_id:
@@ -240,7 +243,8 @@ def update_vocab():
     if not data:
         return error_response("请求参数不能为空")
     
-    user_id = data.get('user_id')
+    # 支持两种命名方式：userId（驼峰）和 user_id（下划线）
+    user_id = data.get('userId') or data.get('user_id')
     vocab_id = data.get('vocab_id')
     
     if not user_id:
@@ -307,7 +311,8 @@ def delete_vocab():
     if not data:
         return error_response("请求参数不能为空")
     
-    user_id = data.get('user_id')
+    # 支持两种命名方式：userId（驼峰）和 user_id（下划线）
+    user_id = data.get('userId') or data.get('user_id')
     vocab_id = data.get('vocab_id')
     
     if not user_id:
@@ -358,7 +363,8 @@ def batch_delete_vocab():
     if not data:
         return error_response("请求参数不能为空")
     
-    user_id = data.get('user_id')
+    # 支持两种命名方式：userId（驼峰）和 user_id（下划线）
+    user_id = data.get('userId') or data.get('user_id')
     vocab_ids = data.get('vocab_ids', [])
     
     if not user_id:
@@ -402,7 +408,8 @@ def get_vocab_stats():
         - learning_count: 学习中数
         - new_count: 未学习数
     """
-    user_id = request.args.get('user_id', type=int)
+    # 支持两种命名方式：userId（驼峰）和 user_id（下划线）
+    user_id = request.args.get('userId', type=int) or request.args.get('user_id', type=int)
     
     if not user_id:
         return error_response("user_id不能为空")
@@ -442,7 +449,8 @@ def check_word_exists():
         - exists: 是否存在
         - vocab_id: 如果存在，返回生词ID
     """
-    user_id = request.args.get('user_id', type=int)
+    # 支持两种命名方式：userId（驼峰）和 user_id（下划线）
+    user_id = request.args.get('userId', type=int) or request.args.get('user_id', type=int)
     word = request.args.get('word', '').strip()
     
     if not user_id:

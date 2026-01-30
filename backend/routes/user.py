@@ -95,12 +95,13 @@ def get_user_info():
     获取用户信息
     
     请求参数:
-        - user_id: 用户ID
+        - userId 或 user_id: 用户ID
     
     返回:
         - 用户信息详情
     """
-    user_id = request.args.get('user_id', type=int)
+    # 支持两种命名方式
+    user_id = request.args.get('userId', type=int) or request.args.get('user_id', type=int)
     
     if not user_id:
         return error_response("user_id不能为空")
@@ -138,7 +139,8 @@ def update_user():
     if not data:
         return error_response("请求参数不能为空")
     
-    user_id = data.get('user_id')
+    # 支持两种命名方式
+    user_id = data.get('userId') or data.get('user_id')
     if not user_id:
         return error_response("user_id不能为空")
     
@@ -176,14 +178,20 @@ def get_user_stats():
     获取用户学习统计
     
     请求参数:
-        - user_id: 用户ID
+        - userId 或 user_id: 用户ID
     
     返回:
         - vocab_count: 生词本单词数
         - mastered_count: 已掌握单词数
         - learning_count: 学习中单词数
     """
-    user_id = request.args.get('user_id', type=int)
+    # 首先打印所有请求参数
+    print(f"[DEBUG] /stats 收到请求，所有参数: {dict(request.args)}")
+    
+    # 支持两种命名方式：userId（驼峰）和 user_id（下划线）
+    user_id = request.args.get('userId', type=int) or request.args.get('user_id', type=int)
+    
+    print(f"[DEBUG] /stats 解析结果: userId={request.args.get('userId')}, user_id={request.args.get('user_id')}, 解析后={user_id}")
     
     if not user_id:
         return error_response("user_id不能为空")
