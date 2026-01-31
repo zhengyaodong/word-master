@@ -78,7 +78,31 @@ Page({
     this.loadVocabList();
   },
 
-  // 更新状态
+  // 更新单个单词状态
+  async updateSingleStatus(e: any) {
+    const { vocabId, status } = e.currentTarget.dataset;
+    
+    try {
+      await vocabBookApi.update(this.data.userId, vocabId, { status });
+      this.loadVocabList();
+      this.loadStats();
+      
+      const statusText = status == 1 ? '学习中' : (status == 2 ? '已掌握' : '重新学习');
+      wx.showToast({
+        title: `已标记为${statusText}`,
+        icon: 'success',
+        duration: 1500
+      });
+    } catch (error) {
+      console.error('更新状态失败:', error);
+      wx.showToast({
+        title: '更新失败，请重试',
+        icon: 'none'
+      });
+    }
+  },
+
+  // 更新状态（批量操作）
   async updateStatus(e: any) {
     const { vocabId, status } = e.currentTarget.dataset;
     

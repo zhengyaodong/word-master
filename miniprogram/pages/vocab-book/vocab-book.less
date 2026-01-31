@@ -76,6 +76,44 @@
   border-bottom: none;
 }
 
+/* 状态操作按钮 */
+.status-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.status-btn {
+  font-size: 22rpx;
+  padding: 6rpx 12rpx;
+  border-radius: 6rpx;
+  text-align: center;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.status-to-learning {
+  background-color: #fff3e0;
+  color: #ff9800;
+  border: 1rpx solid #ff9800;
+}
+
+.status-to-learning:active {
+  background-color: #ff9800;
+  color: #fff;
+}
+
+.status-to-mastered {
+  background-color: #e8f5e9;
+  color: #07c160;
+  border: 1rpx solid #07c160;
+}
+
+.status-to-mastered:active {
+  background-color: #07c160;
+  color: #fff;
+}
+
 .vocab-word {
   font-size: 36rpx;
   font-weight: 600;
