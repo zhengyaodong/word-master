@@ -16,47 +16,124 @@ const BASE_URL = 'http://localhost:5000';
  * @param {object} data - 请求数据
  * @returns {Promise} 返回Promise对象
  */
-const request = (method, url, data = {}) => {
+const request = (method, url, data = {}, options = {}) => {
   return new Promise((resolve, reject) => {
-    wx.request({
-      url: `${BASE_URL}${url}`,
-      method: method,
-      data: data,
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: (res) => {
-        if (res.statusCode === 200) {
-          const result = res.data;
-          if (result.code === 0) {
-            resolve(result);
-          } else {
-            // 业务错误
-            wx.showToast({
-              title: result.message || '请求失败',
-              icon: 'none'
-            });
-            reject(result);
-          }
-        } else {
-          // HTTP错误
+    // 检查网络状态
+    wx.getNetworkType({
+      success: (netRes) => {
+        if (netRes.networkType === 'none') {
           wx.showToast({
-            title: `服务器错误: ${res.statusCode}`,
-            icon: 'none'
+            title: '网络不可用，请检查网络连接',
+            icon: 'none',
+            duration: 2000
           });
-          reject(res);
+          reject(new Error('网络不可用'));
+          return;
         }
+
+        wx.request({
+          url: `${BASE_URL}${url}`,
+          method: method,
+          data: data,
+          timeout: options.timeout || 30000,
+          header: {
+            'Content-Type': 'application/json',
+            ...options.header
+          },
+          success: (res) => {
+            if (res.statusCode === 200) {
+              const result = res.data;
+              if (result.code === 0) {
+                resolve(result);
+              } else {
+                // 业务错误，根据错误码提供更友好的提示
+                const errorMessage = getErrorMessage(result);
+                if (!options.hideErrorToast) {
+                  wx.showToast({
+                    title: errorMessage,
+                    icon: 'none',
+                    duration: 3000
+                  });
+                }
+                reject(new Error(errorMessage));
+              }
+            } else if (res.statusCode === 404) {
+              if (!options.hideErrorToast) {
+                wx.showToast({
+                  title: '请求的接口不存在',
+                  icon: 'none'
+                });
+              }
+              reject(new Error('接口不存在'));
+            } else if (res.statusCode === 500) {
+              if (!options.hideErrorToast) {
+                wx.showToast({
+                  title: '服务器内部错误，请稍后重试',
+                  icon: 'none'
+                });
+              }
+              reject(new Error('服务器内部错误'));
+            } else {
+              // 其他HTTP错误
+              if (!options.hideErrorToast) {
+                wx.showToast({
+                  title: `请求失败 (${res.statusCode})`,
+                  icon: 'none'
+                });
+              }
+              reject(new Error(`HTTP ${res.statusCode}`));
+            }
+          },
+          fail: (err) => {
+            // 网络错误或超时
+            let errorMessage = '网络请求失败，请检查网络';
+            if (err.errMsg && err.errMsg.includes('timeout')) {
+              errorMessage = '请求超时，请检查网络连接';
+            } else if (err.errMsg && err.errMsg.includes('fail')) {
+              errorMessage = '网络连接失败，请检查后端服务是否启动';
+            }
+            
+            if (!options.hideErrorToast) {
+              wx.showToast({
+                title: errorMessage,
+                icon: 'none',
+                duration: 3000
+              });
+            }
+            reject(new Error(errorMessage));
+          }
+        });
       },
-      fail: (err) => {
-        // 网络错误
+      fail: () => {
+        // 获取网络类型失败
         wx.showToast({
-          title: '网络请求失败，请检查网络',
+          title: '无法获取网络状态，请检查网络',
           icon: 'none'
         });
-        reject(err);
+        reject(new Error('网络状态未知'));
       }
     });
   });
+};
+
+// 获取友好的错误信息
+const getErrorMessage = (result) => {
+  const code = result.code;
+  const message = result.message;
+  
+  // 根据错误码返回更友好的提示
+  switch (code) {
+    case 1:
+      return message || '操作失败';
+    case 404:
+      return '请求的资源不存在';
+    case 409:
+      return '数据冲突，该单词可能已存在';
+    case 503:
+      return 'AI服务暂时不可用，请稍后重试';
+    default:
+      return message || '未知错误，请稍后重试';
+  }
 };
 
 /**

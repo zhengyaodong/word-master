@@ -1,26 +1,28 @@
-<!-- 查词页面 - WeUI 风格 -->
-<view class="page" data-weui-theme="{{theme}}">
+<!-- 查词页面 - 简化风格 -->
+<view class="page">
   <!-- 搜索区域 -->
-  <view class="weui-search-bar">
-    <view class="weui-search-bar__form">
-      <view class="weui-search-bar__box">
-        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-        <input 
-          type="text" 
-          class="weui-search-bar__input" 
-          placeholder="输入英文单词查询" 
-          value="{{inputWord}}"
-          bindinput="onInputChange"
-          bindconfirm="onSearch"
-          confirm-type="search"
-        />
-        <view class="weui-icon-clear" wx:if="{{inputWord.length > 0}}" bindtap="clearInput">
-          <icon type="clear" size="14"></icon>
-        </view>
+  <view class="search-container">
+    <view class="search-box">
+      <icon class="search-icon" type="search" size="16" color="#999"></icon>
+      <input 
+        type="text" 
+        class="search-input" 
+        placeholder="输入英文单词查询" 
+        value="{{inputWord}}"
+        bindinput="onInputChange"
+        bindconfirm="onSearch"
+        confirm-type="search"
+        cursor-spacing="10"
+        adjust-position="{{true}}"
+        maxlength="50"
+        auto-focus="{{false}}"
+      />
+      <view class="clear-btn" wx:if="{{inputWord.length > 0}}" bindtap="clearInput">
+        <icon type="clear" size="16" color="#999"></icon>
       </view>
     </view>
-    <view class="weui-search-bar__cancel-btn" bindtap="onSearch">
-      <text wx:if="{{!isLoading}}">搜索</text>
+    <view class="search-btn" bindtap="onSearch">
+      <text wx:if="{{!isLoading}}">查询</text>
       <text wx:else>查询中...</text>
     </view>
   </view>

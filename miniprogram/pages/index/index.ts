@@ -15,26 +15,33 @@ Page({
   },
 
   onLoad() {
+    console.log('[DEBUG] Index页面加载，全局用户信息:', app.globalData.userInfo);
+    
     // 从全局获取用户信息
     const userInfo = app.globalData.userInfo;
     if (userInfo && userInfo.userId) {
+      console.log('[DEBUG] 用户已登录，设置userId:', userInfo.userId);
       this.setData({ userId: userInfo.userId });
       this.loadHistory();
     } else {
+      console.log('[DEBUG] 用户未登录，等待登录完成');
       // 等待自动登录完成
       const checkLogin = setInterval(() => {
         const userInfo = app.globalData.userInfo;
+        console.log('[DEBUG] 检查登录状态:', userInfo);
         if (userInfo && userInfo.userId) {
+          console.log('[DEBUG] 登录完成，设置userId:', userInfo.userId);
           this.setData({ userId: userInfo.userId });
           this.loadHistory();
           clearInterval(checkLogin);
         }
       }, 100);
       
-      // 5秒后停止检查
+      // 10秒后停止检查
       setTimeout(() => {
         clearInterval(checkLogin);
-      }, 5000);
+        console.log('[DEBUG] 登录检查超时');
+      }, 10000);
     }
   },
 
@@ -47,14 +54,25 @@ Page({
 
   // 输入框变化
   onInputChange(e: any) {
+    console.log('[DEBUG] 输入框内容变化:', e.detail.value);
     this.setData({
       inputWord: e.detail.value
     });
   },
 
+  // 清空输入框
+  clearInput() {
+    console.log('[DEBUG] 清空输入框');
+    this.setData({
+      inputWord: ''
+    });
+  },
+
   // 执行查询
   async onSearch() {
+    console.log('[DEBUG] 开始查询，当前输入:', this.data.inputWord);
     const word = this.data.inputWord.trim();
+    console.log('[DEBUG] 处理后的单词:', word);
     
     if (!word) {
       wx.showToast({

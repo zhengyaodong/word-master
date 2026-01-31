@@ -1,6 +1,6 @@
 {
   "libVersion": "2.32.3",
-  "projectname": "word-master",
+  "projectname": "word-master-ex",
   "setting": {
     "urlCheck": false,
     "coverView": false,
@@ -17,5 +17,6 @@
     "bigPackageSizeSupport": false,
     "checkInvalidKey": true,
     "ignoreDevUnusedFiles": true
-  }
+  },
+  "condition": {}
 }

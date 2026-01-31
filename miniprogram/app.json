@@ -22,19 +22,19 @@
         "pagePath": "pages/index/index",
         "text": "查词",
         "iconPath": "images/tabbar/search.png",
-        "selectedIconPath": "images/tabbar/search.png"
+        "selectedIconPath": "images/tabbar/search-active.png"
       },
       {
         "pagePath": "pages/vocab-book/vocab-book",
         "text": "生词本",
-        "iconPath": "images/tabbar/search.png",
-        "selectedIconPath": "images/tabbar/search.png"
+        "iconPath": "images/tabbar/vocab.png",
+        "selectedIconPath": "images/tabbar/vocab-active.png"
       },
       {
         "pagePath": "pages/profile/profile",
         "text": "我的",
-        "iconPath": "images/tabbar/search.png",
-        "selectedIconPath": "images/tabbar/search.png"
+        "iconPath": "images/tabbar/profile.png",
+        "selectedIconPath": "images/tabbar/profile-active.png"
       }
     ]
   },

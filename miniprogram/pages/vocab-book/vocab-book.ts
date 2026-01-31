@@ -14,7 +14,11 @@ Page({
     },
     userId: 0,
     loading: false,
-    currentFilter: 'all' // all, new, learning, mastered
+    currentFilter: 'all', // all, new, learning, mastered
+    selectedVocabIds: [] as number[],
+    hasMore: true,
+    page: 1,
+    pageSize: 20
   },
 
   onLoad() {
@@ -123,6 +127,70 @@ Page({
     const vocabId = e.currentTarget.dataset.vocabId;
     wx.navigateTo({
       url: `/pages/vocab-detail/vocab-detail?vocabId=${vocabId}`
+    });
+  },
+
+  // 批量更新状态
+  async batchUpdateStatus(e: any) {
+    const status = e.currentTarget.dataset.status;
+    
+    wx.showModal({
+      title: '确认操作',
+      content: `确定要将选中的单词标记为${status === 1 ? '学习中' : '已掌握'}吗？`,
+      success: async (res) => {
+        if (res.confirm && this.data.selectedVocabIds.length > 0) {
+          try {
+            // 逐个更新状态
+            for (const vocabId of this.data.selectedVocabIds) {
+              await vocabBookApi.update(this.data.userId, vocabId, { status });
+            }
+            
+            this.setData({ selectedVocabIds: [] });
+            this.loadVocabList();
+            this.loadStats();
+            
+            wx.showToast({
+              title: '批量更新成功',
+              icon: 'success'
+            });
+          } catch (error) {
+            console.error('批量更新失败:', error);
+          }
+        }
+      }
+    });
+  },
+
+  // 批量删除
+  async batchDelete() {
+    wx.showModal({
+      title: '确认删除',
+      content: `确定要删除选中的${this.data.selectedVocabIds.length}个单词吗？`,
+      success: async (res) => {
+        if (res.confirm && this.data.selectedVocabIds.length > 0) {
+          try {
+            await vocabBookApi.batchDelete(this.data.userId, this.data.selectedVocabIds);
+            
+            this.setData({ selectedVocabIds: [] });
+            this.loadVocabList();
+            this.loadStats();
+            
+            wx.showToast({
+              title: '批量删除成功',
+              icon: 'success'
+            });
+          } catch (error) {
+            console.error('批量删除失败:', error);
+          }
+        }
+      }
+    });
+  },
+
+  // 跳转到查词页面
+  goToSearch() {
+    wx.switchTab({
+      url: '/pages/index/index'
     });
   }
 });
