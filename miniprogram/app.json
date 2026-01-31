@@ -1,9 +1,12 @@
 {
+  "appid": "wx6fce287c97c02325",
   "pages": [
     "pages/index/index",
     "pages/vocab-book/vocab-book",
     "pages/profile/profile",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/stats/stats",
+    "pages/favorites/favorites"
   ],
   "window": {
     "navigationBarTextStyle": "black",

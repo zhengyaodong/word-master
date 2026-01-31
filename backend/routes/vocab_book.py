@@ -70,6 +70,11 @@ def add_to_vocab_book():
         if existing:
             return error_response("该单词已在生词本中", code=409)
 
+        # 处理 memory_tips，如果是列表则转换为字符串
+        memory_tips = data.get("memory_tips", "")
+        if isinstance(memory_tips, list):
+            memory_tips = " ".join(memory_tips)
+
         # 创建生词记录
         vocab = VocabularyBook(
             user_id=user_id,
@@ -77,7 +82,7 @@ def add_to_vocab_book():
             phonetic=data.get("phonetic", ""),
             definition=data.get("definition", ""),
             english_definition=data.get("english_definition", ""),
-            memory_tips=data.get("memory_tips", ""),
+            memory_tips=memory_tips,
             status=0,  # 默认未学习
         )
 

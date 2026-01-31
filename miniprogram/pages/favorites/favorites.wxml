@@ -1,0 +1,38 @@
+<!-- 收藏例句页面 -->
+<view class="page">
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <view class="weui-loading"></view>
+    <view class="loading-text">加载中...</view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:elif="{{favorites.length === 0}}">
+    <text class="empty-icon">⭐</text>
+    <text class="empty-text">暂无收藏例句</text>
+    <text class="empty-hint">在单词详情页点击例句旁的⭐按钮
+即可收藏喜欢的例句</text>
+  </view>
+
+  <!-- 收藏列表 -->
+  <view class="favorites-list" wx:else>
+    <view class="favorite-item" wx:for="{{favorites}}" wx:key="favorite_id">
+      <text class="word-tag">{{item.word}}</text>
+      
+      <view class="sentence-content">
+        <text class="sentence-text">"{{item.sentence}}"</text>
+        <view class="sentence-translation" wx:if="{{item.translation}}">
+          {{item.translation}}
+        </view>
+      </view>
+      
+      <view class="favorite-footer">
+        <text class="favorite-time">{{item.created_at}}</text>
+        <view class="delete-btn" bindtap="deleteFavorite" data-id="{{item.favorite_id}}">
+          <text class="delete-icon">🗑️</text>
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

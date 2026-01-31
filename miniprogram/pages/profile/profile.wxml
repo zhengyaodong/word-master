@@ -41,18 +41,45 @@
         </view>
       </view>
     </view>
+    <!-- V2.0: 连续打卡 -->
+    <view class="checkin-row" wx:if="{{stats.consecutive_days > 0}}">
+      <text class="fire-icon">🔥</text>
+      <text class="checkin-text">连续打卡 {{stats.consecutive_days}} 天</text>
+    </view>
   </view>
 
   <!-- 功能列表 -->
   <view class="weui-cells__title">功能</view>
   <view class="weui-cells weui-cells_after-title">
-    <navigator url="/pages/vocab-book/vocab-book" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <navigator url="/pages/vocab-book/vocab-book" class="weui-cell weui-cell_access" hover-class="weui-cell_active" open-type="switchTab">
       <view class="weui-cell__hd">
         <view class="icon-box icon-vocab">
           <text class="icon">📚</text>
         </view>
       </view>
       <view class="weui-cell__bd">我的生词本</view>
+      <view class="weui-cell__ft"></view>
+    </navigator>
+    
+    <!-- V2.0: 学习统计 -->
+    <navigator url="/pages/stats/stats" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <view class="icon-box icon-stats">
+          <text class="icon">📊</text>
+        </view>
+      </view>
+      <view class="weui-cell__bd">学习统计</view>
+      <view class="weui-cell__ft"></view>
+    </navigator>
+    
+    <!-- V2.0: 收藏例句 -->
+    <navigator url="/pages/favorites/favorites" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <view class="icon-box icon-favorite">
+          <text class="icon">⭐</text>
+        </view>
+      </view>
+      <view class="weui-cell__bd">收藏例句</view>
       <view class="weui-cell__ft"></view>
     </navigator>
   </view>

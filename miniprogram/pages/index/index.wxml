@@ -51,6 +51,10 @@
       <!-- 单词标题 -->
       <view class="weui-article__h1 word-title">
         {{queryResult.word}}
+        <!-- V2.0: 语音朗读按钮 -->
+        <view class="voice-btn-inline" bindtap="speakWord">
+          <text class="voice-icon">🔊</text>
+        </view>
         <text class="word-phonetic" wx:if="{{queryResult.phonetic}}">{{queryResult.phonetic}}</text>
         <text class="word-pos" wx:if="{{queryResult.part_of_speech}}">{{queryResult.part_of_speech}}</text>
       </view>
@@ -70,8 +74,19 @@
       <view class="weui-article__section" wx:if="{{queryResult.examples && queryResult.examples.length > 0}}">
         <view class="weui-article__h2">例句</view>
         <view class="weui-article__p example-item" wx:for="{{queryResult.examples}}" wx:key="index">
-          <text class="example-sentence">{{item.sentence}}</text>
-          <text class="example-translation">{{item.translation}}</text>
+          <view class="example-content">
+            <text class="example-sentence">{{item.sentence}}</text>
+            <text class="example-translation">{{item.translation}}</text>
+          </view>
+          <!-- V2.0: 例句操作按钮 -->
+          <view class="example-actions-inline">
+            <view class="example-action-inline" bindtap="speakExample" data-index="{{index}}">
+              <text class="action-icon-inline">🔊</text>
+            </view>
+            <view class="example-action-inline favorite" bindtap="addFavorite" data-index="{{index}}">
+              <text class="action-icon-inline">{{item.isFavorite ? '⭐' : '☆'}}</text>
+            </view>
+          </view>
         </view>
       </view>
 

@@ -45,12 +45,33 @@
   margin-bottom: 20rpx;
 }
 
+.word-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16rpx;
+}
+
 .word-title {
-  display: block;
   font-size: 56rpx;
   font-weight: bold;
   color: #333;
-  margin-bottom: 16rpx;
+  margin-right: 20rpx;
+}
+
+/* V2.0: 语音朗读按钮 */
+.voice-btn {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8f5e9;
+  border-radius: 50%;
+}
+
+.voice-icon {
+  font-size: 32rpx;
 }
 
 .word-phonetic {
@@ -117,6 +138,14 @@
   padding: 20rpx;
   background-color: #f9f9f9;
   border-radius: 12rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.example-content {
+  flex: 1;
+  margin-right: 20rpx;
 }
 
 .example-sentence {
@@ -132,6 +161,32 @@
   font-size: 28rpx;
   color: #666;
   line-height: 1.4;
+}
+
+/* V2.0: 例句操作按钮 */
+.example-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.example-action-btn {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.example-action-btn.favorite {
+  background: #fff8e1;
+}
+
+.action-icon {
+  font-size: 28rpx;
 }
 
 /* 记忆技巧 */

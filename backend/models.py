@@ -188,6 +188,93 @@ class QueryHistory(Base):
         return f"<QueryHistory(history_id={self.history_id}, word={self.word})>"
 
 
+class StudyRecord(Base):
+    """学习记录表 - V2.0新增"""
+
+    __tablename__ = "study_record"
+
+    record_id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(
+        Integer, ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False
+    )
+    study_date = Column(DateTime, nullable=False)  # 学习日期
+    query_count = Column(Integer, default=0)  # 查询次数
+    is_checked_in = Column(Integer, default=0)  # 是否打卡 (0:否, 1:是)
+    created_at = Column(DateTime, default=datetime.now)
+
+    # 关联关系
+    user = relationship("User")
+
+    # 索引
+    __table_args__ = (
+        Index("idx_study_record_user_date", "user_id", "study_date", unique=True),
+        Index("idx_study_record_user_id", "user_id"),
+    )
+
+    def to_dict(self):
+        """转换为字典"""
+        return {
+            "record_id": self.record_id,
+            "user_id": self.user_id,
+            "study_date": self.study_date.strftime("%Y-%m-%d")
+            if self.study_date
+            else None,
+            "query_count": self.query_count,
+            "is_checked_in": bool(self.is_checked_in),
+            "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S")
+            if self.created_at
+            else None,
+        }
+
+    def __repr__(self):
+        return f"<StudyRecord(record_id={self.record_id}, user_id={self.user_id}, date={self.study_date})>"
+
+
+class FavoriteSentence(Base):
+    """收藏例句表 - V2.0新增"""
+
+    __tablename__ = "favorite_sentences"
+
+    favorite_id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(
+        Integer, ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False
+    )
+    vocab_id = Column(
+        Integer,
+        ForeignKey("vocabulary_book.vocab_id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    sentence = Column(Text, nullable=False)  # 例句内容
+    translation = Column(Text)  # 中文翻译
+    created_at = Column(DateTime, default=datetime.now)
+
+    # 关联关系
+    user = relationship("User")
+    vocab = relationship("VocabularyBook")
+
+    # 索引
+    __table_args__ = (
+        Index("idx_favorite_user_id", "user_id"),
+        Index("idx_favorite_vocab_id", "vocab_id"),
+    )
+
+    def to_dict(self):
+        """转换为字典"""
+        return {
+            "favorite_id": self.favorite_id,
+            "user_id": self.user_id,
+            "vocab_id": self.vocab_id,
+            "sentence": self.sentence,
+            "translation": self.translation,
+            "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S")
+            if self.created_at
+            else None,
+        }
+
+    def __repr__(self):
+        return f"<FavoriteSentence(favorite_id={self.favorite_id}, vocab_id={self.vocab_id})"
+
+
 # 创建会话工厂
 SessionLocal = sessionmaker(bind=engine)
 

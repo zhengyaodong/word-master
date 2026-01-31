@@ -1,0 +1,93 @@
+<!-- 学习统计页面 -->
+<view class="page">
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <view class="weui-loading"></view>
+    <view class="loading-text">加载中...</view>
+  </view>
+
+  <block wx:else>
+    <!-- 概览统计 -->
+    <view class="stats-overview">
+      <view class="overview-header">
+        <text class="overview-title">学习概览</text>
+        <view class="checkin-badge" wx:if="{{stats.consecutive_days > 0}}">
+          <text class="fire-icon">🔥</text>
+          <text>连续 {{stats.consecutive_days}} 天</text>
+        </view>
+      </view>
+      
+      <view class="overview-grid">
+        <view class="overview-item">
+          <view class="overview-value">{{stats.total_words || 0}}</view>
+          <view class="overview-label">总词汇</view>
+        </view>
+        <view class="overview-item">
+          <view class="overview-value">{{stats.mastered || 0}}</view>
+          <view class="overview-label">已掌握</view>
+        </view>
+        <view class="overview-item">
+          <view class="overview-value">{{stats.learning || 0}}</view>
+          <view class="overview-label">学习中</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 今日数据 -->
+    <view class="today-card">
+      <view class="card-title">
+        <text class="card-icon">📅</text>
+        <text>今日数据</text>
+      </view>
+      <view class="today-grid">
+        <view class="today-item">
+          <view class="today-value">{{stats.today_query || 0}}</view>
+          <view class="today-label">查询次数</view>
+        </view>
+        <view class="today-item">
+          <view class="today-value">{{stats.new || 0}}</view>
+          <view class="today-label">未学习</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 7天趋势 -->
+    <view class="trend-card">
+      <view class="card-title">
+        <text class="card-icon">📈</text>
+        <text>近7天查询趋势</text>
+      </view>
+      <view class="trend-list">
+        <view class="trend-item" wx:for="{{trendData}}" wx:key="date">
+          <text class="trend-count" wx:if="{{item.query_count > 0}}">{{item.query_count}}</text>
+          <view class="trend-bar {{item.is_checked_in ? 'active' : ''}}" 
+                style="height: {{item.barHeight}}rpx;"></view>
+          <text class="trend-date">{{item.date}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 打卡日历 -->
+    <view class="calendar-card">
+      <view class="calendar-header">
+        <text class="calendar-month">{{currentMonth}}</text>
+        <view class="calendar-legend">
+          <view class="legend-dot checked"></view>
+          <text>已打卡</text>
+          <view class="legend-dot unchecked" style="margin-left: 20rpx;"></view>
+          <text>未打卡</text>
+        </view>
+      </view>
+      <view class="calendar-grid">
+        <!-- 星期标题 -->
+        <view class="calendar-weekday" wx:for="{{weekdays}}" wx:key="*this">{{item}}</view>
+        <!-- 日期 -->
+        <view class="calendar-day {{item.isCheckedIn ? 'checked' : ''}} {{item.isToday ? 'today' : ''}} {{item.isEmpty ? 'empty' : ''}}" 
+              wx:for="{{calendarDays}}" 
+              wx:key="date">
+          {{item.day || ''}}
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

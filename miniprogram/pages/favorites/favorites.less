@@ -1,0 +1,117 @@
+/* 收藏例句页面样式 */
+.page {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 150rpx 40rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 40rpx;
+}
+
+.empty-hint {
+  font-size: 24rpx;
+  color: #bbb;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* 收藏列表 */
+.favorites-list {
+  padding: 20rpx;
+}
+
+.favorite-item {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.word-tag {
+  display: inline-block;
+  background: #07c160;
+  color: white;
+  padding: 6rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  font-weight: 500;
+  margin-bottom: 20rpx;
+}
+
+.sentence-content {
+  margin-bottom: 16rpx;
+}
+
+.sentence-text {
+  font-size: 30rpx;
+  color: #333;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.sentence-translation {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.5;
+  margin-top: 12rpx;
+}
+
+.favorite-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.favorite-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 20rpx;
+  color: #ff4d4f;
+  font-size: 26rpx;
+}
+
+.delete-icon {
+  margin-right: 6rpx;
+}
+
+/* 加载状态 */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+
+.loading-text {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #999;
+}

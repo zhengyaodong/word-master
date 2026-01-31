@@ -342,6 +342,205 @@ const vocabBookApi = {
 };
 
 /**
+ * V2.0 统计相关API
+ */
+const statsApi = {
+  /**
+   * 获取学习概览统计
+   * @param {number} userId - 用户ID
+   */
+  getOverview: (userId) => {
+    return request('GET', `/api/stats/overview?user_id=${userId}`);
+  },
+
+  /**
+   * 获取近7天趋势
+   * @param {number} userId - 用户ID
+   */
+  getTrend: (userId) => {
+    return request('GET', `/api/stats/trend?user_id=${userId}`);
+  },
+
+  /**
+   * 手动打卡
+   * @param {number} userId - 用户ID
+   */
+  checkIn: (userId) => {
+    return request('POST', '/api/stats/checkin', {
+      user_id: userId
+    });
+  }
+};
+
+/**
+ * V2.0 收藏例句相关API
+ */
+const favoritesApi = {
+  /**
+   * 收藏例句
+   * @param {number} userId - 用户ID
+   * @param {number} vocabId - 单词ID
+   * @param {string} sentence - 例句
+   * @param {string} translation - 翻译
+   */
+  add: (userId, vocabId, sentence, translation) => {
+    return request('POST', '/api/favorites/add', {
+      user_id: userId,
+      vocab_id: vocabId,
+      sentence,
+      translation
+    });
+  },
+
+  /**
+   * 获取收藏列表
+   * @param {number} userId - 用户ID
+   */
+  getList: (userId) => {
+    return request('GET', `/api/favorites/list?user_id=${userId}`);
+  },
+
+  /**
+   * 删除收藏
+   * @param {number} userId - 用户ID
+   * @param {number} favoriteId - 收藏ID
+   */
+  delete: (userId, favoriteId) => {
+    return request('DELETE', '/api/favorites/delete', {
+      user_id: userId,
+      favorite_id: favoriteId
+    });
+  },
+
+  /**
+   * 检查是否已收藏
+   * @param {number} userId - 用户ID
+   * @param {number} vocabId - 单词ID
+   * @param {string} sentence - 例句
+   */
+  check: (userId, vocabId, sentence) => {
+    return request('GET', `/api/favorites/check?user_id=${userId}&vocab_id=${vocabId}&sentence=${encodeURIComponent(sentence)}`);
+  }
+};
+
+/**
+ * 语音朗读（使用 Edge-TTS 后端服务）
+ */
+const voiceApi = {
+  /**
+   * 朗读文本
+   * @param {string} text - 要朗读的文本
+   * @param {string} lang - 语言，默认英语
+   */
+  speak: (text, lang = 'en_US') => {
+    return new Promise((resolve, reject) => {
+      // 检查网络状态
+      wx.getNetworkType({
+        success: (netRes) => {
+          if (netRes.networkType === 'none') {
+            wx.showToast({
+              title: '网络不可用，请检查网络连接',
+              icon: 'none',
+              duration: 2000
+            });
+            reject(new Error('网络不可用'));
+            return;
+          }
+
+          // 调用后端 TTS API
+          wx.request({
+            url: `${BASE_URL}/api/tts/speak`,
+            method: 'POST',
+            data: {
+              text: text,
+              lang: lang
+            },
+            header: {
+              'Content-Type': 'application/json'
+            },
+            timeout: 30000,
+            success: (res) => {
+              if (res.statusCode === 200 && res.data.code === 0) {
+                const audioUrl = res.data.data.audio_url;
+                const fullUrl = `${BASE_URL}${audioUrl}`;
+                
+                // 创建音频上下文并播放
+                const audio = wx.createInnerAudioContext();
+                audio.src = fullUrl;
+                
+                audio.onPlay(() => {
+                  console.log('开始播放语音:', text);
+                });
+                
+                audio.onError((err) => {
+                  console.error('语音播放失败:', err);
+                  wx.showToast({
+                    title: '语音播放失败',
+                    icon: 'none'
+                  });
+                  reject(err);
+                });
+                
+                audio.onEnded(() => {
+                  console.log('语音播放完成:', text);
+                  audio.destroy();
+                });
+                
+                audio.play();
+                resolve(res.data);
+              } else {
+                const errorMsg = res.data?.message || '语音合成失败';
+                console.error('TTS API 错误:', errorMsg);
+                wx.showToast({
+                  title: errorMsg,
+                  icon: 'none',
+                  duration: 2000
+                });
+                reject(new Error(errorMsg));
+              }
+            },
+            fail: (err) => {
+              console.error('TTS 请求失败:', err);
+              let errorMessage = '语音服务请求失败';
+              if (err.errMsg && err.errMsg.includes('timeout')) {
+                errorMessage = '语音合成超时，请稍后重试';
+              }
+              wx.showToast({
+                title: errorMessage,
+                icon: 'none',
+                duration: 2000
+              });
+              reject(new Error(errorMessage));
+            }
+          });
+        },
+        fail: () => {
+          wx.showToast({
+            title: '无法获取网络状态',
+            icon: 'none'
+          });
+          reject(new Error('网络状态未知'));
+        }
+      });
+    });
+  },
+
+  /**
+   * 获取可用的语音列表
+   */
+  getVoices: () => {
+    return request('GET', '/api/tts/voices');
+  },
+
+  /**
+   * 清理音频缓存（管理员功能）
+   */
+  clearCache: () => {
+    return request('DELETE', '/api/tts/clear-cache');
+  }
+};
+
+/**
  * 健康检查
  */
 const healthCheck = () => {
@@ -353,5 +552,8 @@ module.exports = {
   userApi,
   wordApi,
   vocabBookApi,
+  statsApi,
+  favoritesApi,
+  voiceApi,
   healthCheck
 };

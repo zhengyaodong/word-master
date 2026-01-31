@@ -105,6 +105,22 @@
   gap: 16rpx;
 }
 
+/* V2.0: 语音朗读按钮 */
+.voice-btn-inline {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8f5e9;
+  border-radius: 50%;
+  margin-left: 10rpx;
+}
+
+.voice-icon {
+  font-size: 28rpx;
+}
+
 .word-phonetic {
   font-size: 32rpx;
   color: #666;
@@ -140,12 +156,20 @@
   margin-bottom: 24rpx;
   padding-bottom: 24rpx;
   border-bottom: 1rpx solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .example-item:last-child {
   border-bottom: none;
   margin-bottom: 0;
   padding-bottom: 0;
+}
+
+.example-content {
+  flex: 1;
+  margin-right: 20rpx;
 }
 
 .example-sentence {
@@ -161,6 +185,32 @@
   font-size: 28rpx;
   color: #666;
   line-height: 1.6;
+}
+
+/* V2.0: 例句操作按钮 */
+.example-actions-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  flex-shrink: 0;
+}
+
+.example-action-inline {
+  width: 52rpx;
+  height: 52rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 50%;
+}
+
+.example-action-inline.favorite {
+  background: #fff8e1;
+}
+
+.action-icon-inline {
+  font-size: 24rpx;
 }
 
 /* 记忆技巧 */

@@ -14,7 +14,8 @@ Page({
     stats: {
       total_queries: 0,
       vocab_count: 0,
-      today_queries: 0
+      today_queries: 0,
+      consecutive_days: 0  // V2.0: 连续打卡天数
     },
     ollamaStatus: false,
     loading: false
@@ -152,7 +153,7 @@ Page({
   showAbout() {
     wx.showModal({
       title: '关于',
-      content: 'AI智能背单词 v1.0.0\n\n使用本地Ollama大模型提供智能单词解释',
+      content: 'AI智能背单词 v2.0.0\n\n使用本地Ollama大模型提供智能单词解释\n\nV2.0新增功能：\n- 学习统计\n- 语音朗读\n- 例句收藏\n- 学习打卡',
       showCancel: false
     });
   }

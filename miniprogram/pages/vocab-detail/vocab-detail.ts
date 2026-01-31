@@ -1,5 +1,5 @@
 // 生词详情页面
-import { vocabBookApi } from '../../utils/api';
+import { vocabBookApi, voiceApi, favoritesApi } from '../../utils/api';
 
 const app = getApp<IAppOption>();
 
@@ -8,7 +8,8 @@ Page({
     vocabId: 0,
     vocabDetail: null as any,
     userId: 0,
-    loading: false
+    loading: false,
+    favoriteStatus: [] as boolean[] // V2.0: 例句收藏状态
   },
 
   onLoad(options: any) {
@@ -25,11 +26,38 @@ Page({
   // 加载生词详情
   async loadVocabDetail() {
     this.setData({ loading: true });
-    
+
     try {
       const result = await vocabBookApi.getDetail(this.data.userId, this.data.vocabId);
+      const vocabDetail = result.data;
+
+      // 初始化收藏状态数组
+      const favoriteStatus: boolean[] = [];
+      if (vocabDetail.examples && vocabDetail.examples.length > 0) {
+        // 检查每个例句的收藏状态
+        for (let i = 0; i < vocabDetail.examples.length; i++) {
+          const example = vocabDetail.examples[i];
+          try {
+            const checkResult = await favoritesApi.check(
+              this.data.userId,
+              this.data.vocabId,
+              example.sentence
+            );
+            // 设置收藏状态和favoriteId
+            const isFavorite = checkResult.data.is_favorite;
+            favoriteStatus.push(isFavorite);
+            vocabDetail.examples[i].isFavorite = isFavorite;
+            vocabDetail.examples[i].favoriteId = checkResult.data.favorite_id;
+          } catch (error) {
+            favoriteStatus.push(false);
+            vocabDetail.examples[i].isFavorite = false;
+          }
+        }
+      }
+
       this.setData({
-        vocabDetail: result.data,
+        vocabDetail,
+        favoriteStatus,
         loading: false
       });
     } catch (error) {
@@ -84,5 +112,87 @@ Page({
         }
       }
     });
+  },
+
+  // V2.0: 朗读单词
+  speakWord() {
+    if (!this.data.vocabDetail) return;
+    
+    const word = this.data.vocabDetail.word;
+    voiceApi.speak(word, 'en_US');
+  },
+
+  // V2.0: 朗读例句
+  speakExample(e: any) {
+    const index = e.currentTarget.dataset.index;
+    const example = this.data.vocabDetail.examples[index];
+    
+    if (example && example.sentence) {
+      voiceApi.speak(example.sentence, 'en_US');
+    }
+  },
+
+  // V2.0: 切换收藏状态
+  async toggleFavorite(e: any) {
+    const index = e.currentTarget.dataset.index;
+    const example = this.data.vocabDetail.examples[index];
+
+    if (!example) return;
+
+    try {
+      const isFavorite = this.data.favoriteStatus[index] || false;
+
+      if (isFavorite) {
+        // 取消收藏
+        const favoriteId = example.favoriteId;
+        if (favoriteId) {
+          await favoritesApi.delete(this.data.userId, favoriteId);
+        }
+
+        wx.showToast({
+          title: '已取消收藏',
+          icon: 'success'
+        });
+      } else {
+        // 添加收藏
+        const result = await favoritesApi.add(
+          this.data.userId,
+          this.data.vocabId,
+          example.sentence,
+          example.translation
+        );
+
+        // 保存返回的favoriteId，用于后续取消收藏
+        if (result.data && result.data.favorite_id) {
+          const vocabDetail = { ...this.data.vocabDetail };
+          vocabDetail.examples[index].favoriteId = result.data.favorite_id;
+          this.setData({ vocabDetail });
+        }
+
+        wx.showToast({
+          title: '收藏成功',
+          icon: 'success'
+        });
+      }
+
+      // 更新收藏状态
+      const favoriteStatus = [...this.data.favoriteStatus];
+      favoriteStatus[index] = !isFavorite;
+
+      // 更新例句的收藏状态
+      const vocabDetail = { ...this.data.vocabDetail };
+      vocabDetail.examples[index].isFavorite = !isFavorite;
+
+      this.setData({
+        favoriteStatus,
+        vocabDetail
+      });
+    } catch (error) {
+      console.error('收藏操作失败:', error);
+      wx.showToast({
+        title: '操作失败',
+        icon: 'none'
+      });
+    }
   }
 });

@@ -92,7 +92,13 @@ def main():
     print("\n验证数据库结构...")
     tables = check_database()
 
-    expected_tables = ["users", "vocabulary_book", "query_history"]
+    expected_tables = [
+        "users",
+        "vocabulary_book",
+        "query_history",
+        "study_record",
+        "favorite_sentences",
+    ]
     missing_tables = set(expected_tables) - set(tables)
 
     if missing_tables:

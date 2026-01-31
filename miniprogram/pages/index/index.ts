@@ -1,5 +1,5 @@
 // 查词页面逻辑
-import { wordApi, vocabBookApi } from '../../utils/api';
+import { wordApi, vocabBookApi, voiceApi, favoritesApi } from '../../utils/api';
 
 // 获取全局app实例
 const app = getApp<IAppOption>();
@@ -11,7 +11,9 @@ Page({
     queryResult: null as any,
     history: [] as any[],
     isInVocabBook: false,
-    userId: 0
+    userId: 0,
+    favoriteStatus: [] as boolean[], // V2.0: 例句收藏状态
+    currentVocabId: 0 // V2.0: 当前单词在生词本中的ID
   },
 
   onLoad() {
@@ -117,12 +119,49 @@ Page({
   async checkIfInVocabBook(word: string) {
     try {
       const result = await vocabBookApi.checkExists(this.data.userId, word);
+      const vocabId = result.data.exists ? result.data.vocab_id : 0;
       this.setData({
-        isInVocabBook: result.data.exists
+        isInVocabBook: result.data.exists,
+        currentVocabId: vocabId
       });
+
+      // 如果单词在生词本中，检查每个例句的收藏状态
+      if (result.data.exists && this.data.queryResult && this.data.queryResult.examples) {
+        await this.initFavoriteStatus(vocabId);
+      }
     } catch (error) {
       console.error('检查失败:', error);
     }
+  },
+
+  // V2.0: 初始化例句收藏状态
+  async initFavoriteStatus(vocabId: number) {
+    if (!this.data.queryResult || !this.data.queryResult.examples) return;
+
+    const favoriteStatus: boolean[] = [];
+    const examples = this.data.queryResult.examples;
+
+    for (let i = 0; i < examples.length; i++) {
+      try {
+        const checkResult = await favoritesApi.check(
+          this.data.userId,
+          vocabId,
+          examples[i].sentence
+        );
+        favoriteStatus.push(checkResult.data.is_favorite);
+        // 保存favoriteId到例句数据中
+        examples[i].favoriteId = checkResult.data.favorite_id;
+        examples[i].isFavorite = checkResult.data.is_favorite;
+      } catch (error) {
+        favoriteStatus.push(false);
+        examples[i].isFavorite = false;
+      }
+    }
+
+    this.setData({
+      favoriteStatus,
+      queryResult: { ...this.data.queryResult, examples }
+    });
   },
 
   // 加载查询历史
@@ -229,5 +268,105 @@ Page({
       title: 'AI智能背单词',
       path: '/pages/index/index'
     };
+  },
+
+  // V2.0: 朗读单词
+  speakWord() {
+    if (!this.data.queryResult) return;
+    
+    const word = this.data.queryResult.word;
+    voiceApi.speak(word, 'en_US');
+  },
+
+  // V2.0: 朗读例句
+  speakExample(e: any) {
+    const index = e.currentTarget.dataset.index;
+    const example = this.data.queryResult.examples[index];
+    
+    if (example && example.sentence) {
+      voiceApi.speak(example.sentence, 'en_US');
+    }
+  },
+
+  // V2.0: 收藏/取消收藏例句
+  async addFavorite(e: any) {
+    const index = e.currentTarget.dataset.index;
+    const example = this.data.queryResult.examples[index];
+
+    if (!example) return;
+
+    try {
+      let vocabId = this.data.currentVocabId;
+
+      // 如果单词不在生词本，先添加单词
+      if (!this.data.isInVocabBook) {
+        const addResult = await vocabBookApi.add(this.data.userId, {
+          word: this.data.queryResult.word,
+          phonetic: this.data.queryResult.phonetic,
+          definition: this.data.queryResult.definition,
+          english_definition: this.data.queryResult.english_definition,
+          examples: this.data.queryResult.examples,
+          memory_tips: this.data.queryResult.memory_tips
+        });
+        vocabId = addResult.data.vocab_id;
+        this.setData({
+          isInVocabBook: true,
+          currentVocabId: vocabId
+        });
+      }
+
+      const isFavorite = this.data.favoriteStatus[index] || false;
+
+      if (isFavorite) {
+        // 取消收藏
+        const favoriteId = example.favoriteId;
+        if (favoriteId) {
+          await favoritesApi.delete(this.data.userId, favoriteId);
+        }
+        wx.showToast({
+          title: '已取消收藏',
+          icon: 'success'
+        });
+      } else {
+        // 添加收藏
+        const result = await favoritesApi.add(
+          this.data.userId,
+          vocabId,
+          example.sentence,
+          example.translation
+        );
+
+        // 保存favoriteId
+        if (result.data && result.data.favorite_id) {
+          const queryResult = { ...this.data.queryResult };
+          queryResult.examples[index].favoriteId = result.data.favorite_id;
+          this.setData({ queryResult });
+        }
+
+        wx.showToast({
+          title: '收藏成功',
+          icon: 'success'
+        });
+      }
+
+      // 更新收藏状态
+      const favoriteStatus = [...this.data.favoriteStatus];
+      favoriteStatus[index] = !isFavorite;
+
+      // 更新例句的收藏状态
+      const queryResult = { ...this.data.queryResult };
+      queryResult.examples[index].isFavorite = !isFavorite;
+
+      this.setData({
+        favoriteStatus,
+        queryResult
+      });
+    } catch (error) {
+      console.error('收藏操作失败:', error);
+      wx.showToast({
+        title: '操作失败',
+        icon: 'none'
+      });
+    }
   }
 });

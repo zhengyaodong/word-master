@@ -10,7 +10,13 @@
   <view class="content" wx:if="{{vocabDetail && !loading}}">
     <!-- 单词标题 -->
     <view class="word-header">
-      <text class="word-title">{{vocabDetail.word}}</text>
+      <view class="word-title-row">
+        <text class="word-title">{{vocabDetail.word}}</text>
+        <!-- V2.0: 语音朗读按钮 -->
+        <view class="voice-btn" bindtap="speakWord">
+          <text class="voice-icon">🔊</text>
+        </view>
+      </view>
       <text class="word-phonetic">{{vocabDetail.phonetic}}</text>
       <text class="word-status status-{{vocabDetail.status}}">{{vocabDetail.status_text}}</text>
     </view>
@@ -29,9 +35,21 @@
     <!-- 例句 -->
     <view class="section" wx:if="{{vocabDetail.examples && vocabDetail.examples.length > 0}}">
       <view class="section-title">例句</view>
-      <view class="example-item" wx:for="{{vocabDetail.examples}}" wx:key="index">
-        <text class="example-sentence">{{item.sentence}}</text>
-        <text class="example-translation">{{item.translation}}</text>
+      <view class="example-item" wx:for="{{vocabDetail.examples}}" wx:key="index" data-index="{{index}}">
+        <view class="example-content">
+          <text class="example-sentence">{{item.sentence}}</text>
+          <text class="example-translation">{{item.translation}}</text>
+        </view>
+        <view class="example-actions">
+          <!-- V2.0: 语音朗读 -->
+          <view class="example-action-btn" bindtap="speakExample" data-index="{{index}}">
+            <text class="action-icon">🔊</text>
+          </view>
+          <!-- V2.0: 收藏按钮 -->
+          <view class="example-action-btn favorite" bindtap="toggleFavorite" data-index="{{index}}">
+            <text class="action-icon">{{item.isFavorite ? '⭐' : '☆'}}</text>
+          </view>
+        </view>
       </view>
     </view>
 
