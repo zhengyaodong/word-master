@@ -7,7 +7,24 @@
 // 开发环境使用本地地址，生产环境需要修改为服务器地址
 // 注意：微信小程序真机调试时不能使用 localhost，需要使用实际IP地址
 // 模拟器使用 localhost，真机调试需要改为实际 IP
-const BASE_URL = 'http://localhost:5000';
+
+// 自动检测运行环境
+const isSimulator = typeof wx !== 'undefined' && wx.getSystemInfoSync().platform === 'devtools';
+const isDevtool = typeof wx !== 'undefined' && wx.getSystemInfoSync().platform === 'devtools';
+
+// 基础URL配置
+let BASE_URL = 'http://localhost:5000';
+
+// 根据环境自动切换
+if (isDevtool) {
+  // 开发者工具/模拟器环境
+  BASE_URL = 'http://localhost:5000';
+} else {
+  // 真机环境，使用局域网IP
+  // 这里可以手动配置你的电脑局域网IP
+  const LOCAL_IP = '192.168.0.104'; // 请根据实际情况修改
+  BASE_URL = `http://${LOCAL_IP}:5000`;
+}
 
 /**
  * 封装请求方法
