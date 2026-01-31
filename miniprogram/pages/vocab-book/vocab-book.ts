@@ -82,12 +82,40 @@ Page({
   async updateSingleStatus(e: any) {
     const { vocabId, status } = e.currentTarget.dataset;
     
+    // 调试输出
+    console.log('updateSingleStatus 调试信息:', {
+      vocabId: vocabId,
+      status: status,
+      statusType: typeof status,
+      dataset: e.currentTarget.dataset
+    });
+    
+    // 确保status是有效的数字
+    if (status === null || status === undefined || status === '') {
+      console.error('status参数无效:', status);
+      wx.showToast({
+        title: '参数错误：状态值无效',
+        icon: 'none'
+      });
+      return;
+    }
+    
+    const numericStatus = parseInt(status);
+    if (isNaN(numericStatus) || ![0, 1, 2].includes(numericStatus)) {
+      console.error('status参数不是有效值:', status, 'parsed:', numericStatus);
+      wx.showToast({
+        title: '参数错误：状态值必须是0、1或2',
+        icon: 'none'
+      });
+      return;
+    }
+    
     try {
-      await vocabBookApi.update(this.data.userId, vocabId, { status });
+      await vocabBookApi.update(this.data.userId, vocabId, { status: numericStatus });
       this.loadVocabList();
       this.loadStats();
       
-      const statusText = status == 1 ? '学习中' : (status == 2 ? '已掌握' : '重新学习');
+      const statusText = numericStatus === 1 ? '学习中' : (numericStatus === 2 ? '已掌握' : '重新学习');
       wx.showToast({
         title: `已标记为${statusText}`,
         icon: 'success',
@@ -106,17 +134,49 @@ Page({
   async updateStatus(e: any) {
     const { vocabId, status } = e.currentTarget.dataset;
     
+    // 调试输出
+    console.log('批量更新状态:', {
+      vocabId: vocabId,
+      status: status,
+      statusType: typeof status,
+      dataset: e.currentTarget.dataset
+    });
+    
+    // 确保status是有效的数字
+    if (status === null || status === undefined || status === '') {
+      console.error('批量status参数无效:', status);
+      wx.showToast({
+        title: '参数错误：状态值无效',
+        icon: 'none'
+      });
+      return;
+    }
+    
+    const numericStatus = parseInt(status);
+    if (isNaN(numericStatus) || ![0, 1, 2].includes(numericStatus)) {
+      console.error('批量status参数不是有效值:', status, 'parsed:', numericStatus);
+      wx.showToast({
+        title: '参数错误：状态值必须是0、1或2',
+        icon: 'none'
+      });
+      return;
+    }
+    
     try {
-      await vocabBookApi.update(this.data.userId, vocabId, { status });
+      await vocabBookApi.update(this.data.userId, vocabId, { status: numericStatus });
       this.loadVocabList();
       this.loadStats();
       
       wx.showToast({
-        title: '更新成功',
+        title: '批量更新成功',
         icon: 'success'
       });
     } catch (error) {
-      console.error('更新失败:', error);
+      console.error('批量更新失败:', error);
+      wx.showToast({
+        title: '批量更新失败，请重试',
+        icon: 'none'
+      });
     }
   },
 
