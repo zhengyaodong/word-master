@@ -85,8 +85,12 @@ def query_word():
 
                 # V2.0: 记录学习统计和打卡
                 record_study(user_id, query_increment=1)
-            except:
+            except Exception as e:
                 session.rollback()
+                print(f"[ERROR] 记录查询历史失败: {e}")
+                import traceback
+
+                traceback.print_exc()
 
         return success_response(
             data=result,

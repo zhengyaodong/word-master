@@ -10,6 +10,7 @@ from sqlalchemy import (
     String,
     Text,
     DateTime,
+    Date,
     ForeignKey,
     Index,
 )
@@ -197,7 +198,7 @@ class StudyRecord(Base):
     user_id = Column(
         Integer, ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False
     )
-    study_date = Column(DateTime, nullable=False)  # 学习日期
+    study_date = Column(Date, nullable=False)  # 学习日期
     query_count = Column(Integer, default=0)  # 查询次数
     is_checked_in = Column(Integer, default=0)  # 是否打卡 (0:否, 1:是)
     created_at = Column(DateTime, default=datetime.now)

@@ -146,9 +146,9 @@ def record_study(user_id, query_increment=1):
     """记录学习（供其他接口调用）"""
     session = get_db_session()
     try:
-        from datetime import datetime
+        from datetime import datetime, date
 
-        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        today = datetime.now().date()
 
         record = (
             session.query(StudyRecord)
@@ -161,7 +161,7 @@ def record_study(user_id, query_increment=1):
                 user_id=user_id,
                 study_date=today,
                 query_count=query_increment,
-                is_checked_in=1,  # 首次查询自动打卡
+                is_checked_in=True,  # 首次查询自动打卡
             )
             session.add(record)
         else:
