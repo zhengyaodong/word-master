@@ -6,11 +6,16 @@
 [![WeChat](https://img.shields.io/badge/WeChat-MiniProgram-brightgreen)](https://developers.weixin.qq.com/miniprogram/dev/framework/)
 [![Ollama](https://img.shields.io/badge/Ollama-qwen3:0.6b-orange)](https://ollama.com/)
 
-一个基于本地Ollama大模型的智能背单词微信小程序，支持AI单词解释、生词本管理、语音朗读、例句收藏、学习统计等功能。
+一个基于本地Ollama大模型的智能背单词微信小程序，支持AI单词解释、生词本管理、批量导入、语音朗读、AI助记、例句收藏、学习统计等功能。
 
 ## 功能特性
 
-### V2.0 新增功能
+### V3.0 新增功能 (最新)
+- **批量导入与一键洗词**: 粘贴长文本（文章、歌词等），AI自动提取核心词汇，一键加入生词本
+- **AI语境助记**: 生成极短幽默故事或谐音联想，提升记忆效率
+- **智能去重**: 自动过滤高频词和已存在的单词
+
+### V2.0 功能
 - **语音朗读**: 使用 Edge-TTS 实现高质量语音朗读，支持单词和例句朗读
 - **例句收藏**: 收藏重要例句，方便重点复习
 - **学习统计**: 学习数据可视化，包括查询趋势、掌握进度
@@ -28,6 +33,7 @@
 - 简洁美观的UI设计
 - 完整的RESTful API接口
 - Edge-TTS 语音合成，自然流畅
+- 智能文本处理，支持长文本分词和关键词提取
 
 ## 技术架构
 
@@ -71,6 +77,7 @@ word-master/
 │   │   ├── index/           # 查词页面
 │   │   ├── vocab-book/      # 生词本页面
 │   │   ├── vocab-detail/    # 生词详情
+│   │   ├── import/          # 批量导入(V3.0)
 │   │   ├── stats/           # 学习统计(V2.0)
 │   │   ├── favorites/       # 收藏例句(V2.0)
 │   │   └── profile/         # 个人中心
@@ -127,6 +134,29 @@ python app.py
 4. 编译运行
 
 **注意**: 语音朗读功能需要联网，因为 Edge-TTS 使用微软服务。
+
+### 4. V3.0 批量导入使用说明
+
+1. 进入"我的"页面，点击"批量导入"
+2. 粘贴英语文章、歌词或其他长文本
+3. 点击"一键洗词"，AI自动提取核心词汇
+4. 选择要导入的单词（默认全选）
+5. 点击"批量导入"加入生词本
+
+**特点**:
+- 自动过滤高频词（the, and, of等）
+- 自动去重，跳过已存在的单词
+- 支持最多200个单词批量导入
+
+### 5. V3.0 AI助记使用说明
+
+1. 在单词详情页点击"AI助记"按钮
+2. 系统自动生成幽默故事或谐音联想
+3. 助记内容会自动缓存，避免重复生成
+4. 可随时刷新生成新的助记内容
+
+**示例**:
+- Ambition → "俺必胜（Am-bi-tion），因为我有野心。"
 
 ## API接口文档
 
@@ -190,6 +220,18 @@ GET    /api/favorites/check     # 检查是否已收藏
 GET    /api/stats/overview      # 获取学习概览
 GET    /api/stats/trend         # 获取近7天趋势
 POST   /api/stats/checkin       # 手动打卡
+```
+
+#### 批量导入接口 (V3.0)
+```
+POST   /api/vocab-book/clean            # 一键洗词（文本提取词汇）
+POST   /api/vocab-book/import           # 批量导入单词到生词本
+```
+
+#### AI助记接口 (V3.0)
+```
+GET    /api/word/mnemonic         # 获取单词助记（优先缓存）
+POST   /api/word/mnemonic         # 生成单词助记并缓存
 ```
 
 ## 配置说明
@@ -287,6 +329,22 @@ node test-node.js
 | query_count | INTEGER | 查询次数 |
 | is_checked_in | INTEGER | 是否打卡(0/1) |
 
+### 导入记录表 (import_history) - V3.0
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| import_id | INTEGER | 主键 |
+| user_id | INTEGER | 用户ID |
+| source_type | VARCHAR(50) | 来源（paste/csv/json） |
+| raw_text | TEXT | 原始文本 |
+| word_count | INTEGER | 提取词数 |
+| created_at | TIMESTAMP | 创建时间 |
+
+#### 生词本表新增字段 (V3.0)
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| mnemonic | TEXT | AI助记内容（缓存） |
+| mnemonic_updated_at | TIMESTAMP | 助记更新时间 |
+
 ## 开发计划
 
 - [x] V1.0 基础版本
@@ -304,13 +362,20 @@ node test-node.js
   - [x] 每日打卡功能
   - [x] 连续打卡统计
 
-- [ ] V3.0 计划功能
-  - [ ] 单词复习模式
-  - [ ] 单词导入导出
-  - [ ] 记忆曲线算法
-  - [ ] 学习提醒推送
+- [x] V3.0 功能升级 (2026-02-07)
+  - [x] 批量导入与一键洗词
+  - [x] AI语境辅助记忆（助记）
+  - [x] 智能去重与高频词过滤
 
 ## 更新日志
+
+### V3.0 (2026-02-07)
+- 新增批量导入功能，支持粘贴长文本一键提取词汇
+- 新增"一键洗词"功能，AI自动提取文章/歌词中的核心词汇
+- 新增AI语境助记功能，生成幽默故事和谐音联想辅助记忆
+- 新增导入历史记录表
+- 优化生词本表结构，新增助记缓存字段
+- 智能过滤高频词（the, and, of等）和已存在单词
 
 ### V2.0 (2026-01-31)
 - 新增语音朗读功能，使用 Edge-TTS 替代微信小程序插件
