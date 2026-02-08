@@ -1,0 +1,31 @@
+<view class="page">
+  <view class="header">
+    <view class="title">{{libraryName || '词库学习'}}</view>
+    <view class="subtitle">第 {{currentWord ? (currentIndex + 1) : 0}} / {{words.length}}</view>
+  </view>
+
+  <view class="card" wx:if="{{currentWord}}">
+    <view class="word">{{currentWord.word}}</view>
+    <view class="phonetic" wx:if="{{currentWord.phonetic}}">{{currentWord.phonetic}}</view>
+    <view class="definition">{{currentWord.definition}}</view>
+    <view class="status-chip">{{currentWord.progress ? currentWord.progress.status_text : '未学习'}}</view>
+
+    <view class="actions">
+      <button class="pill {{currentWord.progress && currentWord.progress.status === 1 ? 'pill-active' : ''}}" bindtap="setStatus" data-status="1">学习中</button>
+      <button class="pill {{currentWord.progress && currentWord.progress.status === 2 ? 'pill-active' : ''}}" bindtap="setStatus" data-status="2">已掌握</button>
+      <button class="pill {{currentWord.progress && currentWord.progress.status === 3 ? 'pill-active' : ''}}" bindtap="setStatus" data-status="3">需复习</button>
+      <button class="pill ghost" bindtap="addToVocab">加入生词本</button>
+    </view>
+
+    <button class="next-btn" bindtap="nextWord">下一个</button>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && !currentWord}}">
+    学习完成
+  </view>
+
+  <view class="weui-loadmore" wx:if="{{loading}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">加载中</view>
+  </view>
+</view>

@@ -61,6 +61,17 @@
       <view class="weui-cell__ft"></view>
     </navigator>
 
+    <!-- V4.0: 词库学习 -->
+    <navigator url="/pages/library/list" class="weui-cell weui-cell_access" hover-class="weui-cell_active" open-type="switchTab">
+      <view class="weui-cell__hd">
+        <view class="icon-box icon-library">
+          <text class="icon">📚</text>
+        </view>
+      </view>
+      <view class="weui-cell__bd">词库学习</view>
+      <view class="weui-cell__ft"></view>
+    </navigator>
+
     <!-- V2.0: 学习统计 -->
     <navigator url="/pages/stats/stats" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
       <view class="weui-cell__hd">

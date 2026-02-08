@@ -1,0 +1,30 @@
+<view class="page">
+  <view class="header">
+    <view class="title">{{libraryName || '今日复习'}}</view>
+    <view class="subtitle">待复习 {{totalDue}} 词</view>
+  </view>
+
+  <view class="card" wx:if="{{currentWord}}">
+    <view class="word">{{currentWord.word_detail.word}}</view>
+    <view class="phonetic" wx:if="{{currentWord.word_detail.phonetic}}">{{currentWord.word_detail.phonetic}}</view>
+    <view class="definition">{{currentWord.word_detail.definition}}</view>
+    <view class="tips">请选择背诵质量</view>
+
+    <view class="quality-buttons">
+      <button class="btn q0" bindtap="submitReview" data-quality="0">0 忘记</button>
+      <button class="btn q2" bindtap="submitReview" data-quality="2">2 困难</button>
+      <button class="btn q3" bindtap="submitReview" data-quality="3">3 一般</button>
+      <button class="btn q4" bindtap="submitReview" data-quality="4">4 较好</button>
+      <button class="btn q5" bindtap="submitReview" data-quality="5">5 完美</button>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && !currentWord}}">
+    今日复习已完成
+  </view>
+
+  <view class="weui-loadmore" wx:if="{{loading}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">加载中</view>
+  </view>
+</view>

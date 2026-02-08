@@ -10,7 +10,14 @@
 
 ## 功能特性
 
-### V3.0 新增功能 (最新)
+### V4.0 新增功能 (最新)
+- **内置词库系统**: CET-4完整词库4434词，从官方考纲PDF提取
+- **SM-2间隔重复**: 科学的复习算法，根据掌握程度智能安排复习时间
+- **词库学习**: 随机学习模式，自动排除已掌握单词，一键添加到生词本
+- **复习提醒**: 每日复习任务，基于SM-2算法计算需要复习的单词
+- **学习进度追踪**: 详细的词库学习统计，包括掌握数、学习中、需复习等状态
+
+### V3.0 功能
 - **批量导入与一键洗词**: 粘贴长文本（文章、歌词等），AI自动提取核心词汇，一键加入生词本
 - **AI语境助记**: 生成极短幽默故事或谐音联想，提升记忆效率
 - **智能去重**: 自动过滤高频词和已存在的单词
@@ -60,13 +67,17 @@ word-master/
 │   ├── init_database.py       # 数据库初始化
 │   ├── requirements.txt       # Python依赖
 │   ├── database/              # 数据库文件
-│   │   └── word_master.db
+│   │   ├── word_master.db
+│   │   ├── cet4_words_from_pdf.json     # CET-4词库数据(V4.0)
+│   │   ├── import_libraries.py          # 词库导入脚本
+│   │   └── extract_cet4_from_pdf.py     # PDF词库提取工具
 │   ├── routes/                # API路由
 │   │   ├── user.py           # 用户相关接口
 │   │   ├── word.py           # 单词查询接口
 │   │   ├── vocab_book.py     # 生词本接口
 │   │   ├── tts.py           # 语音合成接口(Edge-TTS)
-│   │   └── v2_features.py    # V2.0功能接口(统计、收藏)
+│   │   ├── v2_features.py    # V2.0功能接口(统计、收藏)
+│   │   └── library.py        # V4.0词库接口
 │   ├── services/              # 业务服务
 │   │   └── ollama_service.py # Ollama服务封装
 │   └── audio_cache/           # 语音缓存目录
@@ -80,10 +91,16 @@ word-master/
 │   │   ├── import/          # 批量导入(V3.0)
 │   │   ├── stats/           # 学习统计(V2.0)
 │   │   ├── favorites/       # 收藏例句(V2.0)
-│   │   └── profile/         # 个人中心
+│   │   ├── profile/         # 个人中心
+│   │   └── library/         # V4.0词库功能
+│   │       ├── list.ts      # 词库选择页
+│   │       ├── words.ts     # 单词列表页
+│   │       ├── learn.ts     # 学习模式页
+│   │       └── review.ts    # 复习模式页
 │   └── utils/                # 工具类
 │       └── api.js           # API请求封装
 ├── PRD.md                     # 产品需求文档
+├── PRD-V4.md                  # V4.0需求文档
 └── README.md                  # 项目说明
 ```
 
@@ -234,6 +251,52 @@ GET    /api/word/mnemonic         # 获取单词助记（优先缓存）
 POST   /api/word/mnemonic         # 生成单词助记并缓存
 ```
 
+#### 词库接口 (V4.0)
+```
+GET    /api/library/list                 # 获取词库列表
+GET    /api/library/words                # 获取词库单词（支持分页、筛选）
+GET    /api/library/random               # 获取随机单词（排除已掌握）
+POST   /api/library/start                # 开始学习词库
+GET    /api/library/review               # 获取今日需复习单词
+POST   /api/library/review               # 提交复习结果（SM-2算法）
+GET    /api/library/progress             # 获取学习进度统计
+POST   /api/library/progress/update      # 更新单词学习状态
+POST   /api/library/add-to-vocab         # 添加到生词本
+```
+
+### 6. V4.0 词库使用说明
+
+#### 6.1 开始词库学习
+
+1. 点击底部"词库"Tab进入词库列表
+2. 选择CET-4词库（4434词）
+3. 点击"开始学习"初始化进度
+4. 系统自动创建所有单词的学习记录
+
+#### 6.2 学习模式
+
+- **随机学习**: 每次展示20个未掌握的随机单词
+- **单词详情**: 点击单词查看音标、释义、例句
+- **添加到生词本**: 难词可一键加入个人生词本
+- **进度追踪**: 实时显示已掌握/学习中/待复习数量
+
+#### 6.3 复习模式（SM-2算法）
+
+1. 系统根据SM-2算法计算今日需复习单词
+2. 展示单词，用户自测记忆程度
+3. 选择背诵质量评分（0-5分）：
+   - 5分：完美回忆
+   - 4分：正确回忆但有犹豫
+   - 3分：正确回忆但困难
+   - 0-2分：回忆失败
+4. 系统自动计算下次复习时间
+
+**复习间隔规则**:
+- 第1次成功：1天后复习
+- 第2次成功：6天后复习
+- 第N次成功：前次间隔 × 简易度因子
+- 失败：重置为1天后复习
+
 ## 配置说明
 
 ### 后端配置
@@ -345,6 +408,38 @@ node test-node.js
 | mnemonic | TEXT | AI助记内容（缓存） |
 | mnemonic_updated_at | TIMESTAMP | 助记更新时间 |
 
+### 词库表 (word_libraries) - V4.0
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| library_id | INTEGER | 主键 |
+| name | VARCHAR(100) | 词库名称 |
+| category | VARCHAR(50) | 分类(cet4/cet6等) |
+| total_words | INTEGER | 总单词数 |
+| is_builtin | BOOLEAN | 是否内置 |
+
+### 词库单词表 (library_words) - V4.0
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| id | INTEGER | 主键 |
+| library_id | INTEGER | 词库ID |
+| word | VARCHAR(100) | 单词 |
+| phonetic | VARCHAR(100) | 音标 |
+| definition | TEXT | 中文释义 |
+| difficulty | INTEGER | 难度(1-5) |
+
+### 用户词库进度表 (user_library_progress) - V4.0
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| progress_id | INTEGER | 主键 |
+| user_id | INTEGER | 用户ID |
+| library_id | INTEGER | 词库ID |
+| word | VARCHAR(100) | 单词 |
+| status | INTEGER | 状态(0-3) |
+| review_count | INTEGER | 复习次数 |
+| next_review_at | TIMESTAMP | 下次复习时间 |
+| easiness_factor | INTEGER | 简易度因子×100 |
+| interval_days | INTEGER | 间隔天数 |
+
 ## 开发计划
 
 - [x] V1.0 基础版本
@@ -367,7 +462,24 @@ node test-node.js
   - [x] AI语境辅助记忆（助记）
   - [x] 智能去重与高频词过滤
 
+- [x] V4.0 内置词库版 (2026-02-08)
+  - [x] CET-4完整词库4434词（从官方PDF提取）
+  - [x] SM-2间隔重复算法
+  - [x] 词库学习进度追踪
+  - [x] 每日复习任务
+  - [x] 随机学习模式（排除已掌握）
+  - [x] 词库与生词本联动
+
 ## 更新日志
+
+### V4.0 (2026-02-08)
+- 新增内置词库系统，集成CET-4完整词库（4434词，从官方PDF提取）
+- 实现SM-2间隔重复算法，科学安排单词复习时间
+- 新增词库学习页面，支持随机学习模式
+- 新增复习模式，支持0-5分背诵质量评分
+- 新增词库学习进度追踪和统计
+- 支持词库单词一键添加到生词本
+- 新增4个词库相关前端页面（选择、列表、学习、复习）
 
 ### V3.0 (2026-02-07)
 - 新增批量导入功能，支持粘贴长文本一键提取词汇

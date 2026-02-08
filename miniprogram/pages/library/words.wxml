@@ -1,0 +1,47 @@
+<view class="page">
+  <view class="header">
+    <view class="title">{{libraryName || '词库单词'}}</view>
+    <view class="subtitle">共 {{total}} 词</view>
+  </view>
+
+  <view class="toolbar">
+    <button class="btn primary" bindtap="initLearning">初始化学习</button>
+    <button class="btn" bindtap="goReview">今日复习</button>
+  </view>
+
+  <view class="filter">
+    <view class="filter-item {{statusFilter === 'all' ? 'active' : ''}}" data-status="all" bindtap="changeFilter">全部</view>
+    <view class="filter-item {{statusFilter === 0 ? 'active' : ''}}" data-status="0" bindtap="changeFilter">未学习</view>
+    <view class="filter-item {{statusFilter === 1 ? 'active' : ''}}" data-status="1" bindtap="changeFilter">学习中</view>
+    <view class="filter-item {{statusFilter === 2 ? 'active' : ''}}" data-status="2" bindtap="changeFilter">已掌握</view>
+    <view class="filter-item {{statusFilter === 3 ? 'active' : ''}}" data-status="3" bindtap="changeFilter">需复习</view>
+  </view>
+
+  <view class="word-list">
+    <view class="word-item" wx:for="{{words}}" wx:key="word">
+      <view class="word-main">
+        <view class="word-text">{{item.word}}</view>
+        <view class="word-phonetic" wx:if="{{item.phonetic}}">{{item.phonetic}}</view>
+        <view class="word-definition">{{item.definition}}</view>
+      </view>
+      <view class="word-actions">
+        <view class="status-chip">{{item.progress ? item.progress.status_text : '未开始'}}</view>
+        <view class="status-actions">
+          <button class="pill {{item.progress && item.progress.status === 1 ? 'pill-active' : ''}}" bindtap="updateStatus" data-word="{{item.word}}" data-status="1">学习中</button>
+          <button class="pill {{item.progress && item.progress.status === 2 ? 'pill-active' : ''}}" bindtap="updateStatus" data-word="{{item.word}}" data-status="2">已掌握</button>
+          <button class="pill {{item.progress && item.progress.status === 3 ? 'pill-active' : ''}}" bindtap="updateStatus" data-word="{{item.word}}" data-status="3">需复习</button>
+          <button class="pill ghost" bindtap="addToVocab" data-word="{{item.word}}">加入生词本</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-loadmore" wx:if="{{loading}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">加载中</view>
+  </view>
+
+  <view class="weui-loadmore weui-loadmore_line" wx:if="{{!loading && words.length > 0 && !hasMore}}">
+    <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多了</view>
+  </view>
+</view>

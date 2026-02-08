@@ -5,6 +5,10 @@
     "pages/vocab-book/vocab-book",
     "pages/vocab-detail/vocab-detail",
     "pages/profile/profile",
+    "pages/library/list",
+    "pages/library/words",
+    "pages/library/learn",
+    "pages/library/review",
     "pages/import/import",
     "pages/logs/logs",
     "pages/stats/stats",
@@ -28,6 +32,12 @@
         "text": "查词",
         "iconPath": "images/tabbar/search.png",
         "selectedIconPath": "images/tabbar/search-active.png"
+      },
+      {
+        "pagePath": "pages/library/list",
+        "text": "词库",
+        "iconPath": "images/tabbar/word.png",
+        "selectedIconPath": "images/tabbar/word-active.png"
       },
       {
         "pagePath": "pages/vocab-book/vocab-book",

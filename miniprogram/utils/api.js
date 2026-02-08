@@ -20,8 +20,8 @@ if (isDevtool) {
   // 开发者工具模拟器环境
   BASE_URL = 'http://localhost:5000';
 } else {
-  // 真机环境，使用局域网IP
-  const LOCAL_IP = '192.168.0.102'; // 根据实际情况修改
+  // 真机环境
+  const LOCAL_IP = '192.168.0.102';
   BASE_URL = `http://${LOCAL_IP}:5000`;
 }
 
@@ -295,6 +295,83 @@ const statsApi = {
 };
 
 /**
+ * V4.0 词库相关API
+ */
+const libraryApi = {
+  list: (userId) => {
+    const url = userId ? `/api/library/list?user_id=${userId}` : '/api/library/list';
+    return request('GET', url);
+  },
+
+  getWords: (params = {}) => {
+    const {
+      libraryId,
+      userId,
+      page = 1,
+      pageSize = 50,
+      difficulty,
+      status
+    } = params;
+    let url = `/api/library/words?library_id=${libraryId}&page=${page}&page_size=${pageSize}`;
+    if (userId) url += `&user_id=${userId}`;
+    if (difficulty) url += `&difficulty=${difficulty}`;
+    if (status !== undefined && status !== null) url += `&status=${status}`;
+    return request('GET', url);
+  },
+
+  getRandomWords: (libraryId, userId, limit = 20, excludeMastered = true) => {
+    let url = `/api/library/random?library_id=${libraryId}&limit=${limit}&exclude_mastered=${excludeMastered ? 'true' : 'false'}`;
+    if (userId) url += `&user_id=${userId}`;
+    return request('GET', url);
+  },
+
+  start: (userId, libraryId) => {
+    return request('POST', '/api/library/start', {
+      user_id: userId,
+      library_id: libraryId
+    });
+  },
+
+  getReview: (userId, libraryId, limit = 20) => {
+    let url = `/api/library/review?user_id=${userId}&limit=${limit}`;
+    if (libraryId) url += `&library_id=${libraryId}`;
+    return request('GET', url);
+  },
+
+  submitReview: (userId, libraryId, word, quality) => {
+    return request('POST', '/api/library/review', {
+      user_id: userId,
+      library_id: libraryId,
+      word,
+      quality
+    });
+  },
+
+  getProgress: (userId, libraryId) => {
+    let url = `/api/library/progress?user_id=${userId}`;
+    if (libraryId) url += `&library_id=${libraryId}`;
+    return request('GET', url);
+  },
+
+  addToVocab: (userId, libraryId, word) => {
+    return request('POST', '/api/library/add-to-vocab', {
+      user_id: userId,
+      library_id: libraryId,
+      word
+    });
+  },
+
+  updateProgress: (userId, libraryId, word, status) => {
+    return request('POST', '/api/library/progress/update', {
+      user_id: userId,
+      library_id: libraryId,
+      word,
+      status
+    });
+  }
+};
+
+/**
  * V2.0 收藏例句相关API
  */
 const favoritesApi = {
@@ -436,6 +513,7 @@ module.exports = {
   wordApi,
   vocabBookApi,
   statsApi,
+  libraryApi,
   favoritesApi,
   voiceApi,
   healthCheck

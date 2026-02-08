@@ -1,0 +1,42 @@
+<view class="page">
+  <view class="header">
+    <view class="title">内置词库</view>
+    <view class="subtitle">选择词库开始学习</view>
+  </view>
+
+  <view class="library-list">
+    <view class="library-card" wx:for="{{libraries}}" wx:key="library_id">
+      <view class="library-info">
+        <view class="library-name">{{item.name}}</view>
+        <view class="library-desc">{{item.description}}</view>
+        <view class="library-meta">
+          <text class="meta-tag">{{item.level}}</text>
+          <text class="meta-tag">{{item.total_words || 0}} 词</text>
+          <text class="meta-tag" wx:if="{{item.user_learned !== undefined}}">已掌握 {{item.user_learned}}</text>
+        </view>
+        <view class="progress" wx:if="{{item.progress_stats}}">
+          <view class="progress-track">
+            <view class="progress-fill" style="width: {{item.progress_stats.total > 0 ? (item.progress_stats.mastered / item.progress_stats.total * 100) : 0}}%;"></view>
+          </view>
+          <view class="progress-text">
+            未学习 {{item.progress_stats.not_started}} · 学习中 {{item.progress_stats.learning}} · 已掌握 {{item.progress_stats.mastered}} · 需复习 {{item.progress_stats.need_review}}
+          </view>
+        </view>
+      </view>
+      <view class="library-actions">
+        <button class="btn primary" bindtap="startLearning" data-library-id="{{item.library_id}}" data-name="{{item.name}}">开始学习</button>
+        <button class="btn" bindtap="viewWords" data-library-id="{{item.library_id}}" data-name="{{item.name}}">查看词表</button>
+        <button class="btn" bindtap="goReview" data-library-id="{{item.library_id}}" data-name="{{item.name}}">今日复习</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-loadmore" wx:if="{{loading}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">加载中</view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && libraries.length === 0}}">
+    暂无词库
+  </view>
+</view>

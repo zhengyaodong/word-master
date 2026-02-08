@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Flask backend for word-master mini program.
@@ -18,6 +18,7 @@ from routes.word import word_bp
 from routes.vocab_book import vocab_book_bp
 from routes.v2_features import stats_bp, favorites_bp
 from routes.tts import tts_bp
+from routes.library import library_bp
 
 app = Flask(__name__)
 
@@ -40,6 +41,7 @@ app.register_blueprint(vocab_book_bp)
 app.register_blueprint(stats_bp)
 app.register_blueprint(favorites_bp)
 app.register_blueprint(tts_bp)
+app.register_blueprint(library_bp)
 
 
 @app.route("/")

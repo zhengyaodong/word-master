@@ -1,4 +1,4 @@
-﻿"""
+"""
 SQLAlchemy models for word-master backend.
 """
 
@@ -256,6 +256,164 @@ class ImportHistory(Base):
             "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S")
             if self.created_at
             else None,
+        }
+
+
+class WordLibrary(Base):
+    __tablename__ = "word_libraries"
+
+    library_id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(100), nullable=False)
+    description = Column(Text)
+    category = Column(String(50))
+    level = Column(String(20))
+    total_words = Column(Integer, default=0)
+    icon_url = Column(String(255))
+    is_builtin = Column(Integer, default=1)
+    created_at = Column(DateTime, default=datetime.now)
+
+    library_words = relationship(
+        "LibraryWord", back_populates="library", cascade="all, delete-orphan"
+    )
+    user_progress = relationship(
+        "UserLibraryProgress", back_populates="library", cascade="all, delete-orphan"
+    )
+
+    def to_dict(self):
+        return {
+            "library_id": self.library_id,
+            "name": self.name,
+            "description": self.description,
+            "category": self.category,
+            "level": self.level,
+            "total_words": self.total_words,
+            "icon_url": self.icon_url,
+            "is_builtin": bool(self.is_builtin),
+            "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S")
+            if self.created_at
+            else None,
+        }
+
+
+class LibraryWord(Base):
+    __tablename__ = "library_words"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    library_id = Column(
+        Integer,
+        ForeignKey("word_libraries.library_id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    word = Column(String(100), nullable=False)
+    phonetic = Column(String(100))
+    definition = Column(Text)
+    english_definition = Column(Text)
+    examples = Column(Text)
+    part_of_speech = Column(String(50))
+    frequency = Column(Integer, default=0)
+    difficulty = Column(Integer, default=1)
+    created_at = Column(DateTime, default=datetime.now)
+
+    library = relationship("WordLibrary", back_populates="library_words")
+
+    __table_args__ = (
+        Index("idx_library_words_library_id", "library_id"),
+        Index("idx_library_words_word", "word"),
+        Index("idx_library_words_difficulty", "difficulty"),
+    )
+
+    def get_examples(self):
+        if self.examples:
+            try:
+                return json.loads(self.examples)
+            except json.JSONDecodeError:
+                return []
+        return []
+
+    def set_examples(self, examples_list):
+        self.examples = json.dumps(examples_list, ensure_ascii=False)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "library_id": self.library_id,
+            "word": self.word,
+            "phonetic": self.phonetic,
+            "definition": self.definition,
+            "english_definition": self.english_definition,
+            "examples": self.get_examples(),
+            "part_of_speech": self.part_of_speech,
+            "frequency": self.frequency,
+            "difficulty": self.difficulty,
+        }
+
+
+class UserLibraryProgress(Base):
+    __tablename__ = "user_library_progress"
+
+    progress_id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(
+        Integer, ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False
+    )
+    library_id = Column(
+        Integer,
+        ForeignKey("word_libraries.library_id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    word = Column(String(100), nullable=False)
+    status = Column(Integer, default=0)  # 0: 未学习, 1: 学习中, 2: 已掌握, 3: 需复习
+    review_count = Column(Integer, default=0)
+    correct_count = Column(Integer, default=0)
+    wrong_count = Column(Integer, default=0)
+    last_review_at = Column(DateTime)
+    next_review_at = Column(DateTime)
+    easiness_factor = Column(Integer, default=250)  # 存储为整数(2.5 * 100)
+    interval_days = Column(Integer, default=0)
+    created_at = Column(DateTime, default=datetime.now)
+
+    user = relationship("User")
+    library = relationship("WordLibrary", back_populates="user_progress")
+
+    __table_args__ = (
+        Index(
+            "idx_user_progress_user_library_word",
+            "user_id",
+            "library_id",
+            "word",
+            unique=True,
+        ),
+        Index("idx_user_progress_user_id", "user_id"),
+        Index("idx_user_progress_library_id", "library_id"),
+        Index("idx_user_progress_next_review", "user_id", "next_review_at"),
+    )
+
+    def get_easiness_factor(self):
+        return self.easiness_factor / 100.0
+
+    def set_easiness_factor(self, value):
+        self.easiness_factor = int(value * 100)
+
+    def to_dict(self):
+        return {
+            "progress_id": self.progress_id,
+            "user_id": self.user_id,
+            "library_id": self.library_id,
+            "word": self.word,
+            "status": self.status,
+            "status_text": ["未学习", "学习中", "已掌握", "需复习"][self.status]
+            if 0 <= self.status <= 3
+            else "未知",
+            "review_count": self.review_count,
+            "correct_count": self.correct_count,
+            "wrong_count": self.wrong_count,
+            "last_review_at": self.last_review_at.strftime("%Y-%m-%d %H:%M:%S")
+            if self.last_review_at
+            else None,
+            "next_review_at": self.next_review_at.strftime("%Y-%m-%d %H:%M:%S")
+            if self.next_review_at
+            else None,
+            "easiness_factor": self.get_easiness_factor(),
+            "interval_days": self.interval_days,
         }
 
 
