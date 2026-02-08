@@ -1,0 +1,52 @@
+﻿<!-- 批量导入页面 -->
+<view class="page">
+  <view class="section">
+    <view class="section-title">粘贴文本</view>
+    <textarea
+      class="input-text"
+      placeholder="粘贴文章/歌词/长文本，点击洗词自动提取单词"
+      maxlength="-1"
+      value="{{inputText}}"
+      bindinput="onInput"
+    />
+    <view class="row">
+      <view class="option">
+        <text class="label">使用AI</text>
+        <switch checked="{{useAi}}" bindchange="toggleAi" />
+      </view>
+      <view class="option">
+        <text class="label">最大词数</text>
+        <input class="max-input" type="number" value="{{maxWords}}" bindinput="onMaxChange" />
+      </view>
+    </view>
+    <view class="actions">
+      <button class="btn primary" loading="{{cleaning}}" bindtap="cleanWords">一键洗词</button>
+      <button class="btn" bindtap="clearInput">清空</button>
+    </view>
+  </view>
+
+  <view class="section" wx:if="{{words.length}}">
+    <view class="section-title">候选词汇 ({{words.length}})</view>
+    <view class="row">
+      <button class="btn small" bindtap="selectAll">全选</button>
+      <button class="btn small" bindtap="clearSelection">清空选择</button>
+      <text class="selected-count">已选 {{selectedWords.length}}</text>
+    </view>
+    <view class="word-list">
+      <view
+        class="word-chip {{selectedMap[word] ? 'selected' : ''}}"
+        wx:for="{{words}}"
+        wx:for-item="word"
+        wx:key="*this"
+        data-word="{{word}}"
+        bindtap="toggleWord"
+      >
+        {{word}}
+      </view>
+    </view>
+    <view class="actions">
+      <button class="btn primary" loading="{{importing}}" bindtap="importWords">批量导入</button>
+    </view>
+  </view>
+</view>
+

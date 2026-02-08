@@ -1,4 +1,4 @@
-<!-- 生词详情页面 -->
+﻿<!-- 生词详情页面 -->
 <view class="container">
   <view class="nav-bar">
     <view class="back-btn" bindtap="goBack">
@@ -12,7 +12,6 @@
     <view class="word-header">
       <view class="word-title-row">
         <text class="word-title">{{vocabDetail.word}}</text>
-        <!-- V2.0: 语音朗读按钮 -->
         <view class="voice-btn" bindtap="speakWord">
           <text class="voice-icon">🔊</text>
         </view>
@@ -21,7 +20,6 @@
       <text class="word-status status-{{vocabDetail.status}}">{{vocabDetail.status_text}}</text>
     </view>
 
-    <!-- 释义 -->
     <view class="section">
       <view class="section-title">中文释义</view>
       <text class="section-content">{{vocabDetail.definition}}</text>
@@ -32,7 +30,6 @@
       <text class="section-content english">{{vocabDetail.english_definition}}</text>
     </view>
 
-    <!-- 例句 -->
     <view class="section" wx:if="{{vocabDetail.examples && vocabDetail.examples.length > 0}}">
       <view class="section-title">例句</view>
       <view class="example-item" wx:for="{{vocabDetail.examples}}" wx:key="index" data-index="{{index}}">
@@ -41,11 +38,9 @@
           <text class="example-translation">{{item.translation}}</text>
         </view>
         <view class="example-actions">
-          <!-- V2.0: 语音朗读 -->
           <view class="example-action-btn" bindtap="speakExample" data-index="{{index}}">
             <text class="action-icon">🔊</text>
           </view>
-          <!-- V2.0: 收藏按钮 -->
           <view class="example-action-btn favorite" bindtap="toggleFavorite" data-index="{{index}}">
             <text class="action-icon">{{item.isFavorite ? '⭐' : '☆'}}</text>
           </view>
@@ -53,18 +48,15 @@
       </view>
     </view>
 
-    <!-- 记忆技巧 -->
     <view class="section memory-section" wx:if="{{vocabDetail.memory_tips}}">
       <view class="section-title">记忆技巧</view>
       <text class="section-content">{{vocabDetail.memory_tips}}</text>
     </view>
 
-    <!-- 时间信息 -->
     <view class="time-info">
-      <text>添加时间: {{vocabDetail.created_at}}</text>
+      <text>添加时间: {{vocabDetail.createdAt}}</text>
     </view>
 
-    <!-- 操作按钮 -->
     <view class="action-section">
       <view class="action-btn" bindtap="updateStatus" data-status="1" wx:if="{{vocabDetail.status === 0}}">
         标记为学习中
@@ -81,7 +73,6 @@
     </view>
   </view>
 
-  <!-- 加载中 -->
   <view class="loading" wx:if="{{loading}}">
     <text>加载中...</text>
   </view>

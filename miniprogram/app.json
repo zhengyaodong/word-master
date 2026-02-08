@@ -3,7 +3,9 @@
   "pages": [
     "pages/index/index",
     "pages/vocab-book/vocab-book",
+    "pages/vocab-detail/vocab-detail",
     "pages/profile/profile",
+    "pages/import/import",
     "pages/logs/logs",
     "pages/stats/stats",
     "pages/favorites/favorites"

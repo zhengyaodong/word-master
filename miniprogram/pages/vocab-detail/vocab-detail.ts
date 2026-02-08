@@ -1,4 +1,4 @@
-// 生词详情页面
+﻿// 生词详情页面
 import { vocabBookApi, voiceApi, favoritesApi } from '../../utils/api';
 
 const app = getApp<IAppOption>();
@@ -9,18 +9,32 @@ Page({
     vocabDetail: null as any,
     userId: 0,
     loading: false,
-    favoriteStatus: [] as boolean[] // V2.0: 例句收藏状态
+    favoriteStatus: [] as boolean[],
   },
 
   onLoad(options: any) {
-    const vocabId = parseInt(options.vocabId);
+    const vocabId = parseInt(options.vocabId, 10);
     this.setData({ vocabId });
 
     const userInfo = app.globalData.userInfo;
     if (userInfo && userInfo.userId) {
       this.setData({ userId: userInfo.userId });
       this.loadVocabDetail();
+      return;
     }
+
+    const checkLogin = setInterval(() => {
+      const info = app.globalData.userInfo;
+      if (info && info.userId) {
+        this.setData({ userId: info.userId });
+        this.loadVocabDetail();
+        clearInterval(checkLogin);
+      }
+    }, 100);
+
+    setTimeout(() => {
+      clearInterval(checkLogin);
+    }, 10000);
   },
 
   // 加载生词详情
@@ -31,10 +45,8 @@ Page({
       const result = await vocabBookApi.getDetail(this.data.userId, this.data.vocabId);
       const vocabDetail = result.data;
 
-      // 初始化收藏状态数组
       const favoriteStatus: boolean[] = [];
       if (vocabDetail.examples && vocabDetail.examples.length > 0) {
-        // 检查每个例句的收藏状态
         for (let i = 0; i < vocabDetail.examples.length; i++) {
           const example = vocabDetail.examples[i];
           try {
@@ -43,7 +55,6 @@ Page({
               this.data.vocabId,
               example.sentence
             );
-            // 设置收藏状态和favoriteId
             const isFavorite = checkResult.data.is_favorite;
             favoriteStatus.push(isFavorite);
             vocabDetail.examples[i].isFavorite = isFavorite;
@@ -73,11 +84,11 @@ Page({
   // 更新状态
   async updateStatus(e: any) {
     const status = e.currentTarget.dataset.status;
-    
+
     try {
       await vocabBookApi.update(this.data.userId, this.data.vocabId, { status });
       this.loadVocabDetail();
-      
+
       wx.showToast({
         title: '更新成功',
         icon: 'success'
@@ -96,13 +107,12 @@ Page({
         if (res.confirm) {
           try {
             await vocabBookApi.delete(this.data.userId, this.data.vocabId);
-            
+
             wx.showToast({
               title: '删除成功',
               icon: 'success'
             });
 
-            // 返回上一页
             setTimeout(() => {
               wx.navigateBack();
             }, 1000);
@@ -117,7 +127,7 @@ Page({
   // V2.0: 朗读单词
   speakWord() {
     if (!this.data.vocabDetail) return;
-    
+
     const word = this.data.vocabDetail.word;
     voiceApi.speak(word, 'en_US');
   },
@@ -126,7 +136,7 @@ Page({
   speakExample(e: any) {
     const index = e.currentTarget.dataset.index;
     const example = this.data.vocabDetail.examples[index];
-    
+
     if (example && example.sentence) {
       voiceApi.speak(example.sentence, 'en_US');
     }
@@ -143,7 +153,6 @@ Page({
       const isFavorite = this.data.favoriteStatus[index] || false;
 
       if (isFavorite) {
-        // 取消收藏
         const favoriteId = example.favoriteId;
         if (favoriteId) {
           await favoritesApi.delete(this.data.userId, favoriteId);
@@ -154,7 +163,6 @@ Page({
           icon: 'success'
         });
       } else {
-        // 添加收藏
         const result = await favoritesApi.add(
           this.data.userId,
           this.data.vocabId,
@@ -162,7 +170,6 @@ Page({
           example.translation
         );
 
-        // 保存返回的favoriteId，用于后续取消收藏
         if (result.data && result.data.favorite_id) {
           const vocabDetail = { ...this.data.vocabDetail };
           vocabDetail.examples[index].favoriteId = result.data.favorite_id;
@@ -175,11 +182,9 @@ Page({
         });
       }
 
-      // 更新收藏状态
       const favoriteStatus = [...this.data.favoriteStatus];
       favoriteStatus[index] = !isFavorite;
 
-      // 更新例句的收藏状态
       const vocabDetail = { ...this.data.vocabDetail };
       vocabDetail.examples[index].isFavorite = !isFavorite;
 

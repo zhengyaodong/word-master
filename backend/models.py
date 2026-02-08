@@ -1,6 +1,5 @@
-"""
-微信小程序背单词应用 - 数据库模型
-使用SQLAlchemy ORM
+﻿"""
+SQLAlchemy models for word-master backend.
 """
 
 from sqlalchemy import (
@@ -13,25 +12,23 @@ from sqlalchemy import (
     Date,
     ForeignKey,
     Index,
+    text,
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
+from sqlalchemy import inspect
 from datetime import datetime
 import json
 import os
 
-# 获取数据库文件路径
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATABASE_PATH = os.path.join(BASE_DIR, "database", "word_master.db")
 
-# 创建数据库引擎
 engine = create_engine(f"sqlite:///{DATABASE_PATH}", echo=False)
 Base = declarative_base()
 
 
 class User(Base):
-    """用户表"""
-
     __tablename__ = "users"
 
     user_id = Column(Integer, primary_key=True, autoincrement=True)
@@ -41,7 +38,6 @@ class User(Base):
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
 
-    # 关联关系
     vocabulary_books = relationship(
         "VocabularyBook", back_populates="user", cascade="all, delete-orphan"
     )
@@ -50,7 +46,6 @@ class User(Base):
     )
 
     def to_dict(self):
-        """转换为字典"""
         return {
             "userId": self.user_id,
             "openid": self.openid,
@@ -64,13 +59,8 @@ class User(Base):
             else None,
         }
 
-    def __repr__(self):
-        return f"<User(user_id={self.user_id}, nickname={self.nickname})>"
-
 
 class VocabularyBook(Base):
-    """生词本表"""
-
     __tablename__ = "vocabulary_book"
 
     vocab_id = Column(Integer, primary_key=True, autoincrement=True)
@@ -81,15 +71,13 @@ class VocabularyBook(Base):
     phonetic = Column(String(100))
     definition = Column(Text)
     english_definition = Column(Text)
-    examples = Column(Text)  # JSON格式存储
+    examples = Column(Text)
     memory_tips = Column(Text)
-    status = Column(Integer, default=0)  # 0:未学习, 1:学习中, 2:已掌握
+    status = Column(Integer, default=0)  # 0:未学习 1:学习中 2:已掌握
     created_at = Column(DateTime, default=datetime.now)
 
-    # 关联关系
     user = relationship("User", back_populates="vocabulary_books")
 
-    # 联合唯一约束：同一用户的单词不能重复
     __table_args__ = (
         Index("idx_user_word", "user_id", "word", unique=True),
         Index("idx_vocab_book_user_id", "user_id"),
@@ -98,7 +86,6 @@ class VocabularyBook(Base):
     )
 
     def get_examples(self):
-        """获取例句列表"""
         if self.examples:
             try:
                 return json.loads(self.examples)
@@ -107,11 +94,13 @@ class VocabularyBook(Base):
         return []
 
     def set_examples(self, examples_list):
-        """设置例句列表"""
         self.examples = json.dumps(examples_list, ensure_ascii=False)
 
+    def get_status_text(self):
+        status_map = {0: "未学习", 1: "学习中", 2: "已掌握"}
+        return status_map.get(self.status, "未知")
+
     def to_dict(self):
-        """转换为字典"""
         return {
             "vocab_id": self.vocab_id,
             "userId": self.user_id,
@@ -128,18 +117,8 @@ class VocabularyBook(Base):
             else None,
         }
 
-    def get_status_text(self):
-        """获取状态文本"""
-        status_map = {0: "未学习", 1: "学习中", 2: "已掌握"}
-        return status_map.get(self.status, "未知")
-
-    def __repr__(self):
-        return f"<VocabularyBook(vocab_id={self.vocab_id}, word={self.word})>"
-
 
 class QueryHistory(Base):
-    """查询历史表"""
-
     __tablename__ = "query_history"
 
     history_id = Column(Integer, primary_key=True, autoincrement=True)
@@ -147,13 +126,11 @@ class QueryHistory(Base):
         Integer, ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False
     )
     word = Column(String(50), nullable=False)
-    result = Column(Text)  # 缓存查询结果
+    result = Column(Text)
     query_time = Column(DateTime, default=datetime.now)
 
-    # 关联关系
     user = relationship("User", back_populates="query_histories")
 
-    # 索引
     __table_args__ = (
         Index("idx_query_history_user_id", "user_id"),
         Index("idx_query_history_word", "word"),
@@ -161,7 +138,6 @@ class QueryHistory(Base):
     )
 
     def get_result(self):
-        """获取查询结果"""
         if self.result:
             try:
                 return json.loads(self.result)
@@ -170,11 +146,9 @@ class QueryHistory(Base):
         return None
 
     def set_result(self, result_dict):
-        """设置查询结果"""
         self.result = json.dumps(result_dict, ensure_ascii=False)
 
     def to_dict(self):
-        """转换为字典"""
         return {
             "history_id": self.history_id,
             "userId": self.user_id,
@@ -185,35 +159,27 @@ class QueryHistory(Base):
             else None,
         }
 
-    def __repr__(self):
-        return f"<QueryHistory(history_id={self.history_id}, word={self.word})>"
-
 
 class StudyRecord(Base):
-    """学习记录表 - V2.0新增"""
-
     __tablename__ = "study_record"
 
     record_id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(
         Integer, ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False
     )
-    study_date = Column(Date, nullable=False)  # 学习日期
-    query_count = Column(Integer, default=0)  # 查询次数
-    is_checked_in = Column(Integer, default=0)  # 是否打卡 (0:否, 1:是)
+    study_date = Column(Date, nullable=False)
+    query_count = Column(Integer, default=0)
+    is_checked_in = Column(Integer, default=0)
     created_at = Column(DateTime, default=datetime.now)
 
-    # 关联关系
     user = relationship("User")
 
-    # 索引
     __table_args__ = (
         Index("idx_study_record_user_date", "user_id", "study_date", unique=True),
         Index("idx_study_record_user_id", "user_id"),
     )
 
     def to_dict(self):
-        """转换为字典"""
         return {
             "record_id": self.record_id,
             "user_id": self.user_id,
@@ -227,13 +193,8 @@ class StudyRecord(Base):
             else None,
         }
 
-    def __repr__(self):
-        return f"<StudyRecord(record_id={self.record_id}, user_id={self.user_id}, date={self.study_date})>"
-
 
 class FavoriteSentence(Base):
-    """收藏例句表 - V2.0新增"""
-
     __tablename__ = "favorite_sentences"
 
     favorite_id = Column(Integer, primary_key=True, autoincrement=True)
@@ -245,22 +206,19 @@ class FavoriteSentence(Base):
         ForeignKey("vocabulary_book.vocab_id", ondelete="CASCADE"),
         nullable=False,
     )
-    sentence = Column(Text, nullable=False)  # 例句内容
-    translation = Column(Text)  # 中文翻译
+    sentence = Column(Text, nullable=False)
+    translation = Column(Text)
     created_at = Column(DateTime, default=datetime.now)
 
-    # 关联关系
     user = relationship("User")
     vocab = relationship("VocabularyBook")
 
-    # 索引
     __table_args__ = (
         Index("idx_favorite_user_id", "user_id"),
         Index("idx_favorite_vocab_id", "vocab_id"),
     )
 
     def to_dict(self):
-        """转换为字典"""
         return {
             "favorite_id": self.favorite_id,
             "user_id": self.user_id,
@@ -272,22 +230,52 @@ class FavoriteSentence(Base):
             else None,
         }
 
-    def __repr__(self):
-        return f"<FavoriteSentence(favorite_id={self.favorite_id}, vocab_id={self.vocab_id})"
+
+class ImportHistory(Base):
+    __tablename__ = "import_history"
+
+    import_id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(
+        Integer, ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False
+    )
+    source_type = Column(String(50))
+    raw_text = Column(Text)
+    word_count = Column(Integer, default=0)
+    created_at = Column(DateTime, default=datetime.now)
+
+    user = relationship("User")
+
+    __table_args__ = (Index("idx_import_history_user_id", "user_id"),)
+
+    def to_dict(self):
+        return {
+            "import_id": self.import_id,
+            "user_id": self.user_id,
+            "source_type": self.source_type,
+            "word_count": self.word_count,
+            "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S")
+            if self.created_at
+            else None,
+        }
 
 
-# 创建会话工厂
 SessionLocal = sessionmaker(bind=engine)
 
 
 def init_db():
-    """初始化数据库，创建所有表"""
     Base.metadata.create_all(bind=engine)
     print(f"数据库初始化完成: {DATABASE_PATH}")
 
 
+def ensure_schema():
+    inspector = inspect(engine)
+    if "vocabulary_book" in inspector.get_table_names():
+        _ = {col["name"] for col in inspector.get_columns("vocabulary_book")}
+        # Reserved for future schema migrations.
+        return
+
+
 def get_db():
-    """获取数据库会话"""
     db = SessionLocal()
     try:
         yield db
@@ -296,61 +284,9 @@ def get_db():
 
 
 def get_db_session():
-    """获取数据库会话（直接返回）"""
     return SessionLocal()
 
 
 if __name__ == "__main__":
-    # 直接运行此文件时初始化数据库
     init_db()
-    print("数据库表创建成功！")
-
-    # 测试数据库连接
-    session = get_db_session()
-    try:
-        # 测试插入用户
-        test_user = User(openid="test_openid", nickname="测试用户")
-        session.add(test_user)
-        session.commit()
-        print(f"测试用户创建成功: {test_user.user_id}")
-
-        # 测试插入生词
-        test_vocab = VocabularyBook(
-            user_id=test_user.user_id,
-            word="hello",
-            phonetic="/həˈloʊ/",
-            definition="int. 你好",
-            english_definition="used as a greeting",
-            memory_tips="想象两个人见面时说嗨喽",
-        )
-        test_vocab.set_examples(
-            [
-                {"sentence": "Hello, how are you?", "translation": "你好，你好吗？"},
-                {
-                    "sentence": "Say hello to your parents.",
-                    "translation": "代我向你的父母问好。",
-                },
-            ]
-        )
-        session.add(test_vocab)
-        session.commit()
-        print(f"测试生词创建成功: {test_vocab.vocab_id}")
-
-        # 查询测试
-        user = session.query(User).first()
-        print(f"查询用户: {user.to_dict()}")
-
-        vocab = session.query(VocabularyBook).first()
-        print(f"查询生词: {vocab.to_dict()}")
-
-        # 清理测试数据
-        session.delete(test_vocab)
-        session.delete(test_user)
-        session.commit()
-        print("测试数据清理完成")
-
-    except Exception as e:
-        print(f"测试失败: {e}")
-        session.rollback()
-    finally:
-        session.close()
+    ensure_schema()

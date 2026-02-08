@@ -1,11 +1,11 @@
-<!-- 个人中心页面 - WeUI 风格 -->
+﻿<!-- 个人中心页面 - WeUI 风格 -->
 <view class="page" data-weui-theme="{{theme}}">
   <!-- 用户信息卡片 -->
   <view class="user-card">
     <view class="weui-cell weui-cell_access" bindtap="{{userInfo.userId ? '' : 'mockLogin'}}">
       <view class="weui-cell__hd">
-        <image 
-          class="avatar" 
+        <image
+          class="avatar"
           src="{{userInfo.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'}}"
         />
       </view>
@@ -54,24 +54,24 @@
     <navigator url="/pages/vocab-book/vocab-book" class="weui-cell weui-cell_access" hover-class="weui-cell_active" open-type="switchTab">
       <view class="weui-cell__hd">
         <view class="icon-box icon-vocab">
-          <text class="icon">📚</text>
+          <text class="icon">📎</text>
         </view>
       </view>
       <view class="weui-cell__bd">我的生词本</view>
       <view class="weui-cell__ft"></view>
     </navigator>
-    
+
     <!-- V2.0: 学习统计 -->
     <navigator url="/pages/stats/stats" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
       <view class="weui-cell__hd">
         <view class="icon-box icon-stats">
-          <text class="icon">📊</text>
+          <text class="icon">📳</text>
         </view>
       </view>
       <view class="weui-cell__bd">学习统计</view>
       <view class="weui-cell__ft"></view>
     </navigator>
-    
+
     <!-- V2.0: 收藏例句 -->
     <navigator url="/pages/favorites/favorites" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
       <view class="weui-cell__hd">
@@ -82,6 +82,17 @@
       <view class="weui-cell__bd">收藏例句</view>
       <view class="weui-cell__ft"></view>
     </navigator>
+
+    <!-- V3.0: 批量导入/洗词 -->
+    <navigator url="/pages/import/import" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <view class="icon-box icon-import">
+          <text class="icon">📥</text>
+        </view>
+      </view>
+      <view class="weui-cell__bd">批量导入 / 洗词</view>
+      <view class="weui-cell__ft"></view>
+    </navigator>
   </view>
 
   <!-- 服务状态 -->
@@ -90,7 +101,7 @@
     <view class="weui-cell">
       <view class="weui-cell__hd">
         <view class="icon-box icon-service">
-          <text class="icon">🤖</text>
+          <text class="icon">🛠</text>
         </view>
       </view>
       <view class="weui-cell__bd">
@@ -122,6 +133,6 @@
   <!-- 底部信息 -->
   <view class="weui-footer">
     <view class="weui-footer__text">后端服务: http://localhost:5000</view>
-    <view class="weui-footer__text">Ollama模型: qwen3:0.6b</view>
+    <view class="weui-footer__text">Ollama 模型: qwen3:0.6b</view>
   </view>
 </view>

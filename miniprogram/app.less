@@ -1,76 +1,68 @@
-/* 全局样式 - WeUI 风格 */
+/* Global theme - Duolingo + Heptabase inspired */
 page {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
+  font-family: 'Avenir Next', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background-color: #f7f8fa;
+  color: #1d1d1f;
   font-size: 32rpx;
   line-height: 1.6;
 }
 
-/* 主色调 */
-@primary-color: #07c160;
-@primary-light: #e8f5e9;
-@primary-dark: #06ad56;
+/* Colors */
+@primary-color: #58cc02;
+@primary-dark: #46a302;
+@primary-light: #e9f8d9;
+@secondary-color: #2e6bf6;
+@warning-color: #f59e0b;
+@error-color: #ef4444;
 
-/* 辅助色 */
-@warning-color: #ff9800;
-@warning-light: #fff3e0;
-@error-color: #f44336;
-@error-light: #ffebee;
-@info-color: #2196f3;
-@info-light: #e3f2fd;
+@text-primary: #1d1d1f;
+@text-secondary: #6e6e73;
+@text-tertiary: #9aa0a6;
+@text-white: #ffffff;
 
-/* 文字色 */
-@text-primary: #333;
-@text-secondary: #666;
-@text-tertiary: #999;
-@text-white: #fff;
+@bg-primary: #f7f8fa;
+@bg-white: #ffffff;
+@bg-soft: #f5f5f7;
 
-/* 背景色 */
-@bg-primary: #f5f5f5;
-@bg-white: #fff;
-@bg-gray: #f0f0f0;
+@border-color: #e6e9ef;
+@border-radius: 18rpx;
 
-/* 边框 */
-@border-color: #e5e5e5;
-@border-radius: 16rpx;
+@box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
+@box-shadow-lg: 0 12rpx 32rpx rgba(0, 0, 0, 0.08);
 
-/* 阴影 */
-@box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
-@box-shadow-lg: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
-
-/* 间距 */
 @spacing-xs: 8rpx;
 @spacing-sm: 16rpx;
 @spacing-md: 24rpx;
 @spacing-lg: 32rpx;
 @spacing-xl: 48rpx;
 
-/* 通用容器 */
+/* Containers */
 .container {
   padding: @spacing-md;
-  background-color: @bg-primary;
   min-height: 100vh;
+  background: @bg-primary;
 }
 
 .page {
-  background-color: @bg-primary;
   min-height: 100vh;
+  background: @bg-primary;
 }
 
-/* 卡片样式 */
+/* Cards */
 .card {
   background-color: @bg-white;
   border-radius: @border-radius;
   padding: @spacing-lg;
   margin-bottom: @spacing-md;
   box-shadow: @box-shadow;
+  border: 1rpx solid @border-color;
 }
 
-/* 按钮样式增强 */
+/* Buttons */
 .weui-btn {
-  border-radius: 8rpx !important;
-  font-weight: 500 !important;
+  border-radius: 14rpx !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5rpx;
 }
 
 .weui-btn_primary {
@@ -81,7 +73,12 @@ page {
   background-color: @primary-dark !important;
 }
 
-/* 输入框样式 */
+.weui-btn_default {
+  border-color: @border-color !important;
+  color: @text-primary !important;
+}
+
+/* Inputs */
 .weui-input {
   font-size: 32rpx;
   color: @text-primary;
@@ -91,15 +88,18 @@ page {
   color: @text-tertiary;
 }
 
-/* 列表样式 */
+/* Lists */
 .weui-cells {
   border-radius: @border-radius;
   overflow: hidden;
   margin-top: @spacing-md;
+  box-shadow: @box-shadow;
+  border: 1rpx solid @border-color;
 }
 
 .weui-cell {
   padding: @spacing-lg @spacing-md;
+  background: @bg-white;
 }
 
 .weui-cell__bd {
@@ -112,7 +112,6 @@ page {
   color: @text-tertiary;
 }
 
-/* 标题样式 */
 .weui-cells__title {
   font-size: 28rpx;
   color: @text-secondary;
@@ -121,7 +120,7 @@ page {
   padding-left: @spacing-md;
 }
 
-/* 导航栏样式 */
+/* Tabs */
 .weui-navbar {
   background-color: @bg-white;
 }
@@ -135,13 +134,13 @@ page {
   color: @primary-color;
 }
 
-/* 标签样式 */
+/* Tags */
 .tag {
   display: inline-block;
   padding: 8rpx 16rpx;
-  border-radius: 8rpx;
+  border-radius: 10rpx;
   font-size: 24rpx;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .tag-primary {
@@ -150,27 +149,21 @@ page {
 }
 
 .tag-warning {
-  background-color: @warning-light;
+  background-color: #fff4d6;
   color: @warning-color;
 }
 
 .tag-error {
-  background-color: @error-light;
+  background-color: #fee2e2;
   color: @error-color;
 }
 
 .tag-info {
-  background-color: @info-light;
-  color: @info-color;
+  background-color: #e8efff;
+  color: @secondary-color;
 }
 
-/* 加载动画 */
-.weui-loading {
-  width: 40rpx;
-  height: 40rpx;
-}
-
-/* 空状态 */
+/* Empty state */
 .weui-msg {
   padding-top: 120rpx;
 }
@@ -190,7 +183,7 @@ page {
   color: @text-tertiary;
 }
 
-/* 底部信息 */
+/* Footer */
 .weui-footer {
   margin-top: 60rpx;
   padding: 40rpx 30rpx;
@@ -202,7 +195,7 @@ page {
   margin-bottom: 8rpx;
 }
 
-/* 动画效果 */
+/* Motion */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -218,7 +211,6 @@ page {
   animation: fadeIn 0.3s ease-out;
 }
 
-/* 响应式适配 */
 @media (min-width: 768px) {
   .container {
     max-width: 750rpx;

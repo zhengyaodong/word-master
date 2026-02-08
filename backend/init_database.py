@@ -12,7 +12,7 @@ import sys
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
-from models import init_db, engine, Base
+from models import init_db, engine, Base, ensure_schema
 
 
 def check_database():
@@ -87,6 +87,7 @@ def main():
     # 创建所有表
     print("\n创建数据库表...")
     init_db()
+    ensure_schema()
 
     # 验证创建结果
     print("\n验证数据库结构...")
@@ -98,6 +99,7 @@ def main():
         "query_history",
         "study_record",
         "favorite_sentences",
+        "import_history",
     ]
     missing_tables = set(expected_tables) - set(tables)
 

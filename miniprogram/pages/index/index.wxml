@@ -91,7 +91,7 @@
       </view>
 
       <!-- 记忆技巧 -->
-      <view class="weui-article__section" wx:if="{{queryResult.memory_tips}}">
+      <view class="weui-article__section memory-section" wx:if="{{queryResult.memory_tips}}">
         <view class="weui-article__h2">记忆技巧</view>
         <view class="weui-article__p memory-text">{{queryResult.memory_tips}}</view>
       </view>
