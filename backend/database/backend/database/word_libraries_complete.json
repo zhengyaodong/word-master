@@ -1,0 +1,1812 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "total_cet4": 87,
+    "total_cet6": 138,
+    "generated_date": "2026-02-08"
+  },
+  "cet4": [
+    {
+      "word": "ability",
+      "phonetic": "/əˈbɪləti/",
+      "part_of_speech": "n.",
+      "definition": "能力，才能",
+      "english_definition": "the power or capacity to do something",
+      "difficulty": 1
+    },
+    {
+      "word": "abroad",
+      "phonetic": "/əˈbrɔːd/",
+      "part_of_speech": "adv.",
+      "definition": "在国外，到国外",
+      "english_definition": "in or to a foreign country",
+      "difficulty": 2
+    },
+    {
+      "word": "absence",
+      "phonetic": "/ˈæbsəns/",
+      "part_of_speech": "n.",
+      "definition": "缺席，不在",
+      "english_definition": "the state of being away from a place or person",
+      "difficulty": 2
+    },
+    {
+      "word": "absolute",
+      "phonetic": "/ˈæbsəluːt/",
+      "part_of_speech": "adj.",
+      "definition": "绝对的，完全的",
+      "english_definition": "complete and total; not limited in any way",
+      "difficulty": 3
+    },
+    {
+      "word": "absorb",
+      "phonetic": "/əbˈsɔːrb/",
+      "part_of_speech": "v.",
+      "definition": "吸收，理解",
+      "english_definition": "to take in liquid, light, heat, or information",
+      "difficulty": 3
+    },
+    {
+      "word": "abstract",
+      "phonetic": "/ˈæbstrækt/",
+      "part_of_speech": "adj./n.",
+      "definition": "抽象的；摘要",
+      "english_definition": "existing as an idea rather than a physical thing",
+      "difficulty": 3
+    },
+    {
+      "word": "abundant",
+      "phonetic": "/əˈbʌndənt/",
+      "part_of_speech": "adj.",
+      "definition": "丰富的，充裕的",
+      "english_definition": "existing in large quantities; plentiful",
+      "difficulty": 3
+    },
+    {
+      "word": "academic",
+      "phonetic": "/ˌækəˈdemɪk/",
+      "part_of_speech": "adj./n.",
+      "definition": "学术的；学者",
+      "english_definition": "relating to education and scholarship",
+      "difficulty": 2
+    },
+    {
+      "word": "accept",
+      "phonetic": "/əkˈsept/",
+      "part_of_speech": "v.",
+      "definition": "接受，同意",
+      "english_definition": "to receive willingly; to agree to",
+      "difficulty": 1
+    },
+    {
+      "word": "access",
+      "phonetic": "/ˈækses/",
+      "part_of_speech": "n./v.",
+      "definition": "通道，进入；存取",
+      "english_definition": "the means or opportunity to approach or enter",
+      "difficulty": 2
+    },
+    {
+      "word": "accident",
+      "phonetic": "/ˈæksɪdənt/",
+      "part_of_speech": "n.",
+      "definition": "事故，意外",
+      "english_definition": "an unfortunate incident that happens unexpectedly",
+      "difficulty": 1
+    },
+    {
+      "word": "accompany",
+      "phonetic": "/əˈkʌmpəni/",
+      "part_of_speech": "v.",
+      "definition": "陪伴，伴随",
+      "english_definition": "to go somewhere with someone; to play music along with",
+      "difficulty": 2
+    },
+    {
+      "word": "accomplish",
+      "phonetic": "/əˈkʌmplɪʃ/",
+      "part_of_speech": "v.",
+      "definition": "完成，实现",
+      "english_definition": "to achieve or complete successfully",
+      "difficulty": 3
+    },
+    {
+      "word": "accord",
+      "phonetic": "/əˈkɔːrd/",
+      "part_of_speech": "n./v.",
+      "definition": "一致，符合；给予",
+      "english_definition": "agreement or harmony; to give or grant",
+      "difficulty": 3
+    },
+    {
+      "word": "account",
+      "phonetic": "/əˈkaʊnt/",
+      "part_of_speech": "n./v.",
+      "definition": "账户，描述；解释",
+      "english_definition": "a record of financial transactions; to explain",
+      "difficulty": 2
+    },
+    {
+      "word": "accumulate",
+      "phonetic": "/əˈkjuːmjəleɪt/",
+      "part_of_speech": "v.",
+      "definition": "积累，积聚",
+      "english_definition": "to gather or acquire an increasing number of something",
+      "difficulty": 3
+    },
+    {
+      "word": "accurate",
+      "phonetic": "/ˈækjərət/",
+      "part_of_speech": "adj.",
+      "definition": "准确的，精确的",
+      "english_definition": "correct in all details; exact",
+      "difficulty": 2
+    },
+    {
+      "word": "achieve",
+      "phonetic": "/əˈtʃiːv/",
+      "part_of_speech": "v.",
+      "definition": "达到，实现",
+      "english_definition": "to successfully bring about or accomplish",
+      "difficulty": 2
+    },
+    {
+      "word": "acquire",
+      "phonetic": "/əˈkwaɪər/",
+      "part_of_speech": "v.",
+      "definition": "获得，学到",
+      "english_definition": "to buy or obtain something for oneself",
+      "difficulty": 3
+    },
+    {
+      "word": "across",
+      "phonetic": "/əˈkrɔːs/",
+      "part_of_speech": "prep./adv.",
+      "definition": "穿过，横过",
+      "english_definition": "from one side to the other of something",
+      "difficulty": 1
+    },
+    {
+      "word": "act",
+      "phonetic": "/ækt/",
+      "part_of_speech": "n./v.",
+      "definition": "行为，行动；表演",
+      "english_definition": "to do something; a deed or action",
+      "difficulty": 1
+    },
+    {
+      "word": "action",
+      "phonetic": "/ˈækʃn/",
+      "part_of_speech": "n.",
+      "definition": "行动，活动",
+      "english_definition": "the fact or process of doing something",
+      "difficulty": 1
+    },
+    {
+      "word": "active",
+      "phonetic": "/ˈæktɪv/",
+      "part_of_speech": "adj.",
+      "definition": "活跃的，积极的",
+      "english_definition": "engaging or ready to engage in physically energetic pursuits",
+      "difficulty": 1
+    },
+    {
+      "word": "activity",
+      "phonetic": "/ækˈtɪvəti/",
+      "part_of_speech": "n.",
+      "definition": "活动，活跃",
+      "english_definition": "the condition in which things are happening",
+      "difficulty": 1
+    },
+    {
+      "word": "actual",
+      "phonetic": "/ˈæktʃuəl/",
+      "part_of_speech": "adj.",
+      "definition": "实际的，真实的",
+      "english_definition": "existing in fact; real",
+      "difficulty": 2
+    },
+    {
+      "word": "actually",
+      "phonetic": "/ˈæktʃuəli/",
+      "part_of_speech": "adv.",
+      "definition": "实际上，事实上",
+      "english_definition": "as the truth or facts of a situation",
+      "difficulty": 2
+    },
+    {
+      "word": "adapt",
+      "phonetic": "/əˈdæpt/",
+      "part_of_speech": "v.",
+      "definition": "适应，改编",
+      "english_definition": "to adjust to new conditions; to modify",
+      "difficulty": 3
+    },
+    {
+      "word": "add",
+      "phonetic": "/æd/",
+      "part_of_speech": "v.",
+      "definition": "添加，增加",
+      "english_definition": "to join or combine numbers or things",
+      "difficulty": 1
+    },
+    {
+      "word": "addition",
+      "phonetic": "/əˈdɪʃn/",
+      "part_of_speech": "n.",
+      "definition": "增加，加法",
+      "english_definition": "the action or process of adding something",
+      "difficulty": 2
+    },
+    {
+      "word": "address",
+      "phonetic": "/əˈdres/",
+      "part_of_speech": "n./v.",
+      "definition": "地址；处理，演讲",
+      "english_definition": "the place where someone lives; to deal with",
+      "difficulty": 2
+    },
+    {
+      "word": "adequate",
+      "phonetic": "/ˈædɪkwət/",
+      "part_of_speech": "adj.",
+      "definition": "足够的，适当的",
+      "english_definition": "satisfactory or acceptable in quality or quantity",
+      "difficulty": 3
+    },
+    {
+      "word": "adjust",
+      "phonetic": "/əˈdʒʌst/",
+      "part_of_speech": "v.",
+      "definition": "调整，适应",
+      "english_definition": "to alter or move something slightly to achieve desired fit",
+      "difficulty": 3
+    },
+    {
+      "word": "admire",
+      "phonetic": "/ədˈmaɪər/",
+      "part_of_speech": "v.",
+      "definition": "钦佩，羡慕",
+      "english_definition": "to regard with respect and warm approval",
+      "difficulty": 2
+    },
+    {
+      "word": "admit",
+      "phonetic": "/ədˈmɪt/",
+      "part_of_speech": "v.",
+      "definition": "承认，准许进入",
+      "english_definition": "to confess or acknowledge; to allow entry",
+      "difficulty": 2
+    },
+    {
+      "word": "adopt",
+      "phonetic": "/əˈdɑːpt/",
+      "part_of_speech": "v.",
+      "definition": "采用，收养",
+      "english_definition": "to take up or start to use; to take as one's child",
+      "difficulty": 3
+    },
+    {
+      "word": "adult",
+      "phonetic": "/əˈdʌlt/",
+      "part_of_speech": "n./adj.",
+      "definition": "成年人；成年的",
+      "english_definition": "a fully grown person or animal",
+      "difficulty": 1
+    },
+    {
+      "word": "advance",
+      "phonetic": "/ədˈvæns/",
+      "part_of_speech": "n./v./adj.",
+      "definition": "前进，进步；预先的",
+      "english_definition": "to move forward; progress; ahead of time",
+      "difficulty": 2
+    },
+    {
+      "word": "advanced",
+      "phonetic": "/ədˈvænst/",
+      "part_of_speech": "adj.",
+      "definition": "先进的，高级的",
+      "english_definition": "far on or ahead in development or progress",
+      "difficulty": 2
+    },
+    {
+      "word": "advantage",
+      "phonetic": "/ədˈvæntɪdʒ/",
+      "part_of_speech": "n.",
+      "definition": "优势，好处",
+      "english_definition": "a condition or circumstance that puts one in a favorable position",
+      "difficulty": 2
+    },
+    {
+      "word": "affect",
+      "phonetic": "/əˈfekt/",
+      "part_of_speech": "v.",
+      "definition": "影响，感动",
+      "english_definition": "to have an effect on; to move emotionally",
+      "difficulty": 2
+    },
+    {
+      "word": "afford",
+      "phonetic": "/əˈfɔːrd/",
+      "part_of_speech": "v.",
+      "definition": "负担得起，提供",
+      "english_definition": "to have enough money to pay for; to provide",
+      "difficulty": 2
+    },
+    {
+      "word": "afraid",
+      "phonetic": "/əˈfreɪd/",
+      "part_of_speech": "adj.",
+      "definition": "害怕的，担心的",
+      "english_definition": "feeling fear or anxiety",
+      "difficulty": 1
+    },
+    {
+      "word": "against",
+      "phonetic": "/əˈɡenst/",
+      "part_of_speech": "prep.",
+      "definition": "反对，靠着",
+      "english_definition": "in opposition to; touching or leaning on",
+      "difficulty": 2
+    },
+    {
+      "word": "agency",
+      "phonetic": "/ˈeɪdʒənsi/",
+      "part_of_speech": "n.",
+      "definition": "代理，代理处",
+      "english_definition": "a business or organization established to provide a service",
+      "difficulty": 3
+    },
+    {
+      "word": "agree",
+      "phonetic": "/əˈɡriː/",
+      "part_of_speech": "v.",
+      "definition": "同意，赞成",
+      "english_definition": "to have the same opinion; to consent",
+      "difficulty": 1
+    },
+    {
+      "word": "ahead",
+      "phonetic": "/əˈhed/",
+      "part_of_speech": "adv./adj.",
+      "definition": "在前面，向前",
+      "english_definition": "in front; in advance",
+      "difficulty": 2
+    },
+    {
+      "word": "allow",
+      "phonetic": "/əˈlaʊ/",
+      "part_of_speech": "v.",
+      "definition": "允许，准许",
+      "english_definition": "to permit; to give the necessary time or opportunity",
+      "difficulty": 2
+    },
+    {
+      "word": "alone",
+      "phonetic": "/əˈloʊn/",
+      "part_of_speech": "adj./adv.",
+      "definition": "单独的，独自",
+      "english_definition": "having no one else present; on one's own",
+      "difficulty": 2
+    },
+    {
+      "word": "amount",
+      "phonetic": "/əˈmaʊnt/",
+      "part_of_speech": "n./v.",
+      "definition": "数量，总额；总计",
+      "english_definition": "a quantity of something; to total",
+      "difficulty": 2
+    },
+    {
+      "word": "ancient",
+      "phonetic": "/ˈeɪnʃənt/",
+      "part_of_speech": "adj.",
+      "definition": "古代的，古老的",
+      "english_definition": "belonging to the very distant past",
+      "difficulty": 2
+    },
+    {
+      "word": "anger",
+      "phonetic": "/ˈæŋɡər/",
+      "part_of_speech": "n./v.",
+      "definition": "愤怒，生气",
+      "english_definition": "a strong feeling of annoyance or displeasure",
+      "difficulty": 2
+    },
+    {
+      "word": "angle",
+      "phonetic": "/ˈæŋɡl/",
+      "part_of_speech": "n.",
+      "definition": "角度，角落",
+      "english_definition": "the space between two intersecting lines or surfaces",
+      "difficulty": 2
+    },
+    {
+      "word": "angry",
+      "phonetic": "/ˈæŋɡri/",
+      "part_of_speech": "adj.",
+      "definition": "生气的，愤怒的",
+      "english_definition": "feeling or showing annoyance or displeasure",
+      "difficulty": 1
+    },
+    {
+      "word": "animal",
+      "phonetic": "/ˈænɪml/",
+      "part_of_speech": "n.",
+      "definition": "动物",
+      "english_definition": "a living organism that feeds on organic matter",
+      "difficulty": 1
+    },
+    {
+      "word": "announce",
+      "phonetic": "/əˈnaʊns/",
+      "part_of_speech": "v.",
+      "definition": "宣布，宣告",
+      "english_definition": "to make a public statement about",
+      "difficulty": 2
+    },
+    {
+      "word": "annual",
+      "phonetic": "/ˈænjuəl/",
+      "part_of_speech": "adj./n.",
+      "definition": "每年的，年度的；年刊",
+      "english_definition": "occurring once every year",
+      "difficulty": 2
+    },
+    {
+      "word": "answer",
+      "phonetic": "/ˈænsər/",
+      "part_of_speech": "n./v.",
+      "definition": "回答，答案",
+      "english_definition": "a thing said or done in reaction to a question",
+      "difficulty": 1
+    },
+    {
+      "word": "anxiety",
+      "phonetic": "/æŋˈzaɪəti/",
+      "part_of_speech": "n.",
+      "definition": "焦虑，担心",
+      "english_definition": "a feeling of worry or unease",
+      "difficulty": 3
+    },
+    {
+      "word": "appear",
+      "phonetic": "/əˈpɪr/",
+      "part_of_speech": "v.",
+      "definition": "出现，显得",
+      "english_definition": "to come into sight; to seem",
+      "difficulty": 2
+    },
+    {
+      "word": "apply",
+      "phonetic": "/əˈplaɪ/",
+      "part_of_speech": "v.",
+      "definition": "申请，应用",
+      "english_definition": "to make a formal request; to put to use",
+      "difficulty": 2
+    },
+    {
+      "word": "appoint",
+      "phonetic": "/əˈpɔɪnt/",
+      "part_of_speech": "v.",
+      "definition": "任命，约定",
+      "english_definition": "to assign a job or role to someone",
+      "difficulty": 3
+    },
+    {
+      "word": "appreciate",
+      "phonetic": "/əˈpriːʃieɪt/",
+      "part_of_speech": "v.",
+      "definition": "欣赏，感激",
+      "english_definition": "to recognize the full worth of; to be grateful for",
+      "difficulty": 3
+    },
+    {
+      "word": "approach",
+      "phonetic": "/əˈproʊtʃ/",
+      "part_of_speech": "n./v.",
+      "definition": "方法，接近",
+      "english_definition": "a way of dealing with something; to come near",
+      "difficulty": 2
+    },
+    {
+      "word": "approve",
+      "phonetic": "/əˈpruːv/",
+      "part_of_speech": "v.",
+      "definition": "批准，赞成",
+      "english_definition": "to officially agree to; to regard as good",
+      "difficulty": 3
+    },
+    {
+      "word": "argue",
+      "phonetic": "/ˈɑːrɡjuː/",
+      "part_of_speech": "v.",
+      "definition": "争论，辩论",
+      "english_definition": "to give reasons or cite evidence in support of an idea",
+      "difficulty": 2
+    },
+    {
+      "word": "arise",
+      "phonetic": "/əˈraɪz/",
+      "part_of_speech": "v.",
+      "definition": "出现，升起",
+      "english_definition": "to emerge; to become apparent",
+      "difficulty": 3
+    },
+    {
+      "word": "arrange",
+      "phonetic": "/əˈreɪndʒ/",
+      "part_of_speech": "v.",
+      "definition": "安排，整理",
+      "english_definition": "to put in proper order; to organize",
+      "difficulty": 2
+    },
+    {
+      "word": "arrive",
+      "phonetic": "/əˈraɪv/",
+      "part_of_speech": "v.",
+      "definition": "到达，到来",
+      "english_definition": "to reach a destination",
+      "difficulty": 1
+    },
+    {
+      "word": "article",
+      "phonetic": "/ˈɑːrtɪkl/",
+      "part_of_speech": "n.",
+      "definition": "文章，物品，冠词",
+      "english_definition": "a piece of writing; a particular object",
+      "difficulty": 2
+    },
+    {
+      "word": "artist",
+      "phonetic": "/ˈɑːrtɪst/",
+      "part_of_speech": "n.",
+      "definition": "艺术家，美术家",
+      "english_definition": "a person who creates art",
+      "difficulty": 2
+    },
+    {
+      "word": "ashamed",
+      "phonetic": "/əˈʃeɪmd/",
+      "part_of_speech": "adj.",
+      "definition": "惭愧的，羞耻的",
+      "english_definition": "embarrassed or guilty because of one's actions",
+      "difficulty": 3
+    },
+    {
+      "word": "aspect",
+      "phonetic": "/ˈæspekt/",
+      "part_of_speech": "n.",
+      "definition": "方面，外表",
+      "english_definition": "a particular part or feature of something",
+      "difficulty": 3
+    },
+    {
+      "word": "assess",
+      "phonetic": "/əˈses/",
+      "part_of_speech": "v.",
+      "definition": "评估，评价",
+      "english_definition": "to evaluate or estimate the nature or quality of",
+      "difficulty": 3
+    },
+    {
+      "word": "assist",
+      "phonetic": "/əˈsɪst/",
+      "part_of_speech": "v./n.",
+      "definition": "帮助，协助",
+      "english_definition": "to help; an act of helping",
+      "difficulty": 2
+    },
+    {
+      "word": "assume",
+      "phonetic": "/əˈsuːm/",
+      "part_of_speech": "v.",
+      "definition": "假定，假设",
+      "english_definition": "to suppose to be the case without proof",
+      "difficulty": 3
+    },
+    {
+      "word": "assure",
+      "phonetic": "/əˈʃʊr/",
+      "part_of_speech": "v.",
+      "definition": "保证，确信",
+      "english_definition": "to tell someone something positively to dispel doubt",
+      "difficulty": 3
+    },
+    {
+      "word": "attach",
+      "phonetic": "/əˈtætʃ/",
+      "part_of_speech": "v.",
+      "definition": "附上，贴上",
+      "english_definition": "to fasten or join one thing to another",
+      "difficulty": 2
+    },
+    {
+      "word": "attack",
+      "phonetic": "/əˈtæk/",
+      "part_of_speech": "n./v.",
+      "definition": "攻击，袭击",
+      "english_definition": "to take aggressive action against",
+      "difficulty": 2
+    },
+    {
+      "word": "attempt",
+      "phonetic": "/əˈtempt/",
+      "part_of_speech": "n./v.",
+      "definition": "尝试，企图",
+      "english_definition": "to make an effort to achieve something",
+      "difficulty": 2
+    },
+    {
+      "word": "attend",
+      "phonetic": "/əˈtend/",
+      "part_of_speech": "v.",
+      "definition": "参加，照顾",
+      "english_definition": "to be present at; to give attention to",
+      "difficulty": 2
+    },
+    {
+      "word": "attract",
+      "phonetic": "/əˈtrækt/",
+      "part_of_speech": "v.",
+      "definition": "吸引，引起",
+      "english_definition": "to cause to come near by appealing",
+      "difficulty": 2
+    },
+    {
+      "word": "authority",
+      "phonetic": "/əˈθɔːrəti/",
+      "part_of_speech": "n.",
+      "definition": "权威，权力",
+      "english_definition": "the power or right to give orders or make decisions",
+      "difficulty": 3
+    },
+    {
+      "word": "available",
+      "phonetic": "/əˈveɪləbl/",
+      "part_of_speech": "adj.",
+      "definition": "可用的，有空的",
+      "english_definition": "able to be used or obtained; at someone's disposal",
+      "difficulty": 2
+    },
+    {
+      "word": "avoid",
+      "phonetic": "/əˈvɔɪd/",
+      "part_of_speech": "v.",
+      "definition": "避免，避开",
+      "english_definition": "to keep away from or stop oneself from doing",
+      "difficulty": 2
+    },
+    {
+      "word": "award",
+      "phonetic": "/əˈwɔːrd/",
+      "part_of_speech": "n./v.",
+      "definition": "奖，奖励；授予",
+      "english_definition": "a prize; to give as a result of an official decision",
+      "difficulty": 2
+    },
+    {
+      "word": "aware",
+      "phonetic": "/əˈwer/",
+      "part_of_speech": "adj.",
+      "definition": "意识到的，知道的",
+      "english_definition": "having knowledge of something",
+      "difficulty": 3
+    },
+    {
+      "word": "awful",
+      "phonetic": "/ˈɔːfl/",
+      "part_of_speech": "adj./adv.",
+      "definition": "可怕的，糟糕的",
+      "english_definition": "very bad or unpleasant",
+      "difficulty": 2
+    }
+  ],
+  "cet6": [
+    {
+      "word": "abandon",
+      "phonetic": "/əˈbændən/",
+      "part_of_speech": "v./n.",
+      "definition": "放弃，遗弃",
+      "english_definition": "to give up completely; to leave behind",
+      "difficulty": 3
+    },
+    {
+      "word": "abbreviate",
+      "phonetic": "/əˈbriːvieɪt/",
+      "part_of_speech": "v.",
+      "definition": "缩写，缩短",
+      "english_definition": "to shorten a word or phrase",
+      "difficulty": 4
+    },
+    {
+      "word": "abnormal",
+      "phonetic": "/æbˈnɔːrml/",
+      "part_of_speech": "adj.",
+      "definition": "反常的，异常的",
+      "english_definition": "deviating from what is normal or usual",
+      "difficulty": 3
+    },
+    {
+      "word": "abolish",
+      "phonetic": "/əˈbɑːlɪʃ/",
+      "part_of_speech": "v.",
+      "definition": "废除，取消",
+      "english_definition": "to formally put an end to",
+      "difficulty": 4
+    },
+    {
+      "word": "abrupt",
+      "phonetic": "/əˈbrʌpt/",
+      "part_of_speech": "adj.",
+      "definition": "突然的，唐突的",
+      "english_definition": "sudden and unexpected",
+      "difficulty": 4
+    },
+    {
+      "word": "absurd",
+      "phonetic": "/əbˈsɜːrd/",
+      "part_of_speech": "adj./n.",
+      "definition": "荒谬的，可笑的",
+      "english_definition": "wildly unreasonable or illogical",
+      "difficulty": 4
+    },
+    {
+      "word": "abundant",
+      "phonetic": "/əˈbʌndənt/",
+      "part_of_speech": "adj.",
+      "definition": "丰富的，充裕的",
+      "english_definition": "existing in large quantities; plentiful",
+      "difficulty": 3
+    },
+    {
+      "word": "academic",
+      "phonetic": "/ˌækəˈdemɪk/",
+      "part_of_speech": "adj./n.",
+      "definition": "学术的；学者",
+      "english_definition": "relating to education and scholarship",
+      "difficulty": 3
+    },
+    {
+      "word": "accelerate",
+      "phonetic": "/əkˈseləreɪt/",
+      "part_of_speech": "v.",
+      "definition": "加速，促进",
+      "english_definition": "to move faster or make something move faster",
+      "difficulty": 3
+    },
+    {
+      "word": "access",
+      "phonetic": "/ˈækses/",
+      "part_of_speech": "n./v.",
+      "definition": "通道，进入；存取",
+      "english_definition": "the means or opportunity to approach or enter",
+      "difficulty": 3
+    },
+    {
+      "word": "accommodate",
+      "phonetic": "/əˈkɑːmədeɪt/",
+      "part_of_speech": "v.",
+      "definition": "容纳，适应，提供住宿",
+      "english_definition": "to provide lodging or sufficient space for",
+      "difficulty": 4
+    },
+    {
+      "word": "accompany",
+      "phonetic": "/əˈkʌmpəni/",
+      "part_of_speech": "v.",
+      "definition": "陪伴，伴随",
+      "english_definition": "to go somewhere with someone; to play music along with",
+      "difficulty": 3
+    },
+    {
+      "word": "accomplish",
+      "phonetic": "/əˈkʌmplɪʃ/",
+      "part_of_speech": "v.",
+      "definition": "完成，实现",
+      "english_definition": "to achieve or complete successfully",
+      "difficulty": 3
+    },
+    {
+      "word": "accord",
+      "phonetic": "/əˈkɔːrd/",
+      "part_of_speech": "n./v.",
+      "definition": "一致，符合；给予",
+      "english_definition": "agreement or harmony; to give or grant",
+      "difficulty": 4
+    },
+    {
+      "word": "account",
+      "phonetic": "/əˈkaʊnt/",
+      "part_of_speech": "n./v.",
+      "definition": "账户，描述；解释",
+      "english_definition": "a record of financial transactions; to explain",
+      "difficulty": 3
+    },
+    {
+      "word": "accumulate",
+      "phonetic": "/əˈkjuːmjəleɪt/",
+      "part_of_speech": "v.",
+      "definition": "积累，积聚",
+      "english_definition": "to gather or acquire an increasing number of something",
+      "difficulty": 3
+    },
+    {
+      "word": "accurate",
+      "phonetic": "/ˈækjərət/",
+      "part_of_speech": "adj.",
+      "definition": "准确的，精确的",
+      "english_definition": "correct in all details; exact",
+      "difficulty": 3
+    },
+    {
+      "word": "accuse",
+      "phonetic": "/əˈkjuːz/",
+      "part_of_speech": "v.",
+      "definition": "指控，指责",
+      "english_definition": "to charge someone with an offense or crime",
+      "difficulty": 3
+    },
+    {
+      "word": "achieve",
+      "phonetic": "/əˈtʃiːv/",
+      "part_of_speech": "v.",
+      "definition": "达到，实现",
+      "english_definition": "to successfully bring about or accomplish",
+      "difficulty": 3
+    },
+    {
+      "word": "acknowledge",
+      "phonetic": "/əkˈnɑːlɪdʒ/",
+      "part_of_speech": "v.",
+      "definition": "承认，致谢",
+      "english_definition": "to accept or admit the existence or truth of",
+      "difficulty": 4
+    },
+    {
+      "word": "acquaint",
+      "phonetic": "/əˈkweɪnt/",
+      "part_of_speech": "v.",
+      "definition": "使熟悉，使了解",
+      "english_definition": "to make someone familiar with something",
+      "difficulty": 4
+    },
+    {
+      "word": "acquire",
+      "phonetic": "/əˈkwaɪər/",
+      "part_of_speech": "v.",
+      "definition": "获得，学到",
+      "english_definition": "to buy or obtain something for oneself",
+      "difficulty": 3
+    },
+    {
+      "word": "activate",
+      "phonetic": "/ˈæktɪveɪt/",
+      "part_of_speech": "v.",
+      "definition": "激活，启动",
+      "english_definition": "to make something active or operational",
+      "difficulty": 4
+    },
+    {
+      "word": "acute",
+      "phonetic": "/əˈkjuːt/",
+      "part_of_speech": "adj.",
+      "definition": "严重的，敏锐的",
+      "english_definition": "severe or intense; sharp or penetrating",
+      "difficulty": 4
+    },
+    {
+      "word": "adapt",
+      "phonetic": "/əˈdæpt/",
+      "part_of_speech": "v.",
+      "definition": "适应，改编",
+      "english_definition": "to adjust to new conditions; to modify",
+      "difficulty": 3
+    },
+    {
+      "word": "addict",
+      "phonetic": "/ˈædɪkt/",
+      "part_of_speech": "n./v.",
+      "definition": "上瘾者；使上瘾",
+      "english_definition": "a person addicted to a particular substance",
+      "difficulty": 4
+    },
+    {
+      "word": "address",
+      "phonetic": "/əˈdres/",
+      "part_of_speech": "n./v.",
+      "definition": "地址；处理，演讲",
+      "english_definition": "the place where someone lives; to deal with",
+      "difficulty": 3
+    },
+    {
+      "word": "adequate",
+      "phonetic": "/ˈædɪkwət/",
+      "part_of_speech": "adj.",
+      "definition": "足够的，适当的",
+      "english_definition": "satisfactory or acceptable in quality or quantity",
+      "difficulty": 3
+    },
+    {
+      "word": "adjust",
+      "phonetic": "/əˈdʒʌst/",
+      "part_of_speech": "v.",
+      "definition": "调整，适应",
+      "english_definition": "to alter or move something slightly to achieve desired fit",
+      "difficulty": 3
+    },
+    {
+      "word": "administer",
+      "phonetic": "/ədˈmɪnɪstər/",
+      "part_of_speech": "v.",
+      "definition": "管理，执行，给予",
+      "english_definition": "to manage and be responsible for the running of",
+      "difficulty": 4
+    },
+    {
+      "word": "admire",
+      "phonetic": "/ədˈmaɪər/",
+      "part_of_speech": "v.",
+      "definition": "钦佩，羡慕",
+      "english_definition": "to regard with respect and warm approval",
+      "difficulty": 3
+    },
+    {
+      "word": "admit",
+      "phonetic": "/ədˈmɪt/",
+      "part_of_speech": "v.",
+      "definition": "承认，准许进入",
+      "english_definition": "to confess or acknowledge; to allow entry",
+      "difficulty": 3
+    },
+    {
+      "word": "adopt",
+      "phonetic": "/əˈdɑːpt/",
+      "part_of_speech": "v.",
+      "definition": "采用，收养",
+      "english_definition": "to take up or start to use; to take as one's child",
+      "difficulty": 3
+    },
+    {
+      "word": "advance",
+      "phonetic": "/ədˈvæns/",
+      "part_of_speech": "n./v./adj.",
+      "definition": "前进，进步；预先的",
+      "english_definition": "to move forward; progress; ahead of time",
+      "difficulty": 3
+    },
+    {
+      "word": "advocate",
+      "phonetic": "/ˈædvəkeɪt/",
+      "part_of_speech": "n./v.",
+      "definition": "提倡者；提倡，主张",
+      "english_definition": "a person who publicly supports a cause; to recommend",
+      "difficulty": 4
+    },
+    {
+      "word": "affect",
+      "phonetic": "/əˈfekt/",
+      "part_of_speech": "v.",
+      "definition": "影响，感动",
+      "english_definition": "to have an effect on; to move emotionally",
+      "difficulty": 3
+    },
+    {
+      "word": "affiliate",
+      "phonetic": "/əˈfɪlieɪt/",
+      "part_of_speech": "v./n.",
+      "definition": "使附属，使联合；分支机构",
+      "english_definition": "to officially attach to an organization",
+      "difficulty": 4
+    },
+    {
+      "word": "affirm",
+      "phonetic": "/əˈfɜːrm/",
+      "part_of_speech": "v.",
+      "definition": "肯定，断言",
+      "english_definition": "to state as a fact; assert strongly",
+      "difficulty": 4
+    },
+    {
+      "word": "afflict",
+      "phonetic": "/əˈflɪkt/",
+      "part_of_speech": "v.",
+      "definition": "使痛苦，折磨",
+      "english_definition": "to cause pain or suffering to",
+      "difficulty": 4
+    },
+    {
+      "word": "affluent",
+      "phonetic": "/ˈæfluənt/",
+      "part_of_speech": "adj./n.",
+      "definition": "富裕的；富人",
+      "english_definition": "having a great deal of money; wealthy",
+      "difficulty": 4
+    },
+    {
+      "word": "agency",
+      "phonetic": "/ˈeɪdʒənsi/",
+      "part_of_speech": "n.",
+      "definition": "代理，代理处",
+      "english_definition": "a business or organization established to provide a service",
+      "difficulty": 3
+    },
+    {
+      "word": "agenda",
+      "phonetic": "/əˈdʒendə/",
+      "part_of_speech": "n.",
+      "definition": "议程，日程表",
+      "english_definition": "a list of items to be discussed at a meeting",
+      "difficulty": 4
+    },
+    {
+      "word": "aggressive",
+      "phonetic": "/əˈɡresɪv/",
+      "part_of_speech": "adj.",
+      "definition": "侵略的，好斗的",
+      "english_definition": "ready or likely to attack or confront",
+      "difficulty": 3
+    },
+    {
+      "word": "alarm",
+      "phonetic": "/əˈlɑːrm/",
+      "part_of_speech": "n./v.",
+      "definition": "警报，惊慌；使惊恐",
+      "english_definition": "an anxious awareness of danger; to frighten",
+      "difficulty": 3
+    },
+    {
+      "word": "alert",
+      "phonetic": "/əˈlɜːrt/",
+      "part_of_speech": "adj./n./v.",
+      "definition": "警觉的；警报；使警觉",
+      "english_definition": "quick to notice any unusual activity",
+      "difficulty": 3
+    },
+    {
+      "word": "alien",
+      "phonetic": "/ˈeɪliən/",
+      "part_of_speech": "adj./n.",
+      "definition": "外国的，外星人的；外国人",
+      "english_definition": "belonging to a foreign country; a creature from another world",
+      "difficulty": 4
+    },
+    {
+      "word": "alike",
+      "phonetic": "/əˈlaɪk/",
+      "part_of_speech": "adj./adv.",
+      "definition": "相似的，同样地",
+      "english_definition": "similar to each other; in a similar way",
+      "difficulty": 3
+    },
+    {
+      "word": "alive",
+      "phonetic": "/əˈlaɪv/",
+      "part_of_speech": "adj.",
+      "definition": "活着的，活跃的",
+      "english_definition": "living; alert and active",
+      "difficulty": 2
+    },
+    {
+      "word": "allow",
+      "phonetic": "/əˈlaʊ/",
+      "part_of_speech": "v.",
+      "definition": "允许，准许",
+      "english_definition": "to permit; to give the necessary time or opportunity",
+      "difficulty": 2
+    },
+    {
+      "word": "alter",
+      "phonetic": "/ˈɔːltər/",
+      "part_of_speech": "v.",
+      "definition": "改变，变更",
+      "english_definition": "to change or cause to change in character",
+      "difficulty": 3
+    },
+    {
+      "word": "amateur",
+      "phonetic": "/ˈæmətər/",
+      "part_of_speech": "n./adj.",
+      "definition": "业余爱好者；业余的",
+      "english_definition": "a person who engages in an activity for pleasure",
+      "difficulty": 3
+    },
+    {
+      "word": "amaze",
+      "phonetic": "/əˈmeɪz/",
+      "part_of_speech": "v.",
+      "definition": "使惊奇，使惊愕",
+      "english_definition": "to surprise someone greatly",
+      "difficulty": 3
+    },
+    {
+      "word": "ambassador",
+      "phonetic": "/æmˈbæsədər/",
+      "part_of_speech": "n.",
+      "definition": "大使，代表",
+      "english_definition": "an accredited diplomat sent by a country",
+      "difficulty": 4
+    },
+    {
+      "word": "ambiguous",
+      "phonetic": "/æmˈbɪɡjuəs/",
+      "part_of_speech": "adj.",
+      "definition": "模棱两可的，含糊的",
+      "english_definition": "open to more than one interpretation",
+      "difficulty": 4
+    },
+    {
+      "word": "ambition",
+      "phonetic": "/æmˈbɪʃn/",
+      "part_of_speech": "n.",
+      "definition": "雄心，抱负",
+      "english_definition": "a strong desire to do or achieve something",
+      "difficulty": 3
+    },
+    {
+      "word": "amend",
+      "phonetic": "/əˈmend/",
+      "part_of_speech": "v.",
+      "definition": "修改，修订",
+      "english_definition": "to make minor changes to improve",
+      "difficulty": 4
+    },
+    {
+      "word": "among",
+      "phonetic": "/əˈmʌŋ/",
+      "part_of_speech": "prep.",
+      "definition": "在……之中",
+      "english_definition": "surrounded by; in the middle of",
+      "difficulty": 2
+    },
+    {
+      "word": "amount",
+      "phonetic": "/əˈmaʊnt/",
+      "part_of_speech": "n./v.",
+      "definition": "数量，总额；总计",
+      "english_definition": "a quantity of something; to total",
+      "difficulty": 2
+    },
+    {
+      "word": "ample",
+      "phonetic": "/ˈæmpl/",
+      "part_of_speech": "adj.",
+      "definition": "充足的，宽敞的",
+      "english_definition": "enough or more than enough; spacious",
+      "difficulty": 3
+    },
+    {
+      "word": "amuse",
+      "phonetic": "/əˈmjuːz/",
+      "part_of_speech": "v.",
+      "definition": "使娱乐，使发笑",
+      "english_definition": "to cause someone to find something funny",
+      "difficulty": 3
+    },
+    {
+      "word": "analyze",
+      "phonetic": "/ˈænəlaɪz/",
+      "part_of_speech": "v.",
+      "definition": "分析，解析",
+      "english_definition": "to examine methodically",
+      "difficulty": 3
+    },
+    {
+      "word": "ancestor",
+      "phonetic": "/ˈænsestər/",
+      "part_of_speech": "n.",
+      "definition": "祖先，祖宗",
+      "english_definition": "a person from whom one is descended",
+      "difficulty": 3
+    },
+    {
+      "word": "anger",
+      "phonetic": "/ˈæŋɡər/",
+      "part_of_speech": "n./v.",
+      "definition": "愤怒，生气",
+      "english_definition": "a strong feeling of annoyance or displeasure",
+      "difficulty": 2
+    },
+    {
+      "word": "angle",
+      "phonetic": "/ˈæŋɡl/",
+      "part_of_speech": "n.",
+      "definition": "角度，角落",
+      "english_definition": "the space between two intersecting lines or surfaces",
+      "difficulty": 2
+    },
+    {
+      "word": "angry",
+      "phonetic": "/ˈæŋɡri/",
+      "part_of_speech": "adj.",
+      "definition": "生气的，愤怒的",
+      "english_definition": "feeling or showing annoyance or displeasure",
+      "difficulty": 2
+    },
+    {
+      "word": "animal",
+      "phonetic": "/ˈænɪml/",
+      "part_of_speech": "n.",
+      "definition": "动物",
+      "english_definition": "a living organism that feeds on organic matter",
+      "difficulty": 1
+    },
+    {
+      "word": "anniversary",
+      "phonetic": "/ˌænɪˈvɜːrsəri/",
+      "part_of_speech": "n.",
+      "definition": "周年纪念日",
+      "english_definition": "the date on which an event took place in a previous year",
+      "difficulty": 3
+    },
+    {
+      "word": "announce",
+      "phonetic": "/əˈnaʊns/",
+      "part_of_speech": "v.",
+      "definition": "宣布，宣告",
+      "english_definition": "to make a public statement about",
+      "difficulty": 2
+    },
+    {
+      "word": "annoy",
+      "phonetic": "/əˈnɔɪ/",
+      "part_of_speech": "v.",
+      "definition": "使烦恼，使生气",
+      "english_definition": "to make someone slightly angry",
+      "difficulty": 2
+    },
+    {
+      "word": "annual",
+      "phonetic": "/ˈænjuəl/",
+      "part_of_speech": "adj./n.",
+      "definition": "每年的，年度的；年刊",
+      "english_definition": "occurring once every year",
+      "difficulty": 2
+    },
+    {
+      "word": "anticipate",
+      "phonetic": "/ænˈtɪsɪpeɪt/",
+      "part_of_speech": "v.",
+      "definition": "预期，预料",
+      "english_definition": "to regard as probable; expect or predict",
+      "difficulty": 4
+    },
+    {
+      "word": "anxiety",
+      "phonetic": "/æŋˈzaɪəti/",
+      "part_of_speech": "n.",
+      "definition": "焦虑，担心",
+      "english_definition": "a feeling of worry or unease",
+      "difficulty": 3
+    },
+    {
+      "word": "apart",
+      "phonetic": "/əˈpɑːrt/",
+      "part_of_speech": "adv./adj.",
+      "definition": "分开地，分离的",
+      "english_definition": "separated by a distance; at a specified distance",
+      "difficulty": 3
+    },
+    {
+      "word": "apologize",
+      "phonetic": "/əˈpɑːlədʒaɪz/",
+      "part_of_speech": "v.",
+      "definition": "道歉，认错",
+      "english_definition": "to express regret for something done wrong",
+      "difficulty": 3
+    },
+    {
+      "word": "apparent",
+      "phonetic": "/əˈpærənt/",
+      "part_of_speech": "adj.",
+      "definition": "明显的，表面的",
+      "english_definition": "clearly visible or understood; seeming real",
+      "difficulty": 4
+    },
+    {
+      "word": "appeal",
+      "phonetic": "/əˈpiːl/",
+      "part_of_speech": "v./n.",
+      "definition": "呼吁，吸引力，上诉",
+      "english_definition": "to make a serious or urgent request",
+      "difficulty": 3
+    },
+    {
+      "word": "appear",
+      "phonetic": "/əˈpɪr/",
+      "part_of_speech": "v.",
+      "definition": "出现，显得",
+      "english_definition": "to come into sight; to seem",
+      "difficulty": 2
+    },
+    {
+      "word": "appetite",
+      "phonetic": "/ˈæpɪtaɪt/",
+      "part_of_speech": "n.",
+      "definition": "食欲，欲望",
+      "english_definition": "a natural desire to satisfy a bodily need",
+      "difficulty": 3
+    },
+    {
+      "word": "applaud",
+      "phonetic": "/əˈplɔːd/",
+      "part_of_speech": "v.",
+      "definition": "鼓掌，称赞",
+      "english_definition": "to show approval by clapping",
+      "difficulty": 3
+    },
+    {
+      "word": "apply",
+      "phonetic": "/əˈplaɪ/",
+      "part_of_speech": "v.",
+      "definition": "申请，应用",
+      "english_definition": "to make a formal request; to put to use",
+      "difficulty": 2
+    },
+    {
+      "word": "appoint",
+      "phonetic": "/əˈpɔɪnt/",
+      "part_of_speech": "v.",
+      "definition": "任命，约定",
+      "english_definition": "to assign a job or role to someone",
+      "difficulty": 3
+    },
+    {
+      "word": "appreciate",
+      "phonetic": "/əˈpriːʃieɪt/",
+      "part_of_speech": "v.",
+      "definition": "欣赏，感激",
+      "english_definition": "to recognize the full worth of; to be grateful for",
+      "difficulty": 3
+    },
+    {
+      "word": "approach",
+      "phonetic": "/əˈproʊtʃ/",
+      "part_of_speech": "n./v.",
+      "definition": "方法，接近",
+      "english_definition": "a way of dealing with something; to come near",
+      "difficulty": 3
+    },
+    {
+      "word": "appropriate",
+      "phonetic": "/əˈproʊpriət/",
+      "part_of_speech": "adj./v.",
+      "definition": "适当的；挪用",
+      "english_definition": "suitable or proper; to take for one's own use",
+      "difficulty": 3
+    },
+    {
+      "word": "approve",
+      "phonetic": "/əˈpruːv/",
+      "part_of_speech": "v.",
+      "definition": "批准，赞成",
+      "english_definition": "to officially agree to; to regard as good",
+      "difficulty": 3
+    },
+    {
+      "word": "approximate",
+      "phonetic": "/əˈprɑːksɪmət/",
+      "part_of_speech": "adj./v.",
+      "definition": "大约的，近似的",
+      "english_definition": "close to the actual, but not completely accurate",
+      "difficulty": 4
+    },
+    {
+      "word": "architect",
+      "phonetic": "/ˈɑːrkɪtekt/",
+      "part_of_speech": "n.",
+      "definition": "建筑师，设计师",
+      "english_definition": "a person who designs buildings",
+      "difficulty": 3
+    },
+    {
+      "word": "argue",
+      "phonetic": "/ˈɑːrɡjuː/",
+      "part_of_speech": "v.",
+      "definition": "争论，辩论",
+      "english_definition": "to give reasons or cite evidence in support of an idea",
+      "difficulty": 3
+    },
+    {
+      "word": "arise",
+      "phonetic": "/əˈraɪz/",
+      "part_of_speech": "v.",
+      "definition": "出现，升起",
+      "english_definition": "to emerge; to become apparent",
+      "difficulty": 3
+    },
+    {
+      "word": "arrange",
+      "phonetic": "/əˈreɪndʒ/",
+      "part_of_speech": "v.",
+      "definition": "安排，整理",
+      "english_definition": "to put in proper order; to organize",
+      "difficulty": 2
+    },
+    {
+      "word": "arrest",
+      "phonetic": "/əˈrest/",
+      "part_of_speech": "v./n.",
+      "definition": "逮捕，拘留",
+      "english_definition": "to seize someone by legal authority",
+      "difficulty": 3
+    },
+    {
+      "word": "arrive",
+      "phonetic": "/əˈraɪv/",
+      "part_of_speech": "v.",
+      "definition": "到达，到来",
+      "english_definition": "to reach a destination",
+      "difficulty": 2
+    },
+    {
+      "word": "arrow",
+      "phonetic": "/ˈæroʊ/",
+      "part_of_speech": "n.",
+      "definition": "箭，箭头",
+      "english_definition": "a weapon consisting of a stick with a sharp point",
+      "difficulty": 2
+    },
+    {
+      "word": "art",
+      "phonetic": "/ɑːrt/",
+      "part_of_speech": "n.",
+      "definition": "艺术，美术",
+      "english_definition": "the expression of creative skill and imagination",
+      "difficulty": 1
+    },
+    {
+      "word": "article",
+      "phonetic": "/ˈɑːrtɪkl/",
+      "part_of_speech": "n.",
+      "definition": "文章，物品，冠词",
+      "english_definition": "a piece of writing; a particular object",
+      "difficulty": 2
+    },
+    {
+      "word": "articulate",
+      "phonetic": "/ɑːrˈtɪkjələt/",
+      "part_of_speech": "adj./v.",
+      "definition": "发音清晰的；明确表达",
+      "english_definition": "having the ability to speak fluently and coherently",
+      "difficulty": 4
+    },
+    {
+      "word": "artist",
+      "phonetic": "/ˈɑːrtɪst/",
+      "part_of_speech": "n.",
+      "definition": "艺术家，美术家",
+      "english_definition": "a person who creates art",
+      "difficulty": 2
+    },
+    {
+      "word": "ashamed",
+      "phonetic": "/əˈʃeɪmd/",
+      "part_of_speech": "adj.",
+      "definition": "惭愧的，羞耻的",
+      "english_definition": "embarrassed or guilty because of one's actions",
+      "difficulty": 3
+    },
+    {
+      "word": "ashore",
+      "phonetic": "/əˈʃɔːr/",
+      "part_of_speech": "adv./adj.",
+      "definition": "在岸上，上岸",
+      "english_definition": "on or to the shore from the water",
+      "difficulty": 4
+    },
+    {
+      "word": "aside",
+      "phonetic": "/əˈsaɪd/",
+      "part_of_speech": "adv./n.",
+      "definition": "在旁边，到旁边",
+      "english_definition": "to one side; out of the way",
+      "difficulty": 3
+    },
+    {
+      "word": "ask",
+      "phonetic": "/ɑːsk/",
+      "part_of_speech": "v.",
+      "definition": "问，请求",
+      "english_definition": "to say something in order to get an answer",
+      "difficulty": 1
+    },
+    {
+      "word": "asleep",
+      "phonetic": "/əˈsliːp/",
+      "part_of_speech": "adj./adv.",
+      "definition": "睡着的",
+      "english_definition": "in a state of sleep",
+      "difficulty": 2
+    },
+    {
+      "word": "aspect",
+      "phonetic": "/ˈæspekt/",
+      "part_of_speech": "n.",
+      "definition": "方面，外表",
+      "english_definition": "a particular part or feature of something",
+      "difficulty": 3
+    },
+    {
+      "word": "assault",
+      "phonetic": "/əˈsɔːlt/",
+      "part_of_speech": "n./v.",
+      "definition": "攻击，袭击",
+      "english_definition": "a physical attack; to make a physical attack on",
+      "difficulty": 4
+    },
+    {
+      "word": "assemble",
+      "phonetic": "/əˈsembl/",
+      "part_of_speech": "v.",
+      "definition": "集合，组装",
+      "english_definition": "to gather together; to fit together the parts of",
+      "difficulty": 3
+    },
+    {
+      "word": "assert",
+      "phonetic": "/əˈsɜːrt/",
+      "part_of_speech": "v.",
+      "definition": "断言，坚持",
+      "english_definition": "to state a fact or belief confidently",
+      "difficulty": 4
+    },
+    {
+      "word": "assess",
+      "phonetic": "/əˈses/",
+      "part_of_speech": "v.",
+      "definition": "评估，评价",
+      "english_definition": "to evaluate or estimate the nature or quality of",
+      "difficulty": 4
+    },
+    {
+      "word": "assign",
+      "phonetic": "/əˈsaɪn/",
+      "part_of_speech": "v.",
+      "definition": "分配，指派",
+      "english_definition": "to allocate; to designate for a purpose",
+      "difficulty": 3
+    },
+    {
+      "word": "assist",
+      "phonetic": "/əˈsɪst/",
+      "part_of_speech": "v./n.",
+      "definition": "帮助，协助",
+      "english_definition": "to help; an act of helping",
+      "difficulty": 3
+    },
+    {
+      "word": "associate",
+      "phonetic": "/əˈsoʊʃieɪt/",
+      "part_of_speech": "v./n./adj.",
+      "definition": "联系，交往；副的",
+      "english_definition": "to connect in the mind; a partner or colleague",
+      "difficulty": 3
+    },
+    {
+      "word": "assume",
+      "phonetic": "/əˈsuːm/",
+      "part_of_speech": "v.",
+      "definition": "假定，假设",
+      "english_definition": "to suppose to be the case without proof",
+      "difficulty": 3
+    },
+    {
+      "word": "assure",
+      "phonetic": "/əˈʃʊr/",
+      "part_of_speech": "v.",
+      "definition": "保证，确信",
+      "english_definition": "to tell someone something positively to dispel doubt",
+      "difficulty": 3
+    },
+    {
+      "word": "astonish",
+      "phonetic": "/əˈstɑːnɪʃ/",
+      "part_of_speech": "v.",
+      "definition": "使惊讶，使吃惊",
+      "english_definition": "to surprise or impress greatly",
+      "difficulty": 3
+    },
+    {
+      "word": "athlete",
+      "phonetic": "/ˈæθliːt/",
+      "part_of_speech": "n.",
+      "definition": "运动员",
+      "english_definition": "a person who is proficient in sports",
+      "difficulty": 2
+    },
+    {
+      "word": "atmosphere",
+      "phonetic": "/ˈætməsfɪr/",
+      "part_of_speech": "n.",
+      "definition": "大气，气氛",
+      "english_definition": "the envelope of gases surrounding the earth",
+      "difficulty": 3
+    },
+    {
+      "word": "attach",
+      "phonetic": "/əˈtætʃ/",
+      "part_of_speech": "v.",
+      "definition": "附上，贴上",
+      "english_definition": "to fasten or join one thing to another",
+      "difficulty": 3
+    },
+    {
+      "word": "attack",
+      "phonetic": "/əˈtæk/",
+      "part_of_speech": "n./v.",
+      "definition": "攻击，袭击",
+      "english_definition": "to take aggressive action against",
+      "difficulty": 3
+    },
+    {
+      "word": "attain",
+      "phonetic": "/əˈteɪn/",
+      "part_of_speech": "v.",
+      "definition": "达到，获得",
+      "english_definition": "to succeed in achieving something",
+      "difficulty": 4
+    },
+    {
+      "word": "attempt",
+      "phonetic": "/əˈtempt/",
+      "part_of_speech": "n./v.",
+      "definition": "尝试，企图",
+      "english_definition": "to make an effort to achieve something",
+      "difficulty": 3
+    },
+    {
+      "word": "attend",
+      "phonetic": "/əˈtend/",
+      "part_of_speech": "v.",
+      "definition": "参加，照顾",
+      "english_definition": "to be present at; to give attention to",
+      "difficulty": 3
+    },
+    {
+      "word": "attitude",
+      "phonetic": "/ˈætɪtuːd/",
+      "part_of_speech": "n.",
+      "definition": "态度，看法",
+      "english_definition": "a settled way of thinking or feeling about something",
+      "difficulty": 2
+    },
+    {
+      "word": "attorney",
+      "phonetic": "/əˈtɜːrni/",
+      "part_of_speech": "n.",
+      "definition": "律师，代理人",
+      "english_definition": "a person appointed to act for another in business",
+      "difficulty": 4
+    },
+    {
+      "word": "attract",
+      "phonetic": "/əˈtrækt/",
+      "part_of_speech": "v.",
+      "definition": "吸引，引起",
+      "english_definition": "to cause to come near by appealing",
+      "difficulty": 3
+    },
+    {
+      "word": "attribute",
+      "phonetic": "/əˈtrɪbjuːt/",
+      "part_of_speech": "v./n.",
+      "definition": "把……归于；属性",
+      "english_definition": "to regard as being caused by; a quality",
+      "difficulty": 4
+    },
+    {
+      "word": "audience",
+      "phonetic": "/ˈɔːdiəns/",
+      "part_of_speech": "n.",
+      "definition": "观众，听众",
+      "english_definition": "the assembled spectators or listeners at an event",
+      "difficulty": 3
+    },
+    {
+      "word": "authentic",
+      "phonetic": "/ɔːˈθentɪk/",
+      "part_of_speech": "adj.",
+      "definition": "真正的，可靠的",
+      "english_definition": "of undisputed origin; genuine",
+      "difficulty": 4
+    },
+    {
+      "word": "author",
+      "phonetic": "/ˈɔːθər/",
+      "part_of_speech": "n./v.",
+      "definition": "作者，创始人",
+      "english_definition": "a writer of a book, article, or document",
+      "difficulty": 2
+    },
+    {
+      "word": "authority",
+      "phonetic": "/əˈθɔːrəti/",
+      "part_of_speech": "n.",
+      "definition": "权威，权力",
+      "english_definition": "the power or right to give orders or make decisions",
+      "difficulty": 3
+    },
+    {
+      "word": "automatic",
+      "phonetic": "/ˌɔːtəˈmætɪk/",
+      "part_of_speech": "adj./n.",
+      "definition": "自动的",
+      "english_definition": "working by itself with little direct human control",
+      "difficulty": 3
+    },
+    {
+      "word": "available",
+      "phonetic": "/əˈveɪləbl/",
+      "part_of_speech": "adj.",
+      "definition": "可用的，有空的",
+      "english_definition": "able to be used or obtained; at someone's disposal",
+      "difficulty": 3
+    },
+    {
+      "word": "avenue",
+      "phonetic": "/ˈævənuː/",
+      "part_of_speech": "n.",
+      "definition": "大街，途径",
+      "english_definition": "a wide road or thoroughfare; a way of approaching",
+      "difficulty": 3
+    },
+    {
+      "word": "average",
+      "phonetic": "/ˈævərɪdʒ/",
+      "part_of_speech": "n./adj./v.",
+      "definition": "平均，平均数；平均的",
+      "english_definition": "the result of adding quantities together and dividing",
+      "difficulty": 2
+    },
+    {
+      "word": "avoid",
+      "phonetic": "/əˈvɔɪd/",
+      "part_of_speech": "v.",
+      "definition": "避免，避开",
+      "english_definition": "to keep away from or stop oneself from doing",
+      "difficulty": 3
+    },
+    {
+      "word": "awake",
+      "phonetic": "/əˈweɪk/",
+      "part_of_speech": "adj./v.",
+      "definition": "醒着的；唤醒",
+      "english_definition": "not asleep; to stop sleeping",
+      "difficulty": 3
+    },
+    {
+      "word": "award",
+      "phonetic": "/əˈwɔːrd/",
+      "part_of_speech": "n./v.",
+      "definition": "奖，奖励；授予",
+      "english_definition": "a prize; to give as a result of an official decision",
+      "difficulty": 3
+    },
+    {
+      "word": "aware",
+      "phonetic": "/əˈwer/",
+      "part_of_speech": "adj.",
+      "definition": "意识到的，知道的",
+      "english_definition": "having knowledge of something",
+      "difficulty": 3
+    },
+    {
+      "word": "awful",
+      "phonetic": "/ˈɔːfl/",
+      "part_of_speech": "adj./adv.",
+      "definition": "可怕的，糟糕的",
+      "english_definition": "very bad or unpleasant",
+      "difficulty": 2
+    },
+    {
+      "word": "awkward",
+      "phonetic": "/ˈɔːkwərd/",
+      "part_of_speech": "adj.",
+      "definition": "尴尬的，笨拙的",
+      "english_definition": "causing difficulty; hard to deal with",
+      "difficulty": 3
+    }
+  ]
+}
